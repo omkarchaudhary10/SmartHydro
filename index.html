@@ -1,0 +1,3763 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartHydro — IoT-Based Smart Hydroponic Farming System | Group 18</title>
+  <meta name="description" content="Technical project documentation, fabrication journey, and SolidWorks CAD repository for SmartHydro: IoT-Based Smart Hydroponic Farming System with Automatic Water Circulation. Group 18, Sanjivani University.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <style>
+/* ==========================================================================
+   SMARTHYDRO - OFFICIAL ENGINEERING JOURNAL & CAD REPOSITORY (CLEAN 7 SECTIONS)
+   Group 18 · Sanjivani University Makerspace
+   Typography: Space Grotesk (Headings) | Inter (Body) | JetBrains Mono (Code/Labels)
+   ========================================================================== */
+
+:root,
+[data-theme="dark"] {
+  /* True Pitch Black Engineering Theme */
+  --bg: #000000;
+  --bg-alt: #08080a;
+  --surface: #0f1013;
+  --surface-2: #16171b;
+  --surface-hover: #1e2025;
+  --line: #22242a;
+  --line-strong: #333642;
+  
+  --text: #e2e8f0;
+  --text-bright: #ffffff;
+  --muted: #8e95a5;
+  
+  /* Color Standards */
+  --gov-blue: #0284c7;
+  --plant: #22c55e;
+  --plant-glow: rgba(34, 197, 94, 0.2);
+  --water: #38bdf8;
+  --water-glow: rgba(56, 189, 248, 0.2);
+  --clay: #e0703a;
+  --ok: #10b981;
+  --warn: #f59e0b;
+  --danger: #ef4444;
+  
+  /* Fonts */
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* Layout Metrics */
+  --header-height: 68px;
+  --max-width: 1240px;
+  --radius: 6px;
+  --radius-lg: 10px;
+  --transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] {
+  --bg: #ffffff;
+  --bg-alt: #f8fafc;
+  --surface: #f1f5f9;
+  --surface-2: #e2e8f0;
+  --surface-hover: #cbd5e1;
+  --line: #cbd5e1;
+  --line-strong: #94a3b8;
+  
+  --text: #0f172a;
+  --text-bright: #000000;
+  --muted: #475569;
+  
+  --gov-blue: #0369a1;
+  --plant: #15803d;
+  --plant-glow: rgba(21, 128, 61, 0.15);
+  --water: #0284c7;
+  --water-glow: rgba(2, 132, 199, 0.15);
+  --clay: #c2410c;
+  --ok: #15803d;
+  --warn: #b45309;
+  --danger: #b91c1c;
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: var(--header-height);
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+  transition: var(--transition);
+}
+
+[data-theme="light"] .site-header {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.header-inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--text-bright);
+}
+
+.brand-monogram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--gov-blue), var(--plant));
+  color: #000000;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 6px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.brand-text strong {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+}
+
+.brand-meta {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-family: var(--font-mono);
+}
+
+/* 7 Clean Navigation Links in Header */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.nav-link {
+  padding: 0.45rem 0.65rem;
+  font-size: 0.825rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+.nav-link:hover {
+  color: var(--text-bright);
+  background: var(--surface-hover);
+}
+
+.nav-link.active {
+  color: var(--water);
+  background: rgba(56, 189, 248, 0.12);
+  font-weight: 600;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-header-cad {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--plant);
+  color: #000000;
+  font-weight: 700;
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  padding: 0.45rem 0.85rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.btn-header-cad:hover {
+  background: #1eb054;
+  box-shadow: 0 0 15px var(--plant-glow);
+  transform: translateY(-1px);
+}
+
+.btn-icon {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--text);
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-icon:hover {
+  background: var(--surface-hover);
+  color: var(--text-bright);
+}
+
+[data-theme="dark"] .icon-sun { display: block; }
+[data-theme="dark"] .icon-moon { display: none; }
+[data-theme="light"] .icon-sun { display: none; }
+[data-theme="light"] .icon-moon { display: block; }
+
+.mobile-only {
+  display: none;
+}
+
+/* Sections */
+.section {
+  padding: 4.5rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.section-alt {
+  background-color: var(--bg-alt);
+}
+
+.section-header {
+  margin-bottom: 2.25rem;
+}
+
+.section-num {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--water);
+  background: var(--water-glow);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  margin-bottom: 0.5rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 2.15rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text-bright);
+  line-height: 1.2;
+}
+
+.section-desc {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+  max-width: 780px;
+}
+
+/* Hero Section */
+.hero-section {
+  padding: 3.5rem 0 4.5rem;
+}
+
+.hero-container {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: 2.35rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--text-bright);
+  margin-bottom: 1.15rem;
+}
+
+.hero-subtitle {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-bottom: 1.75rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-bottom: 1.75rem;
+}
+
+/* Action Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.7rem 1.35rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  text-decoration: none;
+  border-radius: var(--radius);
+  transition: var(--transition);
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: var(--plant);
+  color: #000000;
+  font-weight: 700;
+}
+
+.btn-primary:hover {
+  background: #1eb054;
+  box-shadow: 0 0 15px var(--plant-glow);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--line-strong);
+}
+
+.btn-secondary:hover {
+  background: var(--surface-hover);
+  color: var(--text-bright);
+  border-color: var(--water);
+}
+
+.btn-cad-download {
+  background: var(--gov-blue);
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.45rem 0.85rem;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: var(--transition);
+}
+
+.btn-cad-download:hover {
+  background: #0284c7;
+  box-shadow: 0 0 12px var(--water-glow);
+}
+
+.btn-cad-master {
+  background: linear-gradient(135deg, #15803d, #0284c7);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.75rem 1.5rem;
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.55rem;
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-accent {
+  background: var(--water-glow);
+  color: var(--water);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.badge-green, .badge-ok {
+  background: var(--plant-glow);
+  color: var(--plant);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+/* Team Card (Numbered 1 2 3 4 without fake titles) */
+.team-card {
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.team-header-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.4rem;
+}
+
+.meta-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.team-ordered-list {
+  padding-left: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.4rem 1.5rem;
+}
+
+.team-ordered-list li {
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: var(--text-bright);
+}
+
+/* Hero CAD Showcase Viewport */
+/* Hero CAD Compact Preview Card */
+.hero-cad-preview-card {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  background: #eaedf1;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.hero-cad-preview-card:hover {
+  border-color: var(--water);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(56, 189, 248, 0.18);
+}
+
+.hero-cad-overlay-action {
+  position: absolute;
+  bottom: 0.85rem;
+  left: 0.85rem;
+  right: 0.85rem;
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+}
+
+.btn-watch-3d-video {
+  background: rgba(0, 0, 0, 0.92);
+  border: 1px solid var(--water);
+  color: var(--water);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.45rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.btn-watch-3d-video:hover {
+  background: var(--water);
+  color: #000000;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.35);
+}
+
+/* Dedicated 3D Model Video & CAD Showcase Card */
+.cad-video-showcase-card {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  background: #08080a;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin-bottom: 2rem;
+  transition: var(--transition);
+}
+
+.cad-video-showcase-card:hover {
+  border-color: var(--water);
+}
+
+.hero-cad-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* 3D Model Video Canvas & Overlay Controls */
+.hero-cad-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.85rem;
+  background: rgba(8, 8, 10, 0.96);
+  border-bottom: 1px solid var(--line);
+  z-index: 20;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.hero-cad-mode-tabs {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.mode-tab-btn {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.mode-tab-btn:hover {
+  color: var(--text-bright);
+  background: var(--surface-3);
+  border-color: var(--water);
+}
+
+.mode-tab-btn.active {
+  background: rgba(56, 189, 248, 0.18);
+  color: var(--water);
+  border-color: var(--water);
+}
+
+.hero-cad-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.three-canvas-wrapper {
+  position: relative;
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 420px;
+  cursor: grab;
+  overflow: hidden;
+}
+
+.three-canvas-wrapper:active {
+  cursor: grabbing;
+}
+
+#threeVideoContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#threeVideoContainer canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+.static-cad-wrapper {
+  position: relative;
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 420px;
+  background: #eaedf1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.cad-screenshot-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.btn-return-video {
+  position: absolute;
+  bottom: 0.85rem;
+  right: 0.85rem;
+  z-index: 15;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.4rem 0.85rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.video-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 0 0 8px #ef4444;
+  animation: pulse 1.5s infinite;
+}
+
+.btn-video-top {
+  background: rgba(8, 8, 10, 0.88);
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+}
+
+.btn-video-top:hover, .btn-video-top.active {
+  background: var(--surface-hover);
+  color: var(--water);
+  border-color: var(--water);
+}
+
+.video-preset-bar {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.75rem;
+  display: flex;
+  gap: 0.35rem;
+  z-index: 10;
+  flex-wrap: wrap;
+}
+
+.cam-preset-btn {
+  background: rgba(8, 8, 10, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  color: #94a3b8;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cam-preset-btn:hover {
+  color: #fff;
+  border-color: var(--water);
+}
+
+.cam-preset-btn.active {
+  background: rgba(56, 189, 248, 0.25);
+  color: var(--water);
+  border-color: var(--water);
+  font-weight: 700;
+}
+
+/* Bottom Video Player Scrubber & Controls */
+.video-bottom-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(4, 4, 6, 0.96), rgba(4, 4, 6, 0.6) 70%, transparent);
+  padding: 0.6rem 0.85rem 0.75rem;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.video-scrubber-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.video-scrubber-progress {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--water), var(--plant));
+  transition: width 0.1s linear;
+}
+
+.video-control-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.video-control-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-ctrl {
+  background: none;
+  border: none;
+  color: #e2e8f0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  transition: color 0.2s;
+}
+
+.btn-ctrl:hover {
+  color: var(--water);
+}
+
+.video-timecode {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #94a3b8;
+}
+
+.cad-badge-top {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid var(--line);
+  padding: 0.25rem 0.55rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--water);
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--plant);
+  border-radius: 50%;
+  animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.7; }
+}
+
+.cad-hint-bottom {
+  position: absolute;
+  bottom: 0.85rem;
+  right: 0.85rem;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid var(--line);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  color: var(--muted);
+}
+
+/* ==========================================================================
+   FULLSCREEN DISPLAY FOR 3D MODEL VIDEO & CAD SHOWCASE
+   ========================================================================== */
+:fullscreen.cad-video-showcase-card,
+:-webkit-full-screen.cad-video-showcase-card,
+:-moz-full-screen.cad-video-showcase-card,
+:fullscreen.hero-cad-card,
+:-webkit-full-screen.hero-cad-card,
+:-moz-full-screen.hero-cad-card,
+.cad-video-showcase-card:fullscreen,
+.cad-video-showcase-card:-webkit-full-screen,
+.cad-video-showcase-card:-moz-full-screen {
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  border-radius: 0 !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: #000000 !important;
+  z-index: 999999 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-shadow: none !important;
+}
+
+:fullscreen .hero-cad-topbar,
+:-webkit-full-screen .hero-cad-topbar,
+:-moz-full-screen .hero-cad-topbar,
+.cad-video-showcase-card:fullscreen .hero-cad-topbar,
+.cad-video-showcase-card:-webkit-full-screen .hero-cad-topbar,
+.cad-video-showcase-card:-moz-full-screen .hero-cad-topbar {
+  flex-shrink: 0 !important;
+  border-radius: 0 !important;
+  padding: 0.65rem 1.25rem !important;
+  background: rgba(0, 0, 0, 0.98) !important;
+  border-bottom: 1px solid var(--line-strong) !important;
+  z-index: 30 !important;
+}
+
+:fullscreen .three-canvas-wrapper,
+:-webkit-full-screen .three-canvas-wrapper,
+:-moz-full-screen .three-canvas-wrapper,
+.cad-video-showcase-card:fullscreen .three-canvas-wrapper,
+.cad-video-showcase-card:-webkit-full-screen .three-canvas-wrapper,
+.cad-video-showcase-card:-moz-full-screen .three-canvas-wrapper {
+  flex: 1 1 auto !important;
+  height: calc(100vh - 50px) !important;
+  min-height: calc(100vh - 50px) !important;
+  width: 100% !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+:fullscreen #threeVideoContainer,
+:-webkit-full-screen #threeVideoContainer,
+:-moz-full-screen #threeVideoContainer,
+.cad-video-showcase-card:fullscreen #threeVideoContainer,
+.cad-video-showcase-card:-webkit-full-screen #threeVideoContainer,
+.cad-video-showcase-card:-moz-full-screen #threeVideoContainer {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+}
+
+:fullscreen #threeVideoContainer canvas,
+:-webkit-full-screen #threeVideoContainer canvas,
+:-moz-full-screen #threeVideoContainer canvas,
+.cad-video-showcase-card:fullscreen #threeVideoContainer canvas,
+.cad-video-showcase-card:-webkit-full-screen #threeVideoContainer canvas,
+.cad-video-showcase-card:-moz-full-screen #threeVideoContainer canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+}
+
+:fullscreen .static-cad-wrapper,
+:-webkit-full-screen .static-cad-wrapper,
+:-moz-full-screen .static-cad-wrapper,
+.cad-video-showcase-card:fullscreen .static-cad-wrapper,
+.cad-video-showcase-card:-webkit-full-screen .static-cad-wrapper,
+.cad-video-showcase-card:-moz-full-screen .static-cad-wrapper {
+  flex: 1 1 auto !important;
+  height: calc(100vh - 50px) !important;
+  min-height: calc(100vh - 50px) !important;
+  width: 100% !important;
+  background: #060608 !important;
+  position: relative !important;
+}
+
+:fullscreen .cad-screenshot-container,
+:-webkit-full-screen .cad-screenshot-container,
+:-moz-full-screen .cad-screenshot-container,
+.cad-video-showcase-card:fullscreen .cad-screenshot-container,
+.cad-video-showcase-card:-webkit-full-screen .cad-screenshot-container,
+.cad-video-showcase-card:-moz-full-screen .cad-screenshot-container {
+  width: 100% !important;
+  height: 100% !important;
+  padding: 1.5rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+:fullscreen .cad-screenshot-container img,
+:-webkit-full-screen .cad-screenshot-container img,
+:-moz-full-screen .cad-screenshot-container img,
+.cad-video-showcase-card:fullscreen .cad-screenshot-container img,
+.cad-video-showcase-card:-webkit-full-screen .cad-screenshot-container img,
+.cad-video-showcase-card:-moz-full-screen .cad-screenshot-container img {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+:fullscreen .video-bottom-controls,
+:-webkit-full-screen .video-bottom-controls,
+:-moz-full-screen .video-bottom-controls,
+.cad-video-showcase-card:fullscreen .video-bottom-controls,
+.cad-video-showcase-card:-webkit-full-screen .video-bottom-controls,
+.cad-video-showcase-card:-moz-full-screen .video-bottom-controls {
+  padding: 0.85rem 1.5rem 1rem !important;
+  z-index: 25 !important;
+}
+
+/* Cards & Layout */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  transition: var(--transition);
+}
+
+.card:hover {
+  border-color: var(--line-strong);
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.85rem;
+}
+
+.text-clay { color: var(--clay); }
+.text-water { color: var(--water); }
+.text-plant { color: var(--plant); }
+
+.grid-2col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.grid-3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.grid-4col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.grid-5col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+}
+
+.styled-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.styled-list li {
+  position: relative;
+  padding-left: 1.4rem;
+  color: var(--text);
+  font-size: 0.925rem;
+}
+
+.styled-list li::before {
+  content: "\2022";
+  position: absolute;
+  left: 0;
+  color: var(--plant);
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* Tables */
+.table-container {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.tech-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.tech-table th {
+  background: var(--surface-2);
+  padding: 0.8rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--line);
+}
+
+.tech-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+}
+
+.tech-table tr:last-child td {
+  border-bottom: none;
+}
+
+.highlight-row {
+  background: rgba(34, 197, 94, 0.06);
+}
+
+.highlight-row td {
+  color: var(--text-bright);
+}
+
+/* Schematic SVG */
+.hydraulic-card {
+  padding: 1.75rem;
+}
+
+.schematic-container {
+  width: 100%;
+  margin-top: 0.75rem;
+}
+
+.schematic-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.anim-dash {
+  stroke-dasharray: 8;
+  animation: flowLine 2s linear infinite;
+}
+
+@keyframes flowLine {
+  from { stroke-dashoffset: 32; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* Workshop Timeline & Clickable Photos */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  position: relative;
+  padding-left: 3rem;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 1.25rem;
+  width: 2px;
+  background: var(--line);
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: -3rem;
+  top: 1.25rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 2px solid var(--plant);
+  color: var(--text-bright);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.step-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--plant);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.timeline-header h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Workshop Real Build Photo Card */
+.workshop-photo-box {
+  position: relative;
+  margin-top: 1rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  height: 320px;
+  background: #000;
+  border: 1px solid var(--line-strong);
+  cursor: pointer;
+}
+
+.workshop-photo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.workshop-photo-box:hover img {
+  transform: scale(1.03);
+}
+
+.zoom-badge {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+/* Dual Photo Layout in Workshop Steps */
+.workshop-dual-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .workshop-dual-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.workshop-sub-photo {
+  display: flex;
+  flex-direction: column;
+}
+
+.stage-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--water);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.stage-label-plant {
+  color: var(--plant);
+}
+
+/* CAD Callout Card */
+.cad-cta-card {
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+  border: 1px solid var(--water);
+}
+
+.cad-cta-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+/* CAD Repository Table */
+.cad-repo-card {
+  padding: 1.75rem;
+}
+
+.master-archive-banner {
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.15), rgba(34, 197, 94, 0.15));
+  border: 1px solid var(--water);
+  padding: 1.35rem;
+  border-radius: var(--radius);
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.master-archive-info h4 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--text-bright);
+  margin-bottom: 0.2rem;
+}
+
+.master-archive-info p {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* Unified Gallery */
+.gallery-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.filter-btn {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  padding: 0.45rem 0.9rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.filter-btn:hover {
+  color: var(--text);
+}
+
+.filter-btn.active {
+  background: var(--water);
+  color: #000000;
+  font-weight: 700;
+  border-color: var(--water);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.35rem;
+}
+
+.gallery-item {
+  position: relative;
+  background: #f4f6f9;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  height: 240px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+/* For SolidWorks CAD screenshots that have light background, contain them neatly */
+.gallery-item[data-category="cad"] img {
+  object-fit: contain;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+.gallery-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
+  padding: 1.15rem 1rem 0.75rem;
+}
+
+.gallery-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--water);
+  font-weight: 700;
+  display: block;
+  margin-bottom: 0.15rem;
+}
+
+.gallery-overlay h4 {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  color: #ffffff;
+}
+
+/* Lightbox Modal */
+.lightbox-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.lightbox-modal.active {
+  display: flex;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lightbox-content img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: var(--radius);
+  background: #f4f6f9;
+  border: 1px solid var(--line-strong);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -2.5rem;
+  right: 0;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 2.2rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.lightbox-caption {
+  margin-top: 0.85rem;
+  color: #e2e8f0;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  text-align: center;
+}
+
+/* Footer */
+.site-footer {
+  background: #040406;
+  border-top: 1px solid var(--line);
+  padding: 3.5rem 0 2rem;
+}
+
+[data-theme="light"] .site-footer {
+  background: #f1f5f9;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.footer-brand h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin: 0.4rem 0;
+  color: var(--text-bright);
+}
+
+.footer-brand p {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.footer-inst {
+  font-family: var(--font-mono);
+  font-size: 0.78rem !important;
+  color: var(--water) !important;
+  margin-top: 0.4rem;
+}
+
+.footer-team h4 {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-bright);
+  text-transform: uppercase;
+  margin-bottom: 0.65rem;
+}
+
+.guide-note {
+  font-size: 0.85rem;
+  color: var(--muted);
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--line);
+  margin-top: 0.5rem;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-family: var(--font-mono);
+}
+
+@media (max-width: 1024px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero-cad-card,
+  .cad-video-showcase-card {
+    height: 440px;
+  }
+
+  .hero-cad-preview-card {
+    height: 340px;
+  }
+  
+  .grid-4col, .grid-5col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 820px) {
+  .nav-links {
+    display: none;
+  }
+  
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--line);
+    padding: 1rem 1.5rem;
+    gap: 0.5rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  }
+  
+  .mobile-only {
+    display: inline-flex;
+  }
+  
+  .hero-title {
+    font-size: 1.95rem;
+  }
+
+  .hero-cad-preview-card {
+    height: 300px;
+  }
+
+  .cad-video-showcase-card {
+    height: 400px;
+  }
+  
+  .grid-2col, .grid-3col, .footer-top {
+    grid-template-columns: 1fr;
+  }
+  
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .team-ordered-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mt-md { margin-top: 1rem; }
+.mt-lg { margin-top: 1.5rem; }
+.mb-lg { margin-bottom: 1.5rem; }
+
+</style>
+
+  <!-- Three.js & OrbitControls for 3D Model Video -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+
+  <!-- Top Sticky Navigation (Strictly 7 Clean Sections) -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <div class="brand">
+        <a href="#top" class="brand-link">
+          <span class="brand-monogram">SH</span>
+          <span class="brand-text">
+            <strong>SmartHydro</strong>
+            <span class="brand-meta">Group 18 · Sanjivani University</span>
+          </span>
+        </a>
+      </div>
+      
+      <!-- Minimized 7-Item Navigation -->
+      <nav class="nav-links" id="navLinks">
+        <a href="#overview" class="nav-link active">1. Overview</a>
+        <a href="#principles" class="nav-link">2. Working Principle</a>
+        <a href="#journey" class="nav-link">3. Build Journey</a>
+        <a href="#cad-model" class="nav-link">4. 3D Video &amp; CAD</a>
+        <a href="#electronics" class="nav-link">5. Electronics &amp; Control</a>
+        <a href="#downloads" class="nav-link">6. CAD Downloads</a>
+        <a href="#gallery" class="nav-link">7. Unified Gallery</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#downloads" class="btn-header-cad">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          CAD Files
+        </a>
+        <button id="themeToggle" class="btn-icon" title="Toggle theme" aria-label="Toggle theme">
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button id="navToggle" class="btn-icon mobile-only" title="Open navigation" aria-label="Open navigation">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <!-- SEC 01: OVERVIEW -->
+    <section id="overview" class="section hero-section">
+      <div class="container">
+        
+        <div class="hero-container">
+          <div class="hero-text">
+            <div class="tag-row">
+              <span class="badge badge-accent">GROUP 18 · SANJIVANI UNIVERSITY · MAKERSPACE</span>
+              <span class="badge badge-green">PROTOTYPE BUILT</span>
+            </div>
+            
+            <h1 class="hero-title">IoT-Based Smart Hydroponic Farming System with Automatic Water Circulation</h1>
+            
+            <p class="hero-subtitle">
+              A soil-free farming system using IoT technology. Water and nutrient solution are circulated through four horizontal PVC pipes in a zigzag arrangement, automated by an ESP32 microcontroller coordinating with a relay module and real-time sensors.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#journey" class="btn btn-primary">See Workshop Build &darr;</a>
+              <a href="#cad-model" class="btn btn-secondary">View SolidWorks CAD &darr;</a>
+            </div>
+
+            <!-- Team Details Card (Numbered 1, 2, 3, 4 without job titles) -->
+            <div class="card team-card">
+              <div class="team-header-row">
+                <span class="meta-label">PROJECT TEAM (GROUP 18)</span>
+                <span class="meta-label">GUIDE: DR. KIRAN WAKCHAURE</span>
+              </div>
+              <ol class="team-ordered-list">
+                <li>Omkar Chaudhary</li>
+                <li>Sarthak Boste</li>
+                <li>Darshan Mahajan</li>
+                <li>Rushikesh Sonawane</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Hero SolidWorks Master Assembly Card (Compact & Balanced) -->
+          <div class="hero-visual">
+            <div class="hero-cad-preview-card" onclick="openLightbox('assets/images/cad_assem_final_elevation.jpg', 'SolidWorks Master Assembly (Assem_final.SLDASM)')">
+              <div class="cad-badge-top">
+                <span class="pulse-dot"></span> SOLIDWORKS CAD · Assem_final.SLDASM
+              </div>
+              <img src="assets/images/cad_assem_final_elevation.jpg" alt="SolidWorks Master Assembly Front Elevation" class="hero-cad-preview-img">
+              <div class="hero-cad-overlay-action">
+                <a href="#cad-model" class="btn-watch-3d-video" onclick="event.stopPropagation();">
+                  🎥 Watch Interactive 3D Model Video &darr;
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Objectives & Specifications Grid -->
+        <div class="grid-2col mt-lg">
+          <div class="card">
+            <h3 class="card-title text-water">Project Objectives</h3>
+            <ul class="styled-list">
+              <li>Develop an automated hydroponic system that reduces manual monitoring and labor.</li>
+              <li>Control water circulation based on real-time root-zone moisture readings.</li>
+              <li>Monitor nutrient solution temperature continuously using a waterproof probe.</li>
+              <li>Accommodate approximately 20 plants (5 per pipe) using four horizontal 3-inch PVC pipes arranged vertically in a zigzag 3D frame.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title text-plant">Mechanical Structure &amp; Frame Finishing</h3>
+            <ul class="styled-list">
+              <li><strong>Frame Dimensions:</strong> Rectangular MS square-pipe frame measuring 4 &times; 4 &times; 2 ft (4' width &times; 4' height &times; 2' depth) fabricated with welded joints.</li>
+              <li><strong>Pipe Arrangement:</strong> Four 3-inch PVC pipes mounted in a zigzag arrangement (Pipe 1 Front, Pipe 2 Back, Pipe 3 Front, Pipe 4 Back) with 9-inch (228.6 mm) vertical centre-to-centre spacing.</li>
+              <li><strong>Surface Finishing:</strong> Welded MS frame is ground smooth, polished, and finished with protective paint/colouring for corrosion prevention in high-humidity environments.</li>
+              <li><strong>Plant Capacity:</strong> Four horizontal pipes accommodating approximately 20 plants in net pots (5 plants per pipe).</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEC 02: WORKING PRINCIPLE -->
+    <section id="principles" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">SECTION 02</span>
+          <h2 class="section-title">Working Principle &amp; Circulation System</h2>
+          <p class="section-desc">Automated coordination between the ESP32 microcontroller, sensors, relay module, and submersible water pump in a closed-loop irrigation system.</p>
+        </div>
+
+        <div class="grid-3col">
+          <div class="card card-step">
+            <div class="step-badge">STEP 01</div>
+            <h4>Sensor Telemetry Acquisition</h4>
+            <p>The capacitive moisture sensor positioned in the plant root zone and the waterproof DS18B20 temperature probe in the reservoir continuously acquire real-time environmental data and feed telemetry to the ESP32.</p>
+          </div>
+
+          <div class="card card-step">
+            <div class="step-badge">STEP 02</div>
+            <h4>ESP32 Analysis &amp; Relay Coordination</h4>
+            <p>The ESP32 processes and analyses moisture and temperature data in real time. It coordinates with the submersible pump through a dedicated Relay Module, which provides electrical isolation and precise switching control.</p>
+          </div>
+
+          <div class="card card-step">
+            <div class="step-badge">STEP 03</div>
+            <h4>Automated Irrigation &amp; Pump Action</h4>
+            <p>When moisture decreases around the plant roots and drops below the calibrated threshold, the ESP32 triggers the relay to start the water pump. Once the required moisture level is gained, the pump automatically stops.</p>
+          </div>
+        </div>
+
+        <!-- Defined Closed-Loop Operating Cycles -->
+        <div class="card mt-lg">
+          <div class="card-header-row">
+            <div>
+              <h3 class="card-title text-water">Defined Operating Cycles &amp; Automation Flow</h3>
+              <p class="text-sm text-muted">Complete closed-loop coordination sequence executed by the ESP32 and Relay Module.</p>
+            </div>
+            <span class="badge badge-ok">Closed-Loop Automation</span>
+          </div>
+
+          <div class="grid-4col mt-md">
+            <div class="card card-mini">
+              <div class="card-status-badge">CYCLE 01</div>
+              <h4>Standby Monitoring</h4>
+              <p>ESP32 continuously samples root-zone moisture and reservoir temperature. The relay module remains OPEN; pump is idle, allowing plant roots to breathe.</p>
+            </div>
+
+            <div class="card card-mini">
+              <div class="card-status-badge">CYCLE 02</div>
+              <h4>Moisture Deficit Detection</h4>
+              <p>When moisture decreases around the plant roots and drops below calibrated threshold (&le; 40%), the ESP32 analyzes the deficit and initiates irrigation logic.</p>
+            </div>
+
+            <div class="card card-mini">
+              <div class="card-status-badge">CYCLE 03</div>
+              <h4>Relay Trigger &amp; Circulation</h4>
+              <p>ESP32 drives GPIO 26 HIGH to trigger the Relay Module. The relay closes, energizing the pump. Nutrient solution rises through the supply pipe into Pipe 1 and cascades across all 4 zigzag tiers.</p>
+            </div>
+
+            <div class="card card-mini">
+              <div class="card-status-badge">CYCLE 04</div>
+              <h4>Moisture Regained &amp; Cut-Off</h4>
+              <p>As nutrient solution reaches plant roots, moisture levels rise. Once target moisture is reached (&ge; 65%), ESP32 opens the relay to stop the pump. Excess solution returns to reservoir.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- System Flow Schematic (SVG) Matching Assem2 Layout -->
+        <div class="card mt-lg hydraulic-card">
+          <div class="card-header-row">
+            <h3 class="card-title">01. Automatic Water Circulation Schematic</h3>
+            <span class="badge badge-accent">Reservoir on Right · Orthogonal Riser · 4 Zigzag Tiers</span>
+          </div>
+
+          <div class="schematic-container">
+            <svg class="schematic-svg" viewBox="0 0 920 370" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <linearGradient id="waterGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#38bdf8" />
+                  <stop offset="100%" stop-color="#22c55e" />
+                </linearGradient>
+                <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8"/>
+                </marker>
+                <marker id="arrowOrange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1 L 10 5 L 0 9 z" fill="#ea580c"/>
+                </marker>
+                <marker id="arrowDrain" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1 L 10 5 L 0 9 z" fill="#22c55e"/>
+                </marker>
+              </defs>
+
+              <!-- Pipe 1: Top Front -->
+              <rect x="120" y="40" width="560" height="40" rx="6" fill="#16171c" stroke="#38bdf8" stroke-width="2"/>
+              <text x="140" y="64" fill="#e2e8f0" font-size="12" font-family="Space Grotesk" font-weight="600">PIPE 1 (TOP) — 5 CUPS</text>
+              <circle cx="340" cy="60" r="10" fill="#38bdf8"/>
+              <circle cx="410" cy="60" r="10" fill="#38bdf8"/>
+              <circle cx="480" cy="60" r="10" fill="#38bdf8"/>
+              <circle cx="550" cy="60" r="10" fill="#38bdf8"/>
+              <circle cx="620" cy="60" r="10" fill="#38bdf8"/>
+
+              <!-- ESP32 mounted on Pipe 1 Right -->
+              <rect x="645" y="22" width="65" height="26" rx="4" fill="#15803d" stroke="#22c55e" stroke-width="1.5"/>
+              <text x="677" y="38" fill="#ffffff" font-size="9" font-family="JetBrains Mono" font-weight="700" text-anchor="middle">ESP32</text>
+
+              <!-- Relay Module Block -->
+              <rect x="725" y="22" width="65" height="26" rx="4" fill="#1e1b4b" stroke="#818cf8" stroke-width="1.5"/>
+              <text x="757" y="38" fill="#818cf8" font-size="9" font-family="JetBrains Mono" font-weight="700" text-anchor="middle">RELAY</text>
+
+              <!-- Control Signal Line from ESP32 to Relay -->
+              <path d="M 710 35 L 725 35" fill="none" stroke="#22c55e" stroke-width="2" stroke-dasharray="3,2"/>
+
+              <!-- Left Elbow 1 to 2 -->
+              <path d="M 120 60 L 80 60 L 80 120 L 120 120" fill="none" stroke="#121318" stroke-width="6" stroke-linecap="round"/>
+              <path d="M 120 60 L 80 60 L 80 120 L 120 120" fill="none" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrow)"/>
+
+              <!-- Pipe 2: Mid-Top Back -->
+              <rect x="120" y="100" width="560" height="40" rx="6" fill="#101115" stroke="#22242c" stroke-width="2"/>
+              <text x="140" y="124" fill="#e2e8f0" font-size="12" font-family="Space Grotesk" font-weight="600">PIPE 2 — 5 CUPS</text>
+              <circle cx="340" cy="120" r="10" fill="#c084fc"/>
+              <circle cx="410" cy="120" r="10" fill="#c084fc"/>
+              <circle cx="480" cy="120" r="10" fill="#c084fc"/>
+              <circle cx="550" cy="120" r="10" fill="#c084fc"/>
+              <circle cx="620" cy="120" r="10" fill="#c084fc"/>
+
+              <!-- Right Elbow 2 to 3 -->
+              <path d="M 680 120 L 720 120 L 720 180 L 680 180" fill="none" stroke="#121318" stroke-width="6" stroke-linecap="round"/>
+              <path d="M 680 120 L 720 120 L 720 180 L 680 180" fill="none" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrow)"/>
+
+              <!-- Pipe 3: Mid-Bottom Front -->
+              <rect x="120" y="160" width="560" height="40" rx="6" fill="#16171c" stroke="#38bdf8" stroke-width="2"/>
+              <text x="140" y="184" fill="#e2e8f0" font-size="12" font-family="Space Grotesk" font-weight="600">PIPE 3 — 5 CUPS</text>
+              <circle cx="340" cy="180" r="10" fill="#22c55e"/>
+              <circle cx="410" cy="180" r="10" fill="#22c55e"/>
+              <circle cx="480" cy="180" r="10" fill="#22c55e"/>
+              <circle cx="550" cy="180" r="10" fill="#22c55e"/>
+              <circle cx="620" cy="180" r="10" fill="#22c55e"/>
+
+              <!-- Left Elbow 3 to 4 -->
+              <path d="M 120 180 L 80 180 L 80 240 L 120 240" fill="none" stroke="#121318" stroke-width="6" stroke-linecap="round"/>
+              <path d="M 120 180 L 80 180 L 80 240 L 120 240" fill="none" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrow)"/>
+
+              <!-- Pipe 4: Bottom Back -->
+              <rect x="120" y="220" width="560" height="40" rx="6" fill="#101115" stroke="#22242c" stroke-width="2"/>
+              <text x="140" y="244" fill="#e2e8f0" font-size="12" font-family="Space Grotesk" font-weight="600">PIPE 4 (BOTTOM) — 5 CUPS</text>
+              <circle cx="340" cy="240" r="10" fill="#38bdf8"/>
+              <circle cx="410" cy="240" r="10" fill="#38bdf8"/>
+              <circle cx="480" cy="240" r="10" fill="#38bdf8"/>
+              <circle cx="550" cy="240" r="10" fill="#38bdf8"/>
+              <circle cx="620" cy="240" r="10" fill="#38bdf8"/>
+
+              <!-- Straight Drain from Pipe 4 into Bucket -->
+              <path d="M 680 240 L 760 240 L 760 265" fill="none" stroke="#121318" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M 680 240 L 760 240 L 760 265" fill="none" stroke="#22c55e" stroke-width="4" marker-end="url(#arrowDrain)"/>
+              <text x="705" y="232" fill="#22c55e" font-size="10" font-family="JetBrains Mono" font-weight="600">Drain Return</text>
+
+              <!-- Reservoir Bucket on Right Side -->
+              <polygon points="755,230 855,230 835,335 775,335" fill="#101115" stroke="#22242c" stroke-width="2"/>
+              <polygon points="760,250 850,250 832,330 778,330" fill="rgba(56, 189, 248, 0.2)"/>
+              <text x="805" y="268" fill="#38bdf8" font-size="10" font-family="JetBrains Mono" font-weight="700" text-anchor="middle">RESERVOIR</text>
+
+              <!-- Submersible Pump Inside Bucket -->
+              <rect x="785" y="285" width="40" height="35" rx="4" fill="#0b0c10" stroke="#38bdf8" stroke-width="2"/>
+              <text x="805" y="306" fill="#38bdf8" font-size="8" font-family="JetBrains Mono" font-weight="700" text-anchor="middle">PUMP</text>
+
+              <!-- Straight Orthogonal Orange Riser Pipe with Clean Finishing -->
+              <!-- Straight Vertical Line from Pump (805, 285) up to y=60, then Straight Horizontal to Pipe 1 (680, 60) -->
+              <path d="M 805 285 L 805 60 L 680 60" fill="none" stroke="#ea580c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M 805 200 L 805 150" fill="none" stroke="#ea580c" stroke-width="5" marker-end="url(#arrowOrange)"/>
+              <path d="M 740 60 L 700 60" fill="none" stroke="#ea580c" stroke-width="5" marker-end="url(#arrowOrange)"/>
+
+              <text x="818" y="130" fill="#ea580c" font-size="11" font-family="JetBrains Mono" font-weight="700">Straight Orange</text>
+              <text x="818" y="145" fill="#ea580c" font-size="11" font-family="JetBrains Mono" font-weight="700">Riser Supply</text>
+              <text x="818" y="160" fill="#94a3b8" font-size="9" font-family="Inter">Orthogonal Routing</text>
+            </svg>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEC 03: FABRICATION JOURNEY (With Real Workshop Photos) -->
+    <section id="journey" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">SECTION 03</span>
+          <h2 class="section-title">Fabrication Journey &amp; Workshop Build Photos</h2>
+          <p class="section-desc">Actual photographs from the workshop documenting cutting, welding, pipe slotting, and final assembly at Sanjivani University.</p>
+        </div>
+
+        <div class="timeline">
+          
+          <!-- Step 01: Cutting Steel Pipe -->
+          <div class="timeline-item">
+            <div class="timeline-marker">01</div>
+            <div class="timeline-content card">
+              <div class="timeline-header">
+                <span class="step-tag">WORKSHOP STEP 01</span>
+                <h3>Cutting MS Square Pipes with Chop Saw</h3>
+              </div>
+              <p>Cutting the 20 mm Mild Steel square pipes to required dimensions on the workshop abrasive chop saw to build the 4 &times; 4 &times; 2 ft frame.</p>
+              <div class="workshop-photo-box" onclick="openLightbox('assets/images/workshop_cutting_frame.jpg', 'Cutting MS square pipe using abrasive chop saw')">
+                <img src="assets/images/workshop_cutting_frame.jpg" alt="Cutting MS square pipe with abrasive chop saw" loading="lazy">
+                <span class="zoom-badge">🔍 View Workshop Photo</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 02: Frame Welding -->
+          <div class="timeline-item">
+            <div class="timeline-marker">02</div>
+            <div class="timeline-content card">
+              <div class="timeline-header">
+                <span class="step-tag">WORKSHOP STEP 02</span>
+                <h3>Welding the Base &amp; Structural Box Frame</h3>
+              </div>
+              <p>Arc welding the rectangular MS square pipe frame base and upright vertical posts on the welding table.</p>
+              <div class="workshop-photo-box" onclick="openLightbox('assets/images/workshop_welding_frame.jpg', 'Welding the MS rectangular frame on the welding table')">
+                <img src="assets/images/workshop_welding_frame.jpg" alt="Welding the MS frame" loading="lazy">
+                <span class="zoom-badge">🔍 View Workshop Photo</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 03: Measuring & Marking PVC Pipes -->
+          <div class="timeline-item">
+            <div class="timeline-marker">03</div>
+            <div class="timeline-content card">
+              <div class="timeline-header">
+                <span class="step-tag">WORKSHOP STEP 03</span>
+                <h3>Measuring &amp; Marking 3-Inch PVC Pipes</h3>
+              </div>
+              <p>Marking 5 hole positions on each of the four 3-inch PVC pipes using a steel scale and marker for uniform plant spacing.</p>
+              <div class="workshop-photo-box" onclick="openLightbox('assets/images/workshop_marking_pvc_pipes.jpg', 'Measuring hole spacing on PVC pipes')">
+                <img src="assets/images/workshop_marking_pvc_pipes.jpg" alt="Measuring hole spacing on PVC pipes" loading="lazy">
+                <span class="zoom-badge">🔍 View Workshop Photo</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 04: Cutting Apertures & Testing Net Cups -->
+          <div class="timeline-item">
+            <div class="timeline-marker">04</div>
+            <div class="timeline-content card">
+              <div class="timeline-header">
+                <span class="step-tag">WORKSHOP STEP 04</span>
+                <h3>Cutting Apertures &amp; Testing Net Cup Fit</h3>
+              </div>
+              <p>Cutting the apertures in the PVC pipes and checking the seating fit of the grow cups.</p>
+              <div class="workshop-photo-box" onclick="openLightbox('assets/images/workshop_cutting_pvc_slots.jpg', 'Cutting slots in PVC pipe and verifying net cup fit')">
+                <img src="assets/images/workshop_cutting_pvc_slots.jpg" alt="Cutting slots in PVC pipe" loading="lazy">
+                <span class="zoom-badge">🔍 View Workshop Photo</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 05: Finished PVC Pipes with End Caps -->
+          <div class="timeline-item">
+            <div class="timeline-marker">05</div>
+            <div class="timeline-content card">
+              <div class="timeline-header">
+                <span class="step-tag">WORKSHOP STEP 05</span>
+                <h3>Four Completed Growth Pipes with End Caps</h3>
+              </div>
+              <p>All four 3-inch PVC pipes prepared with 5 plant apertures each and fitted with end caps and hose drain fittings.</p>
+              <div class="workshop-photo-box" onclick="openLightbox('assets/images/workshop_finished_pvc_pipes.jpg', 'Four finished 3-inch PVC pipes with end caps')">
+                <img src="assets/images/workshop_finished_pvc_pipes.jpg" alt="Four finished PVC pipes" loading="lazy">
+                <span class="zoom-badge">🔍 View Workshop Photo</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 06: Frame Surface Finishing — Polishing & Protective Colouring -->
+          <div class="timeline-item">
+            <div class="timeline-marker">06</div>
+            <div class="timeline-content card">
+              <div class="timeline-header">
+                <span class="step-tag">WORKSHOP STEP 06</span>
+                <h3>Frame Surface Finishing: Polishing &amp; Protective Colouring</h3>
+              </div>
+              <p>Preparing the fabricated 4 &times; 4 &times; 2 ft MS frame: hand-polishing and smoothing all welded joints with emery paper to eliminate burrs, slag, and oxidation, followed by applying a uniform protective spray paint colour coating to prevent rust and corrosion in high-humidity hydroponic operation.</p>
+              
+              <div class="workshop-dual-grid">
+                <div class="workshop-sub-photo">
+                  <div class="stage-label">STAGE 01 · SURFACE POLISHING</div>
+                  <div class="workshop-photo-box" style="height: 380px; margin-top: 0;" onclick="openLightbox('assets/images/workshop_polishing_frame.jpg', 'Hand polishing and smoothing MS frame joints with emery paper')">
+                    <img src="assets/images/workshop_polishing_frame.jpg" alt="Hand polishing and smoothing MS frame joints with emery paper" loading="lazy">
+                    <span class="zoom-badge">🔍 Polishing &amp; Smoothing</span>
+                  </div>
+                </div>
+
+                <div class="workshop-sub-photo">
+                  <div class="stage-label stage-label-plant">STAGE 02 · PROTECTIVE COLOURING</div>
+                  <div class="workshop-photo-box" style="height: 380px; margin-top: 0;" onclick="openLightbox('assets/images/workshop_painting_frame.jpg', 'Applying protective spray paint and colouring to MS frame')">
+                    <img src="assets/images/workshop_painting_frame.jpg" alt="Applying protective spray paint and colouring to MS frame" loading="lazy">
+                    <span class="zoom-badge">🔍 Spray Painting &amp; Colouring</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 07: Rig Assembled in Campus -->
+          <div class="timeline-item">
+            <div class="timeline-marker">07</div>
+            <div class="timeline-content card">
+              <div class="timeline-header">
+                <span class="step-tag">WORKSHOP STEP 07</span>
+                <h3>Completed Rig Assembled on Stand with Hose</h3>
+              </div>
+              <p>The completed MS stand with the four PVC pipes mounted on their brackets, inter-pipe hose routing, and end caps verified on campus.</p>
+              <div class="workshop-photo-box" onclick="openLightbox('assets/images/workshop_full_rig_assembled.jpg', 'Full hydroponic rig assembled on frame with hose routing at Sanjivani College Campus')">
+                <img src="assets/images/workshop_full_rig_assembled.jpg" alt="Completed rig assembled on stand" loading="lazy">
+                <span class="zoom-badge">🔍 View Workshop Photo</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SEC 04: SOLIDWORKS CAD DESIGN & ARCHITECTURE -->
+    <section id="cad-model" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">SECTION 04</span>
+          <h2 class="section-title">SolidWorks 3D Model Video &amp; Mechanical Architecture</h2>
+          <p class="section-desc">Interactive 3D model video and verified SolidWorks assembly (Assem_final.SLDASM). Experience the 360° cinematic orbit, live water circulation, and mechanical architecture.</p>
+        </div>
+
+        <!-- Dedicated SolidWorks 3D Model Video & CAD Showcase Card -->
+        <div class="card cad-video-showcase-card mb-lg">
+          
+          <!-- Permanent Top Header Bar (Always Visible in both 3D Video and SolidWorks CAD modes) -->
+          <div class="hero-cad-topbar">
+            <div class="hero-cad-mode-tabs">
+              <button id="btnTab3DVideo" class="mode-tab-btn active" type="button" title="View interactive 3D model video">
+                <span class="video-live-dot"></span> 🎥 3D Model Video
+              </button>
+              <button id="btnTabCadPhoto" class="mode-tab-btn" type="button" title="View verified SolidWorks CAD screenshot">
+                📸 SolidWorks CAD Screenshot
+              </button>
+            </div>
+
+            <div class="hero-cad-top-actions">
+              <button id="btnToggleWaterFlow" class="btn-video-top active" type="button" title="Toggle Water Circulation Flow">
+                💧 Water Flow
+              </button>
+              <button id="btnVideoFullscreen" class="btn-video-top" type="button" title="Fullscreen View">
+                ⛶ Fullscreen
+              </button>
+            </div>
+          </div>
+
+          <!-- 1. Live 3D Model Video Viewport -->
+          <div id="threeVideoWrapper" class="three-canvas-wrapper">
+            <div id="threeVideoContainer" style="width:100%; height:100%;"></div>
+
+            <!-- Floating Camera Preset Views -->
+            <div class="video-preset-bar">
+              <button class="cam-preset-btn active" data-view="orbit" type="button">🎥 360° Orbit</button>
+              <button class="cam-preset-btn" data-view="front" type="button">Front View</button>
+              <button class="cam-preset-btn" data-view="iso" type="button">Isometric</button>
+              <button class="cam-preset-btn" data-view="reservoir" type="button">Reservoir</button>
+              <button class="cam-preset-btn" data-view="top" type="button">Top View</button>
+            </div>
+
+            <!-- Bottom Video Scrubber & Playback Controls -->
+            <div class="video-bottom-controls">
+              <div class="video-scrubber-track">
+                <div id="videoScrubberProgress" class="video-scrubber-progress"></div>
+              </div>
+              <div class="video-control-row">
+                <div class="video-control-left">
+                  <button id="btnVideoPlay" class="btn-ctrl" type="button">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg> Pause 3D Video
+                  </button>
+                  <span id="videoTimecode" class="video-timecode">00:00 / 00:20</span>
+                </div>
+                <div class="video-control-right">
+                  <span class="video-timecode">4K 60FPS · Assem_final.SLDASM</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Static SolidWorks CAD Assembly Screenshot Viewport -->
+          <div id="staticCadPhotoWrapper" class="static-cad-wrapper" style="display:none;">
+            <div class="cad-screenshot-container" onclick="openLightbox('assets/images/cad_assem_final_elevation.jpg', 'SolidWorks Master Assembly Front Elevation (Assem_final.SLDASM)')">
+              <img src="assets/images/cad_assem_final_elevation.jpg" alt="SolidWorks Master Assembly Front Elevation" class="hero-cad-preview-img">
+              <div class="cad-hint-bottom">🔍 Click image to enlarge fullscreen · Click "🎥 3D Model Video" above to return</div>
+            </div>
+            <!-- Floating return button to ensure instant return to 3D video -->
+            <button class="btn btn-primary btn-return-video" type="button" onclick="event.stopPropagation(); window.show3DVideoMode();">
+              🎥 Return to 3D Video
+            </button>
+          </div>
+
+        </div>
+
+        <!-- SolidWorks Mechanical Architecture Specifications Grid -->
+        <div class="card mb-lg">
+          <div class="card-header-row">
+            <div>
+              <h3 class="card-title text-water">SolidWorks Mechanical &amp; Hydraulic Specifications</h3>
+              <p class="text-sm text-muted">Engineering parameters verified against the physical fabricated prototype.</p>
+            </div>
+            <span class="badge badge-accent">Verified Assembly Data</span>
+          </div>
+
+          <div class="grid-2col mt-md">
+            <div>
+              <h4 class="text-water">Mechanical Frame &amp; Growth Channels</h4>
+              <ul class="styled-list mt-xs">
+                <li><strong>Frame Dimensions:</strong> Rectangular MS square-pipe frame measuring 4 &times; 4 &times; 2 ft (4' width &times; 4' height &times; 2' depth), fabricated with welded joints, polished, and finished with protective colouring.</li>
+                <li><strong>Growth Pipe Geometry:</strong> Four horizontal 3-inch PVC pipes mounted in a vertical zigzag arrangement across the frame.</li>
+                <li><strong>Vertical Pitch:</strong> Recommended vertical centre-to-centre spacing of 9 inches (228.6 mm) between adjacent pipes.</li>
+                <li><strong>Alternating Alignment:</strong> Pipe 1 at front, Pipe 2 at back, Pipe 3 at front, and Pipe 4 at back for structural rigidity and plant spacing.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 class="text-plant">Hydraulic Architecture &amp; Component Layout</h4>
+              <ul class="styled-list mt-xs">
+                <li><strong>Plant Capacity:</strong> 5 net cup apertures per pipe (20 plants total), fitted with net pots for plant cultivation.</li>
+                <li><strong>Right Reservoir Bucket:</strong> Nutrient solution container positioned on the floor to the right of the stand frame.</li>
+                <li><strong>Riser Supply Pipe:</strong> Straight orthogonal orange supply pipe routing nutrient solution from the pump up to Pipe 1 top inlet.</li>
+                <li><strong>Inter-Tier Elbows &amp; Drain:</strong> Inter-pipe elbow hose loops transferring fluid between tiers, with a horizontal straight drain pipe returning effluent directly to the bucket.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Direct CTA to CAD Downloads -->
+        <div class="card cad-cta-card">
+          <div class="cad-cta-content">
+            <div>
+              <h3 class="text-water">Download Verified SolidWorks CAD Files</h3>
+              <p class="text-muted text-sm">Access all individual part models (.SLDPRT) and the complete assembly (.SLDASM) in our CAD downloads repository.</p>
+            </div>
+            <a href="#downloads" class="btn btn-primary">Go to CAD Downloads &darr;</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEC 05: ELECTRONICS & CONTROL -->
+    <section id="electronics" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">SECTION 05</span>
+          <h2 class="section-title">Electronics, Sensors &amp; Control Logic</h2>
+          <p class="section-desc">The hardware components used in our system and their automated control logic.</p>
+        </div>
+
+        <!-- The Core Components (5 Components with Relay Module) -->
+        <div class="grid-5col mb-lg">
+          <div class="card card-mini">
+            <div class="card-status-badge badge-ok">CONTROLLER</div>
+            <h4>ESP32 NodeMCU</h4>
+            <p>Probots ESP32 38-Pin WROOM-32 Dev Board. Main microcontroller executing telemetry analysis, threshold computation, and relay control.</p>
+          </div>
+
+          <div class="card card-mini">
+            <div class="card-status-badge badge-ok">SWITCHING &amp; RELAY</div>
+            <h4>Relay Module</h4>
+            <p>5V Single-Channel Relay Module. Intermediary electromechanical switch providing galvanic isolation between ESP32 3.3V logic and the water pump.</p>
+          </div>
+
+          <div class="card card-mini">
+            <div class="card-status-badge badge-ok">MOISTURE</div>
+            <h4>Capacitive Moisture Sensor</h4>
+            <p>DIYables Capacitive Soil Moisture Sensor module for root-zone moisture acquisition, resistant to corrosion in hydroponic water.</p>
+          </div>
+
+          <div class="card card-mini">
+            <div class="card-status-badge badge-ok">TEMPERATURE</div>
+            <h4>DS18B20 Sensor</h4>
+            <p>Waterproof DS18B20-compatible temperature sensor probe for continuous monitoring of nutrient solution thermal levels.</p>
+          </div>
+
+          <div class="card card-mini">
+            <div class="card-status-badge badge-ok">WATER PUMP</div>
+            <h4>Submersible Water Pump</h4>
+            <p>Submersible water pump triggered through the relay module to circulate nutrient solution upward across all 4 growth channels.</p>
+          </div>
+        </div>
+
+        <!-- ESP32 & Relay Coordination Architecture -->
+        <div class="card mb-lg">
+          <div class="card-header-row">
+            <div>
+              <h3 class="card-title text-water">ESP32 &amp; Relay Coordination Architecture</h3>
+              <p class="text-sm text-muted">Automated coordination sequence between sensors, microcontroller analysis, relay switching, and pump actuation.</p>
+            </div>
+            <span class="badge badge-accent">Closed-Loop Control</span>
+          </div>
+
+          <div class="grid-2col mt-md">
+            <div>
+              <h4 class="text-water">1. Sensor Data Acquisition &amp; Real-Time Analysis</h4>
+              <p class="text-sm text-muted mb-md">The ESP32 microcontroller continuously reads real-time environmental telemetry from the root zone and reservoir:</p>
+              <ul class="styled-list">
+                <li><strong>Capacitive Moisture Sensor (GPIO 34):</strong> Monitors moisture saturation around the plant root zone in the grow pipes.</li>
+                <li><strong>DS18B20 Temperature Probe (GPIO 04):</strong> Continuously tracks nutrient solution temperature in the reservoir bucket.</li>
+                <li><strong>Microcontroller Analysis:</strong> ESP32 algorithms process the raw ADC telemetry to detect moisture depletion around plant roots.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 class="text-plant">2. Relay Module Switching &amp; Pump Action</h4>
+              <p class="text-sm text-muted mb-md">The ESP32 coordinates directly with the submersible pump through the Relay Module:</p>
+              <ul class="styled-list">
+                <li><strong>Pump Activation:</strong> When moisture falls below the calibrated threshold, ESP32 drives GPIO 26 HIGH, closing the relay contacts to start the pump and deliver solution to Pipe 1.</li>
+                <li><strong>Pump Cut-Off:</strong> When optimal root moisture is gained, ESP32 drives GPIO 26 LOW, opening the relay to cut pump power and allow root oxygenation.</li>
+                <li><strong>Galvanic Isolation:</strong> The relay module protects the ESP32 from inductive kickback voltages generated by the water pump motor.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEC 06: CAD DOWNLOADS -->
+    <section id="downloads" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">SECTION 06</span>
+          <h2 class="section-title">SolidWorks CAD Files &amp; Downloads</h2>
+          <p class="section-desc">All 23 SolidWorks CAD parts, sub-assemblies, the master assembly (Assem_final.SLDASM), and the master ZIP archive are accessible for direct download.</p>
+        </div>
+
+        <div class="card cad-repo-card">
+          <div class="card-header-row">
+            <div>
+              <h3 class="card-title text-water">SolidWorks Files Repository</h3>
+              <p class="text-sm text-muted">Click any download button to download the genuine SolidWorks part or assembly file.</p>
+            </div>
+            <span class="badge badge-ok">SolidWorks CAD (23 Files)</span>
+          </div>
+
+          <!-- All SolidWorks Files Table -->
+          <div class="table-container mt-md">
+            <table class="tech-table cad-table">
+              <thead>
+                <tr>
+                  <th>Component / Assembly</th>
+                  <th>File Name</th>
+                  <th>Type</th>
+                  <th>File Size</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- 1. Master & Sub-Assemblies -->
+                <tr class="highlight-row">
+                  <td><strong>Master System Assembly</strong></td>
+                  <td><code>Assem_final.SLDASM</code></td>
+                  <td><span class="badge badge-accent">.SLDASM</span></td>
+                  <td>2.52 MB</td>
+                  <td>
+                    <a href="cad/Assem_final.SLDASM" download="Assem_final.SLDASM" class="btn-cad-download">
+                      Download .SLDASM
+                    </a>
+                  </td>
+                </tr>
+                <tr class="highlight-row">
+                  <td><strong>ESP32 &amp; Soil Moisture Assembly</strong></td>
+                  <td><code>ESP32_Soil_Moisture_Assembly.SLDASM</code></td>
+                  <td><span class="badge badge-accent">.SLDASM</span></td>
+                  <td>1.42 MB</td>
+                  <td>
+                    <a href="cad/ESP32_Soil_Moisture_Assembly.SLDASM" download="ESP32_Soil_Moisture_Assembly.SLDASM" class="btn-cad-download">
+                      Download .SLDASM
+                    </a>
+                  </td>
+                </tr>
+                <tr class="highlight-row">
+                  <td><strong>Hydroponic Stand Assembly</strong></td>
+                  <td><code>hydroponic_stand.SLDASM</code></td>
+                  <td><span class="badge badge-accent">.SLDASM</span></td>
+                  <td>823 KB</td>
+                  <td>
+                    <a href="cad/hydroponic_stand.SLDASM" download="hydroponic_stand.SLDASM" class="btn-cad-download">
+                      Download .SLDASM
+                    </a>
+                  </td>
+                </tr>
+
+                <!-- 2. Electronics & Sensor Models -->
+                <tr>
+                  <td><strong>ESP32 DevKit V1 Board</strong></td>
+                  <td><code>ESP32-DevKit-V1.SLDPRT</code></td>
+                  <td><span class="badge">.SLDPRT</span></td>
+                  <td>5.13 MB</td>
+                  <td>
+                    <a href="cad/ESP32-DevKit-V1.SLDPRT" download="ESP32-DevKit-V1.SLDPRT" class="btn-cad-download">
+                      Download .SLDPRT
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Capacitive Soil Moisture Sensor</strong></td>
+                  <td><code>Soil_Moisture_Sensor.SLDPRT</code></td>
+                  <td><span class="badge">.SLDPRT</span></td>
+                  <td>1.34 MB</td>
+                  <td>
+                    <a href="cad/Soil_Moisture_Sensor.SLDPRT" download="Soil_Moisture_Sensor.SLDPRT" class="btn-cad-download">
+                      Download .SLDPRT
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>DS18B20 Temperature Probe</strong></td>
+                  <td><code>DS18B20_Temperature_Probe.SLDPRT</code></td>
+                  <td><span class="badge">.SLDPRT</span></td>
+                  <td>406 KB</td>
+                  <td>
+                    <a href="cad/DS18B20_Temperature_Probe.SLDPRT" download="DS18B20_Temperature_Probe.SLDPRT" class="btn-cad-download">
+                      Download .SLDPRT
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Hydrophonic Sensor Bracket</strong></td>
+                  <td><code>sensior_hydrophonic.SLDPRT</code></td>
+                  <td><span class="badge">.SLDPRT</span></td>
+                  <td>976 KB</td>
+                  <td>
+                    <a href="cad/sensior_hydrophonic.SLDPRT" download="sensior_hydrophonic.SLDPRT" class="btn-cad-download">
+                      Download .SLDPRT
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Sensor Wiring Harness</strong></td>
+                  <td><code>Cup1_Sensor_Wiring.SLDPRT</code></td>
+                  <td><span class="badge">.SLDPRT</span></td>
+                  <td>656 KB</td>
+                  <td>
+                    <a href="cad/Cup1_Sensor_Wiring.SLDPRT" download="Cup1_Sensor_Wiring.SLDPRT" class="btn-cad-download">
+                      Download .SLDPRT
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Jumper Wire (Signal L)</strong></td>
+                  <td><code>Jumper_Wire_FF_L_Signal.SLDPRT</code></td>
+                  <td><span class="badge">.SLDPRT</span></td>
+                  <td>1.16 MB</td>
+                  <td>
+                    <a href="cad/Jumper_Wire_FF_L_Signal.SLDPRT" download="Jumper_Wire_FF_L_Signal.SLDPRT" class="btn-cad-download">
+                      Download .SLDPRT
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Jumper Wire (Probe U)</strong></td>
+                  <td><code>Jumper_Wire_FF_U_Probe.SLDPRT</code></td>
+                  <td><span class="badge">.SLDPRT</span></td>
+                  <td>925 KB</td>
+                  <td>
+                    <a href="cad/Jumper_Wire_FF_U_Probe.SLDPRT" download="Jumper_Wire_FF_U_Probe.SLDPRT" class="btn-cad-download">
+                      Download .SLDPRT
+                    </a>
+                  </td>
+                </tr>
+
+                <!-- 3. Structure & Frame -->
+                <tr>
+                  <td><strong>Hydroponic System Stand Structure</strong></td>
+                  <td><code>hydroponic_system_stand.SLDPRT</code></td>
+                  <td><span class="badge">.SLDPRT</span></td>
+                  <td>312 KB</td>
+                  <td>
+                    <a href="cad/hydroponic_system_stand.SLDPRT" download="hydroponic_system_stand.SLDPRT" class="btn-cad-download">
+                      Download .SLDPRT
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Nutrient Reservoir Bucket</strong></td>
+                  <td><code>bucket.SLDPRT</code></td>
+                  <td><span class="badge">.SLDPRT</span></td>
+                  <td>188 KB</td>
+                  <td>
+                    <a href="cad/bucket.SLDPRT" download="bucket.SLDPRT" class="btn-cad-download">
+                      Download .SLDPRT
+                    </a>
+                  </td>
+                </tr>
+
+                <!-- 4. Piping & Plumbing -->
+                <tr>
+                  <td><strong>Growth Channel Pipe (3-Inch PVC)</strong></td>
+                  <td><code>pipe.SLDPRT</code></td>
+                  <td><span class="badge">.SLDPRT</span></td>
+                  <td>71 KB</td>
+                  <td>
+                    <a href="cad/pipe.SLDPRT" download="pipe.SLDPRT" class="btn-cad-download">
+                      Download .SLDPRT
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Transfer Growth Pipe</strong></td>
+                  <td><code>pipe_.o2.SLDPRT</code></td>
+                  <td><span class="badge">.SLDPRT</span></td>
+                  <td>153 KB</td>
+                  <td>
+                    <a href="cad/pipe_.o2.SLDPRT" download="pipe_.o2.SLDPRT" class="btn-cad-download">
+                      Download .SLDPRT
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Bottom Growth Pipe</strong></td>
+                  <td><code>pipe_buttom.SLDPRT</code></td>
+                  <td><span class="badge">.SLDPRT</span></td>
+                  <td>104 KB</td>
+                  <td>
+                    <a href="cad/pipe_buttom.SLDPRT" download="pipe_buttom.SLDPRT" class="btn-cad-download">
+                      Download .SLDPRT
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Elbow Fitting / Union</strong></td>
+                  <td><code>12.SLDPRT</code></td>
+                  <td><span class="badge">.SLDPRT</span></td>
+                  <td>136 KB</td>
+                  <td>
+                    <a href="cad/12.SLDPRT" download="12.SLDPRT" class="btn-cad-download">
+                      Download .SLDPRT
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Hydroponic Net Cup</strong></td>
+                  <td><code>Hydro_Net_Cup.SLDPRT</code></td>
+                  <td><span class="badge">.SLDPRT</span></td>
+                  <td>1.10 MB</td>
+                  <td>
+                    <a href="cad/Hydro_Net_Cup.SLDPRT" download="Hydro_Net_Cup.SLDPRT" class="btn-cad-download">
+                      Download .SLDPRT
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Supply Riser Pipe</strong></td>
+                  <td><code>riser_pipe_L1_supply.SLDPRT</code></td>
+                  <td><span class="badge">.SLDPRT</span></td>
+                  <td>297 KB</td>
+                  <td>
+                    <a href="cad/riser_pipe_L1_supply.SLDPRT" download="riser_pipe_L1_supply.SLDPRT" class="btn-cad-download">
+                      Download .SLDPRT
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Submersible Water Pump</strong></td>
+                  <td><code>submersible_pump.SLDPRT</code></td>
+                  <td><span class="badge">.SLDPRT</span></td>
+                  <td>136 KB</td>
+                  <td>
+                    <a href="cad/submersible_pump.SLDPRT" download="submersible_pump.SLDPRT" class="btn-cad-download">
+                      Download .SLDPRT
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Pump Power Cable</strong></td>
+                  <td><code>Pump_Power_Cable.SLDPRT</code></td>
+                  <td><span class="badge">.SLDPRT</span></td>
+                  <td>242 KB</td>
+                  <td>
+                    <a href="cad/Pump_Power_Cable.SLDPRT" download="Pump_Power_Cable.SLDPRT" class="btn-cad-download">
+                      Download .SLDPRT
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Drain Return Hose</strong></td>
+                  <td><code>Drain_Return_Hose.SLDPRT</code></td>
+                  <td><span class="badge">.SLDPRT</span></td>
+                  <td>232 KB</td>
+                  <td>
+                    <a href="cad/Drain_Return_Hose.SLDPRT" download="Drain_Return_Hose.SLDPRT" class="btn-cad-download">
+                      Download .SLDPRT
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Straight Drain Fitting</strong></td>
+                  <td><code>Straight_Drain_Fitting.SLDPRT</code></td>
+                  <td><span class="badge">.SLDPRT</span></td>
+                  <td>62 KB</td>
+                  <td>
+                    <a href="cad/Straight_Drain_Fitting.SLDPRT" download="Straight_Drain_Fitting.SLDPRT" class="btn-cad-download">
+                      Download .SLDPRT
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Bucket Inlet Pipe</strong></td>
+                  <td><code>Bucket_Inlet_Pipe.SLDPRT</code></td>
+                  <td><span class="badge">.SLDPRT</span></td>
+                  <td>90 KB</td>
+                  <td>
+                    <a href="cad/Bucket_Inlet_Pipe.SLDPRT" download="Bucket_Inlet_Pipe.SLDPRT" class="btn-cad-download">
+                      Download .SLDPRT
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Master ZIP Download -->
+          <div class="master-archive-banner">
+            <div class="master-archive-info">
+              <h4>📦 Download Complete SolidWorks CAD Bundle (.ZIP)</h4>
+              <p>Contains all 23 genuine SolidWorks files (`Assem_final.SLDASM`, sub-assemblies, and 20 component parts) in one single ZIP package (18.0 MB).</p>
+            </div>
+            <a href="cad/SmartHydro_SolidWorks_CAD_Group18.zip" download="SmartHydro_SolidWorks_CAD_Group18.zip" class="btn btn-cad-master">
+              Download All CAD Files (.ZIP)
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEC 07: UNIFIED GALLERY (All Workshop Photos + All CAD Screenshots in One Place) -->
+    <section id="gallery" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">SECTION 07</span>
+          <h2 class="section-title">Unified Project Gallery</h2>
+          <p class="section-desc">All workshop fabrication photos and SolidWorks CAD screenshots in one unified gallery. Click any image to view in full resolution.</p>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="gallery-filter-bar">
+          <button class="filter-btn active" data-filter="all">All Photos &amp; CAD (28)</button>
+          <button class="filter-btn" data-filter="workshop">Workshop Build (10)</button>
+          <button class="filter-btn" data-filter="cad">SolidWorks CAD (18)</button>
+        </div>
+
+        <!-- Unified Gallery Grid -->
+        <div class="gallery-grid" id="galleryGrid">
+          
+          <!-- WORKSHOP REAL BUILD PHOTOS -->
+          <div class="gallery-item" data-category="workshop" onclick="openLightbox('assets/images/workshop_full_rig_assembled.jpg', 'Completed rig assembled on stand with PVC pipes and orange hose at Sanjivani College Campus')">
+            <img src="assets/images/workshop_full_rig_assembled.jpg" alt="Completed rig assembled on stand" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">WORKSHOP</span>
+              <h4>Fully Assembled Rig on Campus</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="workshop" onclick="openLightbox('assets/images/workshop_frame_pipes_structure.jpg', 'Welded MS frame stand with 4 horizontal PVC pipes mounted on brackets')">
+            <img src="assets/images/workshop_frame_pipes_structure.jpg" alt="Welded MS frame stand with pipes" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">WORKSHOP</span>
+              <h4>MS Frame &amp; Pipes Stand Structure</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="workshop" onclick="openLightbox('assets/images/workshop_cutting_frame.jpg', 'Cutting MS square pipe using abrasive chop saw')">
+            <img src="assets/images/workshop_cutting_frame.jpg" alt="Cutting frame on chop saw" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">WORKSHOP</span>
+              <h4>Cutting MS Pipe on Chop Saw</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="workshop" onclick="openLightbox('assets/images/workshop_welding_frame.jpg', 'Arc welding the rectangular MS square pipe frame base')">
+            <img src="assets/images/workshop_welding_frame.jpg" alt="Arc welding frame base" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">WORKSHOP</span>
+              <h4>Arc Welding Frame Base</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="workshop" onclick="openLightbox('assets/images/workshop_welding_brackets.jpg', 'Welding pipe support brackets on the frame')">
+            <img src="assets/images/workshop_welding_brackets.jpg" alt="Welding pipe brackets" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">WORKSHOP</span>
+              <h4>Welding Saddle Brackets</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="workshop" onclick="openLightbox('assets/images/workshop_marking_pvc_pipes.jpg', 'Measuring and marking 5 plant hole positions on 3-inch PVC pipes')">
+            <img src="assets/images/workshop_marking_pvc_pipes.jpg" alt="Marking PVC pipes" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">WORKSHOP</span>
+              <h4>Marking 5-Hole Pitch on PVC</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="workshop" onclick="openLightbox('assets/images/workshop_cutting_pvc_slots.jpg', 'Cutting square slots in PVC pipe and verifying net cup fit')">
+            <img src="assets/images/workshop_cutting_pvc_slots.jpg" alt="Cutting PVC slots" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">WORKSHOP</span>
+              <h4>Cutting Slots &amp; Testing Net Cup</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="workshop" onclick="openLightbox('assets/images/workshop_finished_pvc_pipes.jpg', 'Four finished 3-inch PVC pipes with end caps')">
+            <img src="assets/images/workshop_finished_pvc_pipes.jpg" alt="Four finished PVC pipes" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">WORKSHOP</span>
+              <h4>4 Finished Slotted PVC Pipes</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="workshop" onclick="openLightbox('assets/images/workshop_polishing_frame.jpg', 'Team members hand-polishing and smoothing welded joints of the MS frame with emery paper')">
+            <img src="assets/images/workshop_polishing_frame.jpg" alt="Hand polishing welded MS frame joints" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">WORKSHOP</span>
+              <h4>Frame Surface Polishing</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="workshop" onclick="openLightbox('assets/images/workshop_painting_frame.jpg', 'Team members applying protective spray paint and colouring to the 4x4x2 ft MS frame')">
+            <img src="assets/images/workshop_painting_frame.jpg" alt="Applying protective spray paint to MS frame" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">WORKSHOP</span>
+              <h4>Frame Spray Painting &amp; Colouring</h4>
+            </div>
+          </div>
+
+          <!-- SOLIDWORKS CAD SCREENSHOTS (18 VERIFIED GENUINE MODELS & ASSEMBLIES) -->
+          <div class="gallery-item" data-category="cad" onclick="openLightbox('assets/images/cad_assem_final_elevation.jpg', 'SolidWorks Master Assembly (Assem_final.SLDASM) showing complete 4-tier rig, reservoir bucket, pump, and sensor integration')">
+            <img src="assets/images/cad_assem_final_elevation.jpg" alt="SolidWorks Master Assembly (Assem_final.SLDASM)" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">SOLIDWORKS CAD</span>
+              <h4>Master Rig Assembly (Assem_final)</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="cad" onclick="openLightbox('assets/images/cad_hydroponic_stand_assembly.jpg', 'SolidWorks Stand Sub-Assembly (hydroponic_stand.SLDASM) with four 3-inch PVC pipes mounted on welded brackets and riser line')">
+            <img src="assets/images/cad_hydroponic_stand_assembly.jpg" alt="Hydroponic Stand Assembly (hydroponic_stand.SLDASM)" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">SOLIDWORKS CAD</span>
+              <h4>Hydroponic Stand Assembly</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="cad" onclick="openLightbox('assets/images/cad_esp32_soil_moisture_assembly.jpg', 'SolidWorks Sensor &amp; Microcontroller Sub-Assembly (ESP32_Soil_Moisture_Assembly.SLDASM) with DevKit, moisture sensor, and wiring')">
+            <img src="assets/images/cad_esp32_soil_moisture_assembly.jpg" alt="ESP32 &amp; Sensor Assembly (ESP32_Soil_Moisture_Assembly.SLDASM)" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">SOLIDWORKS CAD</span>
+              <h4>ESP32 &amp; Sensor Sub-Assembly</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="cad" onclick="openLightbox('assets/images/cad_hydroponic_system_stand.jpg', 'SolidWorks MS Stand Frame Structure (hydroponic_system_stand.SLDPRT) — 4x4x2 ft welded Mild Steel rectangular frame')">
+            <img src="assets/images/cad_hydroponic_system_stand.jpg" alt="MS Stand Frame Structure (hydroponic_system_stand.SLDPRT)" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">SOLIDWORKS CAD</span>
+              <h4>MS Stand Frame Structure</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="cad" onclick="openLightbox('assets/images/cad_bucket.jpg', 'SolidWorks Nutrient Reservoir Bucket (bucket.SLDPRT) with handle, overflow port, and drain return inlet')">
+            <img src="assets/images/cad_bucket.jpg" alt="Nutrient Reservoir Bucket (bucket.SLDPRT)" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">SOLIDWORKS CAD</span>
+              <h4>Nutrient Reservoir Bucket</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="cad" onclick="openLightbox('assets/images/cad_pipe.jpg', 'SolidWorks 3-Inch PVC Growth Channel (pipe.SLDPRT) with 5 precision net cup aperture cutouts')">
+            <img src="assets/images/cad_pipe.jpg" alt="3-Inch PVC Growth Pipe (pipe.SLDPRT)" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">SOLIDWORKS CAD</span>
+              <h4>3-Inch Slotted PVC Pipe</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="cad" onclick="openLightbox('assets/images/cad_pipe_o2.jpg', 'SolidWorks Inter-Tier Fluid Transfer Pipe (pipe_.o2.SLDPRT) transferring nutrient solution between growth tiers')">
+            <img src="assets/images/cad_pipe_o2.jpg" alt="Inter-Tier Transfer Pipe (pipe_.o2.SLDPRT)" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">SOLIDWORKS CAD</span>
+              <h4>Inter-Tier Transfer Pipe</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="cad" onclick="openLightbox('assets/images/cad_pipe_buttom.jpg', 'SolidWorks PVC Growth Pipe End Cap (pipe_buttom.SLDPRT) with central drain port')">
+            <img src="assets/images/cad_pipe_buttom.jpg" alt="Pipe End Cap with Drain Hole (pipe_buttom.SLDPRT)" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">SOLIDWORKS CAD</span>
+              <h4>Pipe End Cap with Drain Port</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="cad" onclick="openLightbox('assets/images/cad_12_elbow_fitting.jpg', 'SolidWorks 90-Degree Barbed Elbow Connector (12.SLDPRT) for inter-pipe hydraulic transfer loops')">
+            <img src="assets/images/cad_12_elbow_fitting.jpg" alt="90° Barbed Elbow Fitting (12.SLDPRT)" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">SOLIDWORKS CAD</span>
+              <h4>90° Barbed Elbow Fitting</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="cad" onclick="openLightbox('assets/images/cad_straight_drain_fitting.jpg', 'SolidWorks Straight Barbed Drain Connector (Straight_Drain_Fitting.SLDPRT) for reservoir return')">
+            <img src="assets/images/cad_straight_drain_fitting.jpg" alt="Straight Drain Fitting (Straight_Drain_Fitting.SLDPRT)" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">SOLIDWORKS CAD</span>
+              <h4>Straight Drain Fitting</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="cad" onclick="openLightbox('assets/images/cad_drain_return_hose.jpg', 'SolidWorks Flexible Effluent Drain Hose (Drain_Return_Hose.SLDPRT) routing solution back into reservoir')">
+            <img src="assets/images/cad_drain_return_hose.jpg" alt="Drain Return Hose (Drain_Return_Hose.SLDPRT)" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">SOLIDWORKS CAD</span>
+              <h4>Drain Return Hose</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="cad" onclick="openLightbox('assets/images/cad_riser_pipe_l1_supply.jpg', 'SolidWorks Vertical Supply Riser Pipe (riser_pipe_L1_supply.SLDPRT) delivering solution from submersible pump to Pipe 1')">
+            <img src="assets/images/cad_riser_pipe_l1_supply.jpg" alt="Supply Riser Pipe (riser_pipe_L1_supply.SLDPRT)" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">SOLIDWORKS CAD</span>
+              <h4>Vertical Supply Riser Pipe</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="cad" onclick="openLightbox('assets/images/cad_submersible_pump.jpg', 'SolidWorks Submersible Water Pump Model (submersible_pump.SLDPRT) with intake grille and barbed supply outlet')">
+            <img src="assets/images/cad_submersible_pump.jpg" alt="Submersible Water Pump (submersible_pump.SLDPRT)" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">SOLIDWORKS CAD</span>
+              <h4>Submersible Water Pump</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="cad" onclick="openLightbox('assets/images/cad_pump_power_cable.jpg', 'SolidWorks Submersible Pump AC Power Cable &amp; Plug (Pump_Power_Cable.SLDPRT)')">
+            <img src="assets/images/cad_pump_power_cable.jpg" alt="Pump Power Cable &amp; Plug (Pump_Power_Cable.SLDPRT)" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">SOLIDWORKS CAD</span>
+              <h4>Pump Power Cable &amp; Plug</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="cad" onclick="openLightbox('assets/images/cad_hydro_net_cup.jpg', 'SolidWorks Hydroponic Net Grow Cup (Hydro_Net_Cup.SLDPRT) with lateral slots and base drainage')">
+            <img src="assets/images/cad_hydro_net_cup.jpg" alt="Hydroponic Net Cup (Hydro_Net_Cup.SLDPRT)" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">SOLIDWORKS CAD</span>
+              <h4>Hydroponic Net Grow Cup</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="cad" onclick="openLightbox('assets/images/cad_ds18b20_temperature_probe.jpg', 'SolidWorks Waterproof DS18B20 Temperature Probe (DS18B20_Temperature_Probe.SLDPRT) with stainless steel encapsulation')">
+            <img src="assets/images/cad_ds18b20_temperature_probe.jpg" alt="DS18B20 Temperature Probe (DS18B20_Temperature_Probe.SLDPRT)" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">SOLIDWORKS CAD</span>
+              <h4>DS18B20 Temperature Probe</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="cad" onclick="openLightbox('assets/images/cad_sensior_hydrophonic.jpg', 'SolidWorks Hydroponic Sensor Bracket Board (sensior_hydrophonic.SLDPRT) for ESP32 and sensor pin headers')">
+            <img src="assets/images/cad_sensior_hydrophonic.jpg" alt="Hydroponic Sensor Mount Board (sensior_hydrophonic.SLDPRT)" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">SOLIDWORKS CAD</span>
+              <h4>Hydroponic Sensor Mount Board</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="cad" onclick="openLightbox('assets/images/cad_cup1_sensor_wiring.jpg', 'SolidWorks Multi-Conductor Sensor DuPont Wiring Harness (Cup1_Sensor_Wiring.SLDPRT)')">
+            <img src="assets/images/cad_cup1_sensor_wiring.jpg" alt="Sensor DuPont Wiring Harness (Cup1_Sensor_Wiring.SLDPRT)" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">SOLIDWORKS CAD</span>
+              <h4>Sensor DuPont Wiring Harness</h4>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Clean Institutional Footer -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="brand-monogram">SH</span>
+          <h3>SmartHydro — Group 18</h3>
+          <p>IoT-Based Smart Hydroponic Farming System with Automatic Water Circulation</p>
+          <p class="footer-inst">Department of Mechanical Engineering &amp; Makerspace · Sanjivani University</p>
+        </div>
+
+        <div class="footer-team">
+          <h4>Project Team (Group 18)</h4>
+          <ol class="team-ordered-list">
+            <li>Omkar Chaudhary</li>
+            <li>Sarthak Boste</li>
+            <li>Darshan Mahajan</li>
+            <li>Rushikesh Sonawane</li>
+          </ol>
+          <p class="guide-note">Project Guide: <strong>Dr. Kiran Wakchaure</strong></p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 SmartHydro Project Team (Group 18). Sanjivani University.</p>
+        <p class="footer-tech">SolidWorks CAD files available for academic download in Section 06.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal for Zooming Images -->
+  <div id="imageLightbox" class="lightbox-modal" onclick="closeLightbox(event)">
+    <div class="lightbox-content">
+      <button class="lightbox-close" onclick="closeLightbox(event)" aria-label="Close image">&times;</button>
+      <img id="lightboxImg" src="" alt="Enlarged view">
+      <div id="lightboxCaption" class="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <!-- JavaScript Modules -->
+  <script>
+/**
+ * SmartHydro - Main UI Script
+ * Group 18 · Sanjivani University Makerspace
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  initThemeToggle();
+  initNavigation();
+  initGalleryFilter();
+  initLightbox();
+});
+
+/* 1. Theme Toggle */
+function initThemeToggle() {
+  const themeToggle = document.getElementById('themeToggle');
+  const html = document.documentElement;
+  
+  const savedTheme = localStorage.getItem('smarthydro-theme') || 'dark';
+  html.setAttribute('data-theme', savedTheme);
+  
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const target = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', target);
+      localStorage.setItem('smarthydro-theme', target);
+    });
+  }
+}
+
+/* 2. Navigation & ScrollSpy for 7 Clean Sections */
+function initNavigation() {
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  const links = document.querySelectorAll('.nav-link');
+  
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+  }
+  
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      if (navLinks && navLinks.classList.contains('open')) {
+        navLinks.classList.remove('open');
+      }
+    });
+  });
+  
+  // ScrollSpy
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let scrollY = window.pageYOffset;
+    
+    sections.forEach(current => {
+      const sectionHeight = current.offsetHeight;
+      const sectionTop = current.offsetTop - 120;
+      const sectionId = current.getAttribute('id');
+      
+      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+        links.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${sectionId}`) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  });
+}
+
+/* 3. Unified Gallery Filtering */
+function initGalleryFilter() {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      const filter = btn.getAttribute('data-filter');
+      
+      galleryItems.forEach(item => {
+        const itemCat = item.getAttribute('data-category');
+        if (filter === 'all' || itemCat === filter) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+}
+
+/* 4. Lightbox Modal */
+function initLightbox() {
+  window.openLightbox = function(imgSrc, caption) {
+    const modal = document.getElementById('imageLightbox');
+    const img = document.getElementById('lightboxImg');
+    const cap = document.getElementById('lightboxCaption');
+    
+    if (modal && img) {
+      img.src = imgSrc;
+      cap.textContent = caption || '';
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  };
+  
+  window.closeLightbox = function(e) {
+    if (e.target.id === 'imageLightbox' || e.target.classList.contains('lightbox-close')) {
+      const modal = document.getElementById('imageLightbox');
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+  };
+  
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const modal = document.getElementById('imageLightbox');
+      if (modal && modal.classList.contains('active')) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+  });
+}
+
+</script>
+  <script>
+/**
+ * SmartHydro - Interactive 3D Model Video & CAD Engine
+ * Group 18 · Sanjivani University Makerspace
+ * 
+ * Recreates the exact SolidWorks Assem_final.SLDASM assembly:
+ * - 4x4x2 ft welded MS square-pipe frame (painted black)
+ * - 4 horizontal 3-inch PVC pipes in vertical zigzag arrangement
+ * - 20 net grow cups (5 per tier) with green plant sprouts
+ * - Floor reservoir bucket with handle & submersible pump
+ * - Wavy orange supply riser pipe (riser_pipe_L1_supply)
+ * - Inter-pipe transfer loops and drain return hose
+ * - ESP32 controller with DuPont wiring and live circulation particles
+ * - Cinematic video orbit, camera presets, scrubber bar, and CAD photo toggle
+ * - Fullscreen engine with automated multi-frame viewport resizing
+ */
+
+(function () {
+  'use strict';
+
+  let scene, camera, renderer, controls;
+  let modelGroup, waterParticles = [];
+  let isPlaying = true;
+  let isWaterFlowing = true;
+  let currentView = 'orbit';
+  let orbitTime = 0;
+  const ORBIT_CYCLE_SECONDS = 20;
+
+  // Camera preset positions
+  const PRESETS = {
+    orbit: { x: 4.8, y: 2.2, z: 6.2, tx: 0.3, ty: 0.1, tz: 0 },
+    front: { x: 0.2, y: 0.1, z: 7.2, tx: 0.2, ty: 0.1, tz: 0 },
+    iso: { x: 5.2, y: 3.2, z: 5.5, tx: 0.2, ty: 0.1, tz: 0 },
+    reservoir: { x: 4.2, y: -0.6, z: 2.8, tx: 2.8, ty: -1.2, tz: 0.3 },
+    top: { x: 0.2, y: 7.5, z: 0.8, tx: 0.2, ty: 0, tz: 0 }
+  };
+
+  let targetCamPos = { ...PRESETS.orbit };
+  let targetLookAt = { x: PRESETS.orbit.tx, y: PRESETS.orbit.ty, z: PRESETS.orbit.tz };
+
+  document.addEventListener('DOMContentLoaded', init);
+
+  function init() {
+    const container = document.getElementById('threeVideoContainer');
+    if (!container) return;
+
+    // Check if Three.js is loaded
+    if (typeof THREE === 'undefined') {
+      showFallback(container);
+      return;
+    }
+
+    try {
+      setupThree(container);
+      buildScene();
+      setupControls();
+      setupUI();
+      animate(0);
+    } catch (err) {
+      console.warn('Three.js initialization failed:', err);
+      showFallback(container);
+    }
+  }
+
+  function setupThree(container) {
+    const w = container.clientWidth || 560;
+    const h = container.clientHeight || 440;
+
+    // Scene
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x040406);
+    scene.fog = new THREE.FogExp2(0x040406, 0.045);
+
+    // Camera
+    camera = new THREE.PerspectiveCamera(42, w / h, 0.1, 100);
+    camera.position.set(PRESETS.orbit.x, PRESETS.orbit.y, PRESETS.orbit.z);
+
+    // Renderer
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+    renderer.setSize(w, h);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.1;
+
+    container.appendChild(renderer.domElement);
+
+    // OrbitControls
+    if (typeof THREE.OrbitControls !== 'undefined') {
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.06;
+      controls.maxDistance = 15;
+      controls.minDistance = 2.5;
+      controls.maxPolarAngle = Math.PI / 2 + 0.05;
+      controls.target.set(0.3, 0.1, 0);
+
+      controls.addEventListener('start', () => {
+        if (currentView === 'orbit') {
+          setActivePresetBtn('manual');
+        }
+      });
+    }
+
+    // Resize listener & ResizeObserver
+    window.addEventListener('resize', forceResize);
+
+    if (window.ResizeObserver) {
+      try {
+        const ro = new ResizeObserver(() => {
+          forceResize();
+        });
+        ro.observe(container);
+        const threeWrapper = document.getElementById('threeVideoWrapper');
+        if (threeWrapper) ro.observe(threeWrapper);
+      } catch (e) {}
+    }
+  }
+
+  function forceResize() {
+    const container = document.getElementById('threeVideoContainer');
+    const threeWrapper = document.getElementById('threeVideoWrapper');
+    if (!container || !camera || !renderer) return;
+
+    let nw = 0;
+    let nh = 0;
+
+    const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
+
+    if (isFs) {
+      // Fullscreen mode: fill the entire viewport below top header bar
+      const topbar = document.querySelector('.hero-cad-topbar');
+      const topbarH = topbar ? topbar.offsetHeight : 46;
+      nw = window.innerWidth;
+      nh = Math.max(window.innerHeight - topbarH, 300);
+    } else {
+      // Standard card mode
+      if (threeWrapper && threeWrapper.clientWidth > 0 && threeWrapper.clientHeight > 0) {
+        nw = threeWrapper.clientWidth;
+        nh = threeWrapper.clientHeight;
+      } else if (container.clientWidth > 0 && container.clientHeight > 0) {
+        nw = container.clientWidth;
+        nh = container.clientHeight;
+      } else {
+        const card = document.querySelector('.cad-video-showcase-card');
+        if (card) {
+          nw = card.clientWidth;
+          nh = card.clientHeight - 46;
+        }
+      }
+    }
+
+    if (nw > 0 && nh > 0) {
+      camera.aspect = nw / nh;
+      camera.updateProjectionMatrix();
+      renderer.setSize(nw, nh);
+      if (renderer.domElement) {
+        renderer.domElement.style.width = '100%';
+        renderer.domElement.style.height = '100%';
+      }
+    }
+  }
+
+  function buildScene() {
+    // 1. Lighting Setup
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.65);
+    scene.add(ambientLight);
+
+    const keyLight = new THREE.DirectionalLight(0xffffff, 1.1);
+    keyLight.position.set(6, 9, 7);
+    keyLight.castShadow = true;
+    keyLight.shadow.mapSize.width = 1024;
+    keyLight.shadow.mapSize.height = 1024;
+    keyLight.shadow.bias = -0.0005;
+    scene.add(keyLight);
+
+    const fillLight = new THREE.DirectionalLight(0x38bdf8, 0.45);
+    fillLight.position.set(-7, 4, -5);
+    scene.add(fillLight);
+
+    const plantLight = new THREE.PointLight(0x22c55e, 0.4, 6);
+    plantLight.position.set(0, 1.8, 1.2);
+    scene.add(plantLight);
+
+    const pumpGlow = new THREE.PointLight(0xea580c, 0.35, 4);
+    pumpGlow.position.set(2.8, -1.2, 0.3);
+    scene.add(pumpGlow);
+
+    // 2. Ground Grid & Reflection
+    const gridHelper = new THREE.GridHelper(14, 28, 0x22222a, 0x111116);
+    gridHelper.position.y = -2.02;
+    scene.add(gridHelper);
+
+    const floorGeo = new THREE.PlaneGeometry(24, 24);
+    const floorMat = new THREE.MeshStandardMaterial({
+      color: 0x040406,
+      roughness: 0.8,
+      metalness: 0.2
+    });
+    const floor = new THREE.Mesh(floorGeo, floorMat);
+    floor.rotation.x = -Math.PI / 2;
+    floor.position.y = -2.03;
+    floor.receiveShadow = true;
+    scene.add(floor);
+
+    // 3. Master Hydroponics Model Group
+    modelGroup = new THREE.Group();
+    scene.add(modelGroup);
+
+    buildStandFrame();
+    buildGrowthChannels();
+    buildReservoirBucket();
+    buildPlumbingAndRiser();
+    buildESP32Module();
+    buildWaterParticles();
+  }
+
+  /* 4x4x2 ft Rectangular Steel Stand Frame */
+  function buildStandFrame() {
+    const frameMat = new THREE.MeshStandardMaterial({
+      color: 0x1a1e24,
+      roughness: 0.35,
+      metalness: 0.75
+    });
+
+    const pipeRadius = 0.045; // 20 mm square-equivalent tube
+
+    function createColumn(x, z) {
+      const geo = new THREE.BoxGeometry(pipeRadius * 2, 4.0, pipeRadius * 2);
+      const col = new THREE.Mesh(geo, frameMat);
+      col.position.set(x, 0, z);
+      col.castShadow = true;
+      col.receiveShadow = true;
+      modelGroup.add(col);
+    }
+
+    function createBeam(x1, y1, z1, x2, y2, z2) {
+      const p1 = new THREE.Vector3(x1, y1, z1);
+      const p2 = new THREE.Vector3(x2, y2, z2);
+      const dist = p1.distanceTo(p2);
+      const geo = new THREE.BoxGeometry(pipeRadius * 2, pipeRadius * 2, dist);
+      const beam = new THREE.Mesh(geo, frameMat);
+      beam.position.copy(p1.clone().add(p2).multiplyScalar(0.5));
+      beam.lookAt(p2);
+      beam.castShadow = true;
+      modelGroup.add(beam);
+    }
+
+    // 4 Corner Posts (Width 4.0, Depth 2.0 -> x in [-2, 2], z in [-1, 1])
+    createColumn(-2.0, -1.0);
+    createColumn(-2.0, 1.0);
+    createColumn(2.0, -1.0);
+    createColumn(2.0, 1.0);
+
+    // Top Rectangle (y = 2.0)
+    createBeam(-2.0, 2.0, -1.0, 2.0, 2.0, -1.0);
+    createBeam(-2.0, 2.0, 1.0, 2.0, 2.0, 1.0);
+    createBeam(-2.0, 2.0, -1.0, -2.0, 2.0, 1.0);
+    createBeam(2.0, 2.0, -1.0, 2.0, 2.0, 1.0);
+
+    // Bottom Base Rectangle (y = -2.0)
+    createBeam(-2.0, -2.0, -1.0, 2.0, -2.0, -1.0);
+    createBeam(-2.0, -2.0, 1.0, 2.0, -2.0, 1.0);
+    createBeam(-2.0, -2.0, -1.0, -2.0, -2.0, 1.0);
+    createBeam(2.0, -2.0, -1.0, 2.0, -2.0, 1.0);
+
+    // 4 Tier Horizontal Pipe Support Cross-Bars (Left & Right sides)
+    const tierY = [1.35, 0.45, -0.45, -1.35];
+    tierY.forEach(y => {
+      createBeam(-2.0, y, -1.0, -2.0, y, 1.0);
+      createBeam(2.0, y, -1.0, 2.0, y, 1.0);
+
+      // Pipe Saddle Support Brackets
+      [-2.0, 2.0].forEach(x => {
+        const saddleGeo = new THREE.BoxGeometry(pipeRadius * 2.2, 0.12, pipeRadius * 2.2);
+        const saddle1 = new THREE.Mesh(saddleGeo, frameMat);
+        saddle1.position.set(x, y + 0.06, 0.85);
+        modelGroup.add(saddle1);
+
+        const saddle2 = new THREE.Mesh(saddleGeo, frameMat);
+        saddle2.position.set(x, y + 0.06, -0.85);
+        modelGroup.add(saddle2);
+      });
+    });
+  }
+
+  /* 4 Horizontal 3-Inch PVC Growth Pipes in Zigzag Layout */
+  function buildGrowthChannels() {
+    const pvcMat = new THREE.MeshStandardMaterial({
+      color: 0xdae0e8,
+      roughness: 0.28,
+      metalness: 0.08
+    });
+
+    const capMat = new THREE.MeshStandardMaterial({
+      color: 0xb5bcc7,
+      roughness: 0.35,
+      metalness: 0.15
+    });
+
+    const cupMat = new THREE.MeshStandardMaterial({
+      color: 0x1e293b,
+      roughness: 0.55
+    });
+
+    const leafMat = new THREE.MeshStandardMaterial({
+      color: 0x22c55e,
+      roughness: 0.35
+    });
+
+    const pipeLength = 3.92;
+    const pipeOuterR = 0.095; // 3-inch PVC scale
+
+    // 4 tiers in vertical zigzag:
+    // Tier 1: Front (z = 0.85)
+    // Tier 2: Back  (z = -0.85)
+    // Tier 3: Front (z = 0.85)
+    // Tier 4: Back  (z = -0.85)
+    const tiers = [
+      { y: 1.35, z: 0.85, rotZ: 0.008 },
+      { y: 0.45, z: -0.85, rotZ: -0.008 },
+      { y: -0.45, z: 0.85, rotZ: 0.008 },
+      { y: -1.35, z: -0.85, rotZ: -0.008 }
+    ];
+
+    tiers.forEach((tData) => {
+      // Pipe Cylinder
+      const pipeGeo = new THREE.CylinderGeometry(pipeOuterR, pipeOuterR, pipeLength, 32);
+      const pipeMesh = new THREE.Mesh(pipeGeo, pvcMat);
+      pipeMesh.rotation.z = Math.PI / 2 + tData.rotZ;
+      pipeMesh.position.set(0, tData.y, tData.z);
+      pipeMesh.castShadow = true;
+      pipeMesh.receiveShadow = true;
+      modelGroup.add(pipeMesh);
+
+      // End Caps
+      const capGeo = new THREE.CylinderGeometry(pipeOuterR * 1.04, pipeOuterR * 1.04, 0.08, 32);
+      const leftCap = new THREE.Mesh(capGeo, capMat);
+      leftCap.rotation.z = Math.PI / 2 + tData.rotZ;
+      leftCap.position.set(-pipeLength / 2, tData.y - tData.rotZ * (pipeLength / 2), tData.z);
+      modelGroup.add(leftCap);
+
+      const rightCap = new THREE.Mesh(capGeo, capMat);
+      rightCap.rotation.z = Math.PI / 2 + tData.rotZ;
+      rightCap.position.set(pipeLength / 2, tData.y + tData.rotZ * (pipeLength / 2), tData.z);
+      modelGroup.add(rightCap);
+
+      // 5 Net Grow Cups per Tier (20 Plants Total)
+      const cupPositions = [-1.4, -0.7, 0.0, 0.7, 1.4];
+      cupPositions.forEach(cx => {
+        const cy = tData.y + tData.rotZ * cx + pipeOuterR * 0.72;
+
+        // Net Cup Collar
+        const netGeo = new THREE.CylinderGeometry(0.045, 0.035, 0.075, 16);
+        const netMesh = new THREE.Mesh(netGeo, cupMat);
+        netMesh.position.set(cx, cy, tData.z);
+        modelGroup.add(netMesh);
+
+        // Plant Sprout
+        const stemGeo = new THREE.CylinderGeometry(0.005, 0.006, 0.07, 8);
+        const stem = new THREE.Mesh(stemGeo, leafMat);
+        stem.position.set(cx, cy + 0.045, tData.z);
+        modelGroup.add(stem);
+
+        const leafGeo = new THREE.SphereGeometry(0.026, 8, 8);
+        leafGeo.scale(1.8, 0.4, 0.9);
+
+        const leaf1 = new THREE.Mesh(leafGeo, leafMat);
+        leaf1.position.set(cx - 0.02, cy + 0.075, tData.z);
+        leaf1.rotation.z = 0.45;
+        modelGroup.add(leaf1);
+
+        const leaf2 = new THREE.Mesh(leafGeo, leafMat);
+        leaf2.position.set(cx + 0.02, cy + 0.075, tData.z);
+        leaf2.rotation.z = -0.45;
+        modelGroup.add(leaf2);
+      });
+    });
+  }
+
+  /* Reservoir Bucket & Submersible Pump (Right-Side Floor Position) */
+  function buildReservoirBucket() {
+    const bucketMat = new THREE.MeshStandardMaterial({
+      color: 0x475569,
+      roughness: 0.38,
+      metalness: 0.12
+    });
+
+    const waterMat = new THREE.MeshStandardMaterial({
+      color: 0x0284c7,
+      transparent: true,
+      opacity: 0.65,
+      roughness: 0.1
+    });
+
+    const pumpMat = new THREE.MeshStandardMaterial({
+      color: 0x0f172a,
+      roughness: 0.45,
+      metalness: 0.3
+    });
+
+    const bx = 2.8;
+    const by = -1.2;
+    const bz = 0.3;
+
+    // Bucket Body (Tapered Bucket: Top R=0.48, Bottom R=0.38, Height=0.92)
+    const bucketGeo = new THREE.CylinderGeometry(0.48, 0.38, 0.92, 32, 1, true);
+    const bucket = new THREE.Mesh(bucketGeo, bucketMat);
+    bucket.position.set(bx, by, bz);
+    bucket.castShadow = true;
+    modelGroup.add(bucket);
+
+    // Bucket Bottom
+    const botGeo = new THREE.CylinderGeometry(0.38, 0.38, 0.04, 32);
+    const bottom = new THREE.Mesh(botGeo, bucketMat);
+    bottom.position.set(bx, by - 0.45, bz);
+    modelGroup.add(bottom);
+
+    // Water Surface Disc inside bucket
+    const waterGeo = new THREE.CylinderGeometry(0.46, 0.46, 0.02, 32);
+    const waterDisc = new THREE.Mesh(waterGeo, waterMat);
+    waterDisc.position.set(bx, by + 0.28, bz);
+    modelGroup.add(waterDisc);
+
+    // Steel Handle
+    const handleGeo = new THREE.TorusGeometry(0.46, 0.012, 8, 32, Math.PI);
+    const handleMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.9, roughness: 0.2 });
+    const handle = new THREE.Mesh(handleGeo, handleMat);
+    handle.rotation.x = -Math.PI / 2;
+    handle.position.set(bx, by + 0.42, bz);
+    modelGroup.add(handle);
+
+    // Submersible Pump resting at bucket base
+    const pumpGeo = new THREE.BoxGeometry(0.22, 0.18, 0.22);
+    const pump = new THREE.Mesh(pumpGeo, pumpMat);
+    pump.position.set(bx, by - 0.32, bz);
+    modelGroup.add(pump);
+
+    // Temperature Probe wire submerged in bucket
+    const probeGeo = new THREE.CylinderGeometry(0.01, 0.01, 0.55, 8);
+    const probeMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b, roughness: 0.5 });
+    const probe = new THREE.Mesh(probeGeo, probeMat);
+    probe.position.set(bx - 0.18, by + 0.15, bz);
+    modelGroup.add(probe);
+  }
+
+  /* Wavy Orange Supply Riser Pipe & Inter-tier Plumbing */
+  function buildPlumbingAndRiser() {
+    const orangeMat = new THREE.MeshStandardMaterial({
+      color: 0xf97316,
+      roughness: 0.32,
+      metalness: 0.15
+    });
+
+    const hoseMat = new THREE.MeshStandardMaterial({
+      color: 0x38bdf8,
+      roughness: 0.3,
+      transparent: true,
+      opacity: 0.8
+    });
+
+    // 1. Wavy Orange Supply Riser (riser_pipe_L1_supply)
+    const curve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(2.8, -1.2, 0.3),
+      new THREE.Vector3(2.6, -0.6, 0.5),
+      new THREE.Vector3(2.35, 0.1, 0.65),
+      new THREE.Vector3(2.5, 0.8, 0.75),
+      new THREE.Vector3(2.0, 1.35, 0.85)
+    ]);
+    const riserGeo = new THREE.TubeGeometry(curve, 48, 0.024, 16, false);
+    const riserMesh = new THREE.Mesh(riserGeo, orangeMat);
+    modelGroup.add(riserMesh);
+
+    // 2. Inter-tier Transfer Loops (U-bends)
+    function createLoop(p1, p2, ctrl) {
+      const c = new THREE.QuadraticBezierCurve3(p1, ctrl, p2);
+      const g = new THREE.TubeGeometry(c, 24, 0.022, 12, false);
+      return new THREE.Mesh(g, hoseMat);
+    }
+
+    // Tier 1 (front right) to Tier 2 (back left) via left loop
+    const loop1 = createLoop(
+      new THREE.Vector3(-1.96, 1.35, 0.85),
+      new THREE.Vector3(-1.96, 0.45, -0.85),
+      new THREE.Vector3(-2.35, 0.9, 0.0)
+    );
+    modelGroup.add(loop1);
+
+    // Tier 2 (back right) to Tier 3 (front right) via right loop
+    const loop2 = createLoop(
+      new THREE.Vector3(1.96, 0.45, -0.85),
+      new THREE.Vector3(1.96, -0.45, 0.85),
+      new THREE.Vector3(2.35, 0.0, 0.0)
+    );
+    modelGroup.add(loop2);
+
+    // Tier 3 (front left) to Tier 4 (back left) via left loop
+    const loop3 = createLoop(
+      new THREE.Vector3(-1.96, -0.45, 0.85),
+      new THREE.Vector3(-1.96, -1.35, -0.85),
+      new THREE.Vector3(-2.35, -0.9, 0.0)
+    );
+    modelGroup.add(loop3);
+
+    // 3. Straight Horizontal Drain Hose from Tier 4 into Bucket
+    const drainCurve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(1.96, -1.35, -0.85),
+      new THREE.Vector3(2.3, -1.35, -0.3),
+      new THREE.Vector3(2.65, -1.15, 0.2)
+    ]);
+    const drainGeo = new THREE.TubeGeometry(drainCurve, 24, 0.025, 12, false);
+    const drainMesh = new THREE.Mesh(drainGeo, hoseMat);
+    modelGroup.add(drainMesh);
+  }
+
+  /* ESP32 Controller & DuPont Sensor Wiring */
+  function buildESP32Module() {
+    const pcbMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.6 });
+    const metalMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.8, roughness: 0.2 });
+
+    // ESP32 NodeMCU Board mounted to upper upright
+    const pcbGeo = new THREE.BoxGeometry(0.18, 0.015, 0.32);
+    const pcb = new THREE.Mesh(pcbGeo, pcbMat);
+    pcb.position.set(-1.8, 1.85, 0.85);
+    modelGroup.add(pcb);
+
+    const shieldGeo = new THREE.BoxGeometry(0.12, 0.02, 0.16);
+    const shield = new THREE.Mesh(shieldGeo, metalMat);
+    shield.position.set(-1.8, 1.87, 0.87);
+    modelGroup.add(shield);
+
+    // Capacitive Moisture Sensor in Tier 1 Cup 1
+    const probeGeo = new THREE.BoxGeometry(0.015, 0.14, 0.035);
+    const probeMat = new THREE.MeshStandardMaterial({ color: 0xef4444 });
+    const probe = new THREE.Mesh(probeGeo, probeMat);
+    probe.position.set(-1.4, 1.45, 0.85);
+    modelGroup.add(probe);
+
+    // Sensor Jumper Wire
+    const wireMat = new THREE.MeshBasicMaterial({ color: 0x22c55e });
+    const wireCurve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(-1.8, 1.85, 0.85),
+      new THREE.Vector3(-1.6, 1.65, 0.9),
+      new THREE.Vector3(-1.4, 1.52, 0.85)
+    ]);
+    const wireGeo = new THREE.TubeGeometry(wireCurve, 16, 0.008, 8, false);
+    const wire = new THREE.Mesh(wireGeo, wireMat);
+    modelGroup.add(wire);
+  }
+
+  /* Water Circulation Animated Particles */
+  function buildWaterParticles() {
+    const particleCount = 60;
+    const pGeo = new THREE.SphereGeometry(0.016, 8, 8);
+    const pMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
+
+    waterParticles = [];
+    for (let i = 0; i < particleCount; i++) {
+      const mesh = new THREE.Mesh(pGeo, pMat);
+      mesh.position.set(0, -10, 0);
+      modelGroup.add(mesh);
+      waterParticles.push({
+        mesh: mesh,
+        progress: (i / particleCount),
+        speed: 0.0035 + Math.random() * 0.0015
+      });
+    }
+  }
+
+  function animate(time) {
+    requestAnimationFrame(animate);
+
+    if (controls) controls.update();
+
+    // Cinematic Video Auto-Orbit
+    if (isPlaying && currentView === 'orbit') {
+      orbitTime += 0.007;
+      const angle = (orbitTime % (Math.PI * 2));
+      const radius = 7.2;
+      camera.position.x = Math.sin(angle) * radius;
+      camera.position.z = Math.cos(angle) * radius;
+      camera.position.y = 2.0 + Math.sin(angle * 2) * 0.6;
+      camera.lookAt(0.3, 0.1, 0);
+
+      const progress = (orbitTime % (Math.PI * 2)) / (Math.PI * 2);
+      updateVideoScrubber(progress);
+    } else if (currentView !== 'manual') {
+      camera.position.lerp(new THREE.Vector3(targetCamPos.x, targetCamPos.y, targetCamPos.z), 0.05);
+      if (controls) {
+        controls.target.lerp(new THREE.Vector3(targetLookAt.x, targetLookAt.y, targetLookAt.z), 0.05);
+      }
+    }
+
+    // Water Circulation Particle Animation
+    if (isWaterFlowing && waterParticles.length > 0) {
+      const tierLength = 3.92;
+      waterParticles.forEach(p => {
+        p.progress += p.speed;
+        if (p.progress > 1) p.progress = 0;
+
+        const globalProg = p.progress * 4;
+        const tier = Math.floor(globalProg);
+        const subProg = globalProg - tier;
+
+        const tY = [1.35, 0.45, -0.45, -1.35][tier];
+        const tZ = [0.85, -0.85, 0.85, -0.85][tier];
+        const isForward = (tier % 2 === 0);
+
+        const px = isForward ? (tierLength / 2 - subProg * tierLength) : (-tierLength / 2 + subProg * tierLength);
+        p.mesh.position.set(px, tY - 0.02, tZ);
+      });
+    }
+
+    if (renderer && scene && camera) {
+      renderer.render(scene, camera);
+    }
+  }
+
+  function setupUI() {
+    // 1. Play / Pause Toggle
+    const playBtn = document.getElementById('btnVideoPlay');
+    if (playBtn) {
+      playBtn.addEventListener('click', () => {
+        isPlaying = !isPlaying;
+        playBtn.innerHTML = isPlaying
+          ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg> Pause 3D Video'
+          : '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Play 3D Video';
+      });
+    }
+
+    // 2. Camera Preset Views
+    const presetPills = document.querySelectorAll('.cam-preset-btn');
+    presetPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        const view = pill.getAttribute('data-view');
+        currentView = view;
+        setActivePresetBtn(view);
+
+        if (view === 'orbit') {
+          isPlaying = true;
+          if (controls) controls.target.set(0.3, 0.1, 0);
+        } else if (PRESETS[view]) {
+          isPlaying = false;
+          targetCamPos = { ...PRESETS[view] };
+          targetLookAt = { x: PRESETS[view].tx, y: PRESETS[view].ty, z: PRESETS[view].tz };
+        }
+      });
+    });
+
+    // 3. Water Circulation Flow Toggle
+    const waterBtn = document.getElementById('btnToggleWaterFlow');
+    if (waterBtn) {
+      waterBtn.addEventListener('click', () => {
+        isWaterFlowing = !isWaterFlowing;
+        waterParticles.forEach(wp => { wp.mesh.visible = isWaterFlowing; });
+        waterBtn.classList.toggle('active', isWaterFlowing);
+      });
+    }
+
+    // 4. Mode Tabs: 3D Video vs SolidWorks CAD Screenshot
+    const btnTab3D = document.getElementById('btnTab3DVideo');
+    const btnTabCAD = document.getElementById('btnTabCadPhoto');
+    const threeWrapper = document.getElementById('threeVideoWrapper');
+    const photoWrapper = document.getElementById('staticCadPhotoWrapper');
+
+    function switchTo3DVideo() {
+      if (threeWrapper && photoWrapper) {
+        threeWrapper.style.display = 'block';
+        photoWrapper.style.display = 'none';
+        if (btnTab3D) btnTab3D.classList.add('active');
+        if (btnTabCAD) btnTabCAD.classList.remove('active');
+        isPlaying = true;
+        forceResize();
+        setTimeout(forceResize, 50);
+      }
+    }
+
+    function switchToCADScreenshot() {
+      if (threeWrapper && photoWrapper) {
+        threeWrapper.style.display = 'none';
+        photoWrapper.style.display = 'flex';
+        if (btnTabCAD) btnTabCAD.classList.add('active');
+        if (btnTab3D) btnTab3D.classList.remove('active');
+      }
+    }
+
+    if (btnTab3D) btnTab3D.addEventListener('click', switchTo3DVideo);
+    if (btnTabCAD) btnTabCAD.addEventListener('click', switchToCADScreenshot);
+
+    window.show3DVideoMode = switchTo3DVideo;
+    window.showCADScreenshotMode = switchToCADScreenshot;
+
+    // 5. Fullscreen Toggle with Complete Multi-Frame Resize & Vendor Prefixes
+    const fsBtn = document.getElementById('btnVideoFullscreen');
+    const videoCard = document.querySelector('.cad-video-showcase-card') || document.querySelector('.hero-cad-card');
+
+    function isFsActive() {
+      return !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
+    }
+
+    function toggleFullscreen() {
+      if (!videoCard) return;
+      if (!isFsActive()) {
+        const req = videoCard.requestFullscreen || videoCard.webkitRequestFullscreen || videoCard.mozRequestFullScreen || videoCard.msRequestFullscreen;
+        if (req) {
+          req.call(videoCard).catch(() => {});
+        }
+      } else {
+        const exit = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen;
+        if (exit) {
+          exit.call(document).catch(() => {});
+        }
+      }
+    }
+
+    if (fsBtn && videoCard) {
+      fsBtn.addEventListener('click', toggleFullscreen);
+    }
+
+    function onFullscreenChange() {
+      const isFs = isFsActive();
+      if (fsBtn) {
+        if (isFs) {
+          fsBtn.innerHTML = '✕ Exit Fullscreen';
+          fsBtn.classList.add('active');
+          fsBtn.setAttribute('title', 'Exit Fullscreen View');
+        } else {
+          fsBtn.innerHTML = '⛶ Fullscreen';
+          fsBtn.classList.remove('active');
+          fsBtn.setAttribute('title', 'Fullscreen View');
+        }
+      }
+
+      forceResize();
+      setTimeout(forceResize, 50);
+      setTimeout(forceResize, 150);
+      setTimeout(forceResize, 300);
+      setTimeout(forceResize, 600);
+    }
+
+    ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'].forEach(ev => {
+      document.addEventListener(ev, onFullscreenChange);
+    });
+  }
+
+  function setActivePresetBtn(view) {
+    const presetPills = document.querySelectorAll('.cam-preset-btn');
+    presetPills.forEach(p => {
+      p.classList.toggle('active', p.getAttribute('data-view') === view);
+    });
+  }
+
+  function updateVideoScrubber(progress) {
+    const bar = document.getElementById('videoScrubberProgress');
+    const timeLabel = document.getElementById('videoTimecode');
+    if (bar) {
+      bar.style.width = (progress * 100).toFixed(1) + '%';
+    }
+    if (timeLabel) {
+      const curSec = Math.floor(progress * ORBIT_CYCLE_SECONDS);
+      const totalSec = ORBIT_CYCLE_SECONDS;
+      const curStr = curSec < 10 ? '0' + curSec : '' + curSec;
+      const totStr = totalSec < 10 ? '0' + totalSec : '' + totalSec;
+      timeLabel.textContent = `00:${curStr} / 00:${totStr}`;
+    }
+  }
+
+  function showFallback(container) {
+    const photoWrapper = document.getElementById('staticCadPhotoWrapper');
+    const threeWrapper = document.getElementById('threeVideoWrapper');
+    const btnTab3D = document.getElementById('btnTab3DVideo');
+    const btnTabCAD = document.getElementById('btnTabCadPhoto');
+    if (photoWrapper && threeWrapper) {
+      threeWrapper.style.display = 'none';
+      photoWrapper.style.display = 'flex';
+      if (btnTabCAD) btnTabCAD.classList.add('active');
+      if (btnTab3D) btnTab3D.classList.remove('active');
+    }
+  }
+
+  function setupControls() {}
+
+  // Global export
+  window.SmartHydro3D = {
+    forceResize: forceResize
+  };
+})();
+
+</script>
+</body>
+</html>
