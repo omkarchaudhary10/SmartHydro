@@ -1623,7 +1623,8 @@ body {
         <a href="#electronics" class="nav-link">5. Electronics &amp; Control</a>
         <a href="#downloads" class="nav-link">6. CAD Downloads</a>
         <a href="#3d-work" class="nav-link">7. 3D Work</a>
-        <a href="#gallery" class="nav-link">8. Unified Gallery</a>
+        <a href="#laser-work" class="nav-link">8. Laser Cutting</a>
+        <a href="#gallery" class="nav-link">9. Unified Gallery</a>
       </nav>
 
       <div class="header-actions">
@@ -2653,21 +2654,134 @@ body {
       </div>
     </section>
 
-    <!-- SEC 08: UNIFIED GALLERY (All Workshop Photos, SolidWorks CAD & 3D Work) -->
-    <section id="gallery" class="section">
+    <!-- SEC 08: CNC LASER CUTTING & PRECISION ENGRAVING (Laser Work) -->
+    <section id="laser-work" class="section">
       <div class="container">
         <div class="section-header">
           <span class="section-num">SECTION 08</span>
+          <h2 class="section-title">CNC Laser Cutting &amp; Precision Engraving</h2>
+          <p class="section-desc">Subtractive digital fabrication, heavy-duty SIL industrial CO2 flatbed laser system (1200 &times; 900 mm bed), LaserCAD CAM toolpath modulation, materials calibration chart, and physical acrylic mementos fabricated at the Sanjivani University Makerspace.</p>
+        </div>
+
+        <!-- Laser Cutting Technical Pillars -->
+        <div class="grid-4col mb-lg">
+          <div class="card card-mini">
+            <div class="card-status-badge badge-water">CO2 LASER SYSTEM</div>
+            <h4 class="mt-xs text-bright">SIL Industrial Cutter</h4>
+            <p class="text-sm text-muted mt-xs">Heavy-duty flatbed CO2 laser with 1200 &times; 900 mm honeycomb cutting bed, dual pneumatic gas-spring hood, and air assist.</p>
+          </div>
+          <div class="card card-mini">
+            <div class="card-status-badge badge-gov">CAM ENGINE</div>
+            <h4 class="mt-xs text-bright">LaserCAD V8</h4>
+            <p class="text-sm text-muted mt-xs">Precision vector toolpath generation with color-coded layer mapping for simultaneous cutting (Red) and scanning/engraving (Black).</p>
+          </div>
+          <div class="card card-mini">
+            <div class="card-status-badge badge-ok">CALIBRATION MATRIX</div>
+            <h4 class="mt-xs text-bright">Multi-Material Profiles</h4>
+            <p class="text-sm text-muted mt-xs">Calibrated power/speed parameters for Cast Acrylic (2–18mm), MDF (2–4mm), Glass, Leather, Marble, Cardboard, and Paper.</p>
+          </div>
+          <div class="card card-mini">
+            <div class="card-status-badge badge-clay">DIGITAL CONSOLE</div>
+            <h4 class="mt-xs text-bright">SIL DSP Controller</h4>
+            <p class="text-sm text-muted mt-xs">Color LCD control interface with jog navigation, USB pen drive offline execution, 0–50 mA tube current meter, and safety E-stop.</p>
+          </div>
+        </div>
+
+        <!-- Laser Work Process & Artifact Cards -->
+        <div class="gallery-grid">
+          
+          <div class="gallery-item" data-category="laser" onclick="openLightbox('assets/images/Laser_work/01_laser_cut_sanjivani_goddess_memento_trophy.jpg', 'Intricate acrylic trophy memento featuring Goddess Durga/Saraswati traditional mandala halo and engraved Sanjivani University campus buildings')">
+            <img src="assets/images/Laser_work/01_laser_cut_sanjivani_goddess_memento_trophy.jpg" alt="Sanjivani Goddess Memento Trophy" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">01 · ARTIFACT MEMENTO</span>
+              <h4>Sanjivani Campus &amp; Goddess Trophy</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="laser" onclick="openLightbox('assets/images/Laser_work/02_laser_cut_lightbulb_network_prototype.jpg', 'Laser-cut acrylic creative prototype illustrating a networked concept in a lightbulb profile with color-filled nodal connections and SKH cutout')">
+            <img src="assets/images/Laser_work/02_laser_cut_lightbulb_network_prototype.jpg" alt="Lightbulb Network Prototype" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">02 · PROTOTYPE ART</span>
+              <h4>IoT Lightbulb Network Topology</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="laser" onclick="openLightbox('assets/images/Laser_work/03_laser_cut_sanjivani_university_crest_keychain.jpg', 'Clear acrylic circular keychain medallion with mirror-inverted subsurface engraving of the Sanjivani University coat of arms')">
+            <img src="assets/images/Laser_work/03_laser_cut_sanjivani_university_crest_keychain.jpg" alt="Sanjivani Crest Keychain" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">03 · ENGRAVED KEYCHAIN</span>
+              <h4>Sanjivani University Crest Medallion</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="laser" onclick="openLightbox('assets/images/Laser_work/04_sil_laser_cutting_machine_closed_overview.jpg', 'Industrial SIL CO2 laser cutting system at the Makerspace with closed blue viewing hood and exhaust ducting')">
+            <img src="assets/images/Laser_work/04_sil_laser_cutting_machine_closed_overview.jpg" alt="SIL Industrial Laser Machine Closed" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">04 · MACHINE SYSTEM</span>
+              <h4>SIL Flatbed CO2 Laser Machine</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="laser" onclick="openLightbox('assets/images/Laser_work/05_sil_laser_cutting_machine_open_honeycomb_bed.jpg', 'SIL laser machine hood raised revealing the 1200 x 900 mm honeycomb bed, linear guide rails, and optical laser cutting head')">
+            <img src="assets/images/Laser_work/05_sil_laser_cutting_machine_open_honeycomb_bed.jpg" alt="SIL Honeycomb Cutting Bed" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">05 · CUTTING BED</span>
+              <h4>1200 &times; 900 mm Honeycomb Table</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="laser" onclick="openLightbox('assets/images/Laser_work/06_lasercad_cam_software_ellipse_toolpath.png', 'LaserCAD V8 CAM software toolpath configuration showing vector cutting and raster engraving parameters at 300 mm/s speed')">
+            <img src="assets/images/Laser_work/06_lasercad_cam_software_ellipse_toolpath.png" alt="LaserCAD Software Ellipse Toolpath" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">06 · CAM TOOLPATHS</span>
+              <h4>LaserCAD V8 Layer Modulation</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="laser" onclick="openLightbox('assets/images/Laser_work/07_lasercad_workspace_bed_dimensions.png', 'LaserCAD machine workspace envelope verifying full 1200 x 900 mm working coordinate bounds connected via COM34')">
+            <img src="assets/images/Laser_work/07_lasercad_workspace_bed_dimensions.png" alt="LaserCAD Bed Dimensions" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">07 · WORKSPACE BOUNDS</span>
+              <h4>Machine Coordinate Configuration</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="laser" onclick="openLightbox('assets/images/Laser_work/08_sil_laser_speed_power_materials_chart.jpg', 'Official SIL workshop engineering chart specifying speed and power settings for acrylic, MDF, glass, leather, and chiller water maintenance')">
+            <img src="assets/images/Laser_work/08_sil_laser_speed_power_materials_chart.jpg" alt="SIL Laser Materials Calibration Chart" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">08 · PARAMETER MATRIX</span>
+              <h4>SIL Speed &amp; Power Standard Chart</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="laser" onclick="openLightbox('assets/images/Laser_work/09_sil_laser_dsp_controller_console.jpg', 'SIL DSP digital color LCD controller with manual jog buttons, 0-50 mA laser tube current meter, USB pen drive port, and emergency stop')">
+            <img src="assets/images/Laser_work/09_sil_laser_dsp_controller_console.jpg" alt="SIL Laser Controller Console" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">09 · OPERATOR CONSOLE</span>
+              <h4>DSP Controller, Ammeter &amp; E-Stop</h4>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SEC 09: UNIFIED GALLERY (All Workshop Photos, SolidWorks CAD, 3D Work & Laser Cutting) -->
+    <section id="gallery" class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">SECTION 09</span>
           <h2 class="section-title">Unified Project Gallery</h2>
-          <p class="section-desc">All workshop fabrication photos, SolidWorks CAD screenshots, and 3D printing rapid prototyping in one unified gallery. Click any image to view in full resolution.</p>
+          <p class="section-desc">All workshop fabrication photos, SolidWorks CAD screenshots, 3D printing rapid prototyping, and CNC laser cutting in one unified gallery. Click any image to view in full resolution.</p>
         </div>
 
         <!-- Filter Bar -->
         <div class="gallery-filter-bar">
-          <button class="filter-btn active" data-filter="all">All Media (35)</button>
+          <button class="filter-btn active" data-filter="all">All Media (44)</button>
           <button class="filter-btn" data-filter="workshop">Workshop Build (10)</button>
           <button class="filter-btn" data-filter="cad">SolidWorks CAD (18)</button>
           <button class="filter-btn" data-filter="3dwork">3D Printing Work (7)</button>
+          <button class="filter-btn" data-filter="laser">Laser Cutting (9)</button>
         </div>
 
         <!-- Unified Gallery Grid -->
@@ -2953,6 +3067,79 @@ body {
             <div class="gallery-overlay">
               <span class="gallery-tag">3D WORK</span>
               <h4>Twin Indian Zebu Bull Sculptures</h4>
+            </div>
+          </div>
+
+          <!-- LASER CUTTING & PRECISION ENGRAVING -->
+          <div class="gallery-item" data-category="laser" onclick="openLightbox('assets/images/Laser_work/01_laser_cut_sanjivani_goddess_memento_trophy.jpg', 'Intricate acrylic trophy memento featuring Goddess Durga/Saraswati traditional mandala halo and engraved Sanjivani University campus buildings')">
+            <img src="assets/images/Laser_work/01_laser_cut_sanjivani_goddess_memento_trophy.jpg" alt="Sanjivani Goddess Memento Trophy" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">LASER WORK</span>
+              <h4>Sanjivani Campus &amp; Goddess Trophy</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="laser" onclick="openLightbox('assets/images/Laser_work/02_laser_cut_lightbulb_network_prototype.jpg', 'Laser-cut acrylic creative prototype illustrating a networked concept in a lightbulb profile with color-filled nodal connections and SKH cutout')">
+            <img src="assets/images/Laser_work/02_laser_cut_lightbulb_network_prototype.jpg" alt="Lightbulb Network Prototype" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">LASER WORK</span>
+              <h4>IoT Lightbulb Network Topology</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="laser" onclick="openLightbox('assets/images/Laser_work/03_laser_cut_sanjivani_university_crest_keychain.jpg', 'Clear acrylic circular keychain medallion with mirror-inverted subsurface engraving of the Sanjivani University coat of arms')">
+            <img src="assets/images/Laser_work/03_laser_cut_sanjivani_university_crest_keychain.jpg" alt="Sanjivani Crest Keychain" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">LASER WORK</span>
+              <h4>Sanjivani University Crest Medallion</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="laser" onclick="openLightbox('assets/images/Laser_work/04_sil_laser_cutting_machine_closed_overview.jpg', 'Industrial SIL CO2 laser cutting system at the Makerspace with closed blue viewing hood and exhaust ducting')">
+            <img src="assets/images/Laser_work/04_sil_laser_cutting_machine_closed_overview.jpg" alt="SIL Industrial Laser Machine Closed" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">LASER WORK</span>
+              <h4>SIL Flatbed CO2 Laser Machine</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="laser" onclick="openLightbox('assets/images/Laser_work/05_sil_laser_cutting_machine_open_honeycomb_bed.jpg', 'SIL laser machine hood raised revealing the 1200 x 900 mm honeycomb bed, linear guide rails, and optical laser cutting head')">
+            <img src="assets/images/Laser_work/05_sil_laser_cutting_machine_open_honeycomb_bed.jpg" alt="SIL Honeycomb Cutting Bed" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">LASER WORK</span>
+              <h4>1200 &times; 900 mm Honeycomb Table</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="laser" onclick="openLightbox('assets/images/Laser_work/06_lasercad_cam_software_ellipse_toolpath.png', 'LaserCAD V8 CAM software toolpath configuration showing vector cutting and raster engraving parameters at 300 mm/s speed')">
+            <img src="assets/images/Laser_work/06_lasercad_cam_software_ellipse_toolpath.png" alt="LaserCAD Software Ellipse Toolpath" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">LASER WORK</span>
+              <h4>LaserCAD V8 Layer Modulation</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="laser" onclick="openLightbox('assets/images/Laser_work/07_lasercad_workspace_bed_dimensions.png', 'LaserCAD machine workspace envelope verifying full 1200 x 900 mm working coordinate bounds connected via COM34')">
+            <img src="assets/images/Laser_work/07_lasercad_workspace_bed_dimensions.png" alt="LaserCAD Bed Dimensions" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">LASER WORK</span>
+              <h4>Machine Coordinate Configuration</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="laser" onclick="openLightbox('assets/images/Laser_work/08_sil_laser_speed_power_materials_chart.jpg', 'Official SIL workshop engineering chart specifying speed and power settings for acrylic, MDF, glass, leather, and chiller water maintenance')">
+            <img src="assets/images/Laser_work/08_sil_laser_speed_power_materials_chart.jpg" alt="SIL Laser Materials Calibration Chart" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">LASER WORK</span>
+              <h4>SIL Speed &amp; Power Standard Chart</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="laser" onclick="openLightbox('assets/images/Laser_work/09_sil_laser_dsp_controller_console.jpg', 'SIL DSP digital color LCD controller with manual jog buttons, 0-50 mA laser tube current meter, USB pen drive port, and emergency stop')">
+            <img src="assets/images/Laser_work/09_sil_laser_dsp_controller_console.jpg" alt="SIL Laser Controller Console" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">LASER WORK</span>
+              <h4>DSP Controller, Ammeter &amp; E-Stop</h4>
             </div>
           </div>
 

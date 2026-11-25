@@ -1,4 +1,4 @@
-﻿# SmartHydro: IoT-Based Smart Hydroponic Farming System with Automatic Water Circulation
+# SmartHydro: IoT-Based Smart Hydroponic Farming System with Automatic Water Circulation
 
 [![GitHub Pages](https://img.shields.io/badge/Live%20Website-GitHub%20Pages-success?style=for-the-badge&logo=github)](https://omkarchaudhary10.github.io/SmartHydro/)
 [![Institution](https://img.shields.io/badge/Institution-Sanjivani%20University-blue?style=for-the-badge)](https://sanjivani.edu.in)
@@ -146,6 +146,38 @@ In addition to structural metal fabrication, rapid prototyping was conducted at 
 
 ---
 
+## 🔬 CNC Laser Cutting & Precision Engraving Laboratory (`Laser Work/`)
+
+In addition to additive manufacturing and welding, subtractive digital fabrication was performed at the Makerspace using a heavy-duty industrial CO2 laser cutting system for precision acrylic front panels, structural mounting plates, university mementos, and IoT enclosures.
+
+👉 **[📂 Explore the Complete Laser Work Directory & Documentation](Laser%20Work/)**
+
+### Industrial Laser Machine & CAM Specifications:
+| Parameter | Specification | Details |
+| :--- | :--- | :--- |
+| **Laser Cutting System** | **SIL Industrial Flatbed Laser** | Heavy-duty industrial CNC CO2 laser cutting and engraving machine (`silasers.com`). |
+| **Working Envelope / Bed Size** | **$1200\text{ mm} \times 900\text{ mm}$** ($4\times3\text{ ft}$) | Large-format cutting area accommodating standard acrylic and MDF sheet stock. |
+| **Bed Architecture** | **Honeycomb Table** | Prevents laser beam back-reflection, aids smoke evacuation, and supports small/delicate parts. |
+| **CAM Software** | **LaserCAD V8.28.18** | Color-coded vector layer mapping (Red for Cut, Black for Raster Engraving at $300\text{ mm/s}$). |
+| **Laser Tube Monitoring** | **$0–50\text{ mA}$ Analog Ammeter** | Real-time monitoring of tube current to prevent overdrive and optimize optical tube life. |
+| **Control Console** | **SIL DSP Color Touchscreen** | Jog positioning, Origin setting, Box boundary test, Laser test pulse, and Pen Drive USB offline transfer. |
+| **Cooling & Safety** | **Industrial Closed-Loop Water Chiller** | Chiller pre-start interlock, 15-day water refresh protocol, exhaust extraction, and emergency stop. |
+
+### Process & Artifact Documentation:
+| # | Step / Artifact | Image | Technical Description |
+| :-: | :--- | :---: | :--- |
+| **01** | **Sanjivani Goddess Memento Trophy** | `01_laser_cut_sanjivani_goddess_memento_trophy.jpg` | Dual-process acrylic memento featuring Goddess Durga/Saraswati traditional mandala halo and engraved Sanjivani University campus architecture. |
+| **02** | **IoT Lightbulb Network Prototype** | `02_laser_cut_lightbulb_network_prototype.jpg` | Laser-cut acrylic creative prototype illustrating a networked concept with color-filled nodal connections and SKH cutout. |
+| **03** | **Sanjivani University Crest Keychain** | `03_laser_cut_sanjivani_university_crest_keychain.jpg` | Clear acrylic circular keychain medallion featuring mirror-inverted subsurface engraving of the Sanjivani University coat of arms. |
+| **04** | **SIL Industrial Laser System Overview** | `04_sil_laser_cutting_machine_closed_overview.jpg` | Exterior view of the heavy-duty SIL industrial CO2 flatbed laser machine at the Makerspace with blue safety viewing hood closed. |
+| **05** | **1200 × 900 mm Honeycomb Bed** | `05_sil_laser_cutting_machine_open_honeycomb_bed.jpg` | Dual pneumatic gas-spring hood raised revealing the large honeycomb table, linear motion guide rails, and optical laser head. |
+| **06** | **LaserCAD V8 Toolpath Modulation** | `06_lasercad_cam_software_ellipse_toolpath.png` | LaserCAD V8 CAM interface showing vector path configuration (Red vector cut, Black scan engrave at $300\text{ mm/s}$, $20\%$ power). |
+| **07** | **Machine Coordinate Configuration** | `07_lasercad_workspace_bed_dimensions.png` | Digital machine envelope configuration verifying the full $1200.000\text{ mm} \times 900.000\text{ mm}$ coordinate bounds on COM34. |
+| **08** | **SIL Speed & Power Standard Chart** | `08_sil_laser_speed_power_materials_chart.jpg` | Workshop engineering matrix specifying speed and power settings for acrylic ($2-18\text{ mm}$), MDF, glass, leather, marble, cardboard, and paper. |
+| **09** | **DSP Controller, Ammeter & E-Stop** | `09_sil_laser_dsp_controller_console.jpg` | Machine operator interface with SIL DSP color LCD, $0-50\text{ mA}$ analog laser tube current meter, USB Pen Drive port, and emergency stop. |
+
+---
+
 ## 📁 Repository Directory Structure
 
 ```text
@@ -159,6 +191,17 @@ SmartHydro/
 │   ├── 05_bambu_studio_slicer_small_pieces_p1s.jpg
 │   ├── 06_bambu_studio_slicer_rose_heart.jpg
 │   └── 07_3d_printed_indian_bull_models.jpg
+├── Laser Work/
+│   ├── README.md
+│   ├── 01_laser_cut_sanjivani_goddess_memento_trophy.jpg
+│   ├── 02_laser_cut_lightbulb_network_prototype.jpg
+│   ├── 03_laser_cut_sanjivani_university_crest_keychain.jpg
+│   ├── 04_sil_laser_cutting_machine_closed_overview.jpg
+│   ├── 05_sil_laser_cutting_machine_open_honeycomb_bed.jpg
+│   ├── 06_lasercad_cam_software_ellipse_toolpath.png
+│   ├── 07_lasercad_workspace_bed_dimensions.png
+│   ├── 08_sil_laser_speed_power_materials_chart.jpg
+│   └── 09_sil_laser_dsp_controller_console.jpg
 ├── assets/
 │   └── images/
 │       ├── cad_12_elbow_fitting.jpg
