@@ -1593,6 +1593,85 @@ body {
 .mt-lg { margin-top: 1.5rem; }
 .mb-lg { margin-bottom: 1.5rem; }
 
+/* Component Hardware Cards with Real Photographs */
+.component-hw-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+.component-hw-card {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+.component-hw-card:hover {
+  border-color: var(--water);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+}
+.component-hw-img {
+  position: relative;
+  width: 100%;
+  height: 190px;
+  background: #08080a;
+  cursor: pointer;
+  overflow: hidden;
+}
+.component-hw-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.component-hw-img:hover img {
+  transform: scale(1.06);
+}
+.component-hw-img .card-status-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  margin: 0;
+  z-index: 2;
+}
+.component-hw-body {
+  padding: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.component-hw-body h4 {
+  color: var(--text-bright);
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+}
+.component-hw-meta {
+  font-size: 0.75rem;
+  color: var(--water);
+  font-family: var(--font-mono);
+  margin-bottom: 0.5rem;
+}
+.component-hw-desc {
+  font-size: 0.825rem;
+  color: var(--text);
+  line-height: 1.5;
+}
+@media (max-width: 900px) {
+  .component-hw-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .component-hw-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 </style>
 
   <!-- Three.js & OrbitControls for 3D Model Video -->
@@ -2180,37 +2259,81 @@ body {
           <p class="section-desc">The hardware components used in our system and their automated control logic.</p>
         </div>
 
-        <!-- The Core Components (5 Components with Relay Module) -->
-        <div class="grid-5col mb-lg">
-          <div class="card card-mini">
-            <div class="card-status-badge badge-ok">CONTROLLER</div>
-            <h4>ESP32 NodeMCU</h4>
-            <p>Probots ESP32 38-Pin WROOM-32 Dev Board. Main microcontroller executing telemetry analysis, threshold computation, and relay control.</p>
+        <!-- The Core Components (6 Hardware Components with Real Photographs) -->
+        <div class="component-hw-grid">
+          
+          <div class="component-hw-card">
+            <div class="component-hw-img" onclick="openLightbox('assets/images/electronics/01_hw_esp32_microcontroller_board.jpg', 'ESP32 NodeMCU 38-Pin Microcontroller Board with DuPont Wiring')">
+              <img src="assets/images/electronics/01_hw_esp32_microcontroller_board.jpg" alt="ESP32 Microcontroller Board" loading="lazy">
+              <span class="card-status-badge badge-ok">CONTROLLER</span>
+            </div>
+            <div class="component-hw-body">
+              <h4>ESP32 NodeMCU</h4>
+              <div class="component-hw-meta">38-Pin WROOM-32 · Dual-Core 240MHz</div>
+              <p class="component-hw-desc">Central IoT processing unit executing real-time ADC telemetry sampling, closed-loop hysteresis logic, and automated pump relay output control.</p>
+            </div>
           </div>
 
-          <div class="card card-mini">
-            <div class="card-status-badge badge-ok">SWITCHING &amp; RELAY</div>
-            <h4>Relay Module</h4>
-            <p>5V Single-Channel Relay Module. Intermediary electromechanical switch providing galvanic isolation between ESP32 3.3V logic and the water pump.</p>
+          <div class="component-hw-card">
+            <div class="component-hw-img" onclick="openLightbox('assets/images/electronics/02_hw_relay_module_5v.jpg', '1-Channel 5V Optocoupler Relay Module (JQC-3F-05VDC-C)')">
+              <img src="assets/images/electronics/02_hw_relay_module_5v.jpg" alt="5V Relay Module" loading="lazy">
+              <span class="card-status-badge badge-ok">RELAY SWITCH</span>
+            </div>
+            <div class="component-hw-body">
+              <h4>5V Relay Module</h4>
+              <div class="component-hw-meta">JQC-3F-05VDC-C · 10A 250VAC Switching</div>
+              <p class="component-hw-desc">Provides optical galvanic isolation between the sensitive 3.3V microcontroller logic and the high-voltage submersible pump circuit.</p>
+            </div>
           </div>
 
-          <div class="card card-mini">
-            <div class="card-status-badge badge-ok">MOISTURE</div>
-            <h4>Capacitive Moisture Sensor</h4>
-            <p>DIYables Capacitive Soil Moisture Sensor module for root-zone moisture acquisition, resistant to corrosion in hydroponic water.</p>
+          <div class="component-hw-card">
+            <div class="component-hw-img" onclick="openLightbox('assets/images/electronics/03_hw_moisture_sensor_module.jpg', 'Soil Moisture Sensor Probe and LM393 Voltage Comparator Board')">
+              <img src="assets/images/electronics/03_hw_moisture_sensor_module.jpg" alt="Soil Moisture Sensor" loading="lazy">
+              <span class="card-status-badge badge-ok">MOISTURE SENSING</span>
+            </div>
+            <div class="component-hw-body">
+              <h4>Moisture Sensor &amp; Comparator</h4>
+              <div class="component-hw-meta">HW-103 v1.2 / LM393 · GPIO 34 (ADC)</div>
+              <p class="component-hw-desc">Dual-probe sensor positioned in the top growth pipe to acquire continuous root-zone dielectric moisture saturation readings.</p>
+            </div>
           </div>
 
-          <div class="card card-mini">
-            <div class="card-status-badge badge-ok">TEMPERATURE</div>
-            <h4>DS18B20 Sensor</h4>
-            <p>Waterproof DS18B20-compatible temperature sensor probe for continuous monitoring of nutrient solution thermal levels.</p>
+          <div class="component-hw-card">
+            <div class="component-hw-img" onclick="openLightbox('assets/images/electronics/04_hw_ds18b20_temperature_probe.jpg', 'DS18B20 Stainless Steel Waterproof Temperature Sensor Probe')">
+              <img src="assets/images/electronics/04_hw_ds18b20_temperature_probe.jpg" alt="DS18B20 Temp Probe" loading="lazy">
+              <span class="card-status-badge badge-ok">THERMAL TELEMETRY</span>
+            </div>
+            <div class="component-hw-body">
+              <h4>DS18B20 Temperature Probe</h4>
+              <div class="component-hw-meta">1-Wire Digital Bus · GPIO 04 (±0.5°C)</div>
+              <p class="component-hw-desc">Stainless steel encapsulated submersible probe continuously monitoring nutrient solution temperature in the reservoir bucket.</p>
+            </div>
           </div>
 
-          <div class="card card-mini">
-            <div class="card-status-badge badge-ok">WATER PUMP</div>
-            <h4>Submersible Water Pump</h4>
-            <p>Submersible water pump triggered through the relay module to circulate nutrient solution upward across all 4 growth channels.</p>
+          <div class="component-hw-card">
+            <div class="component-hw-img" onclick="openLightbox('assets/images/electronics/05_hw_submersible_water_pump.jpg', 'TU Travel Universe 18W Submersible Water Pump (1100 L/h, Hmax 1.8m, IPX8)')">
+              <img src="assets/images/electronics/05_hw_submersible_water_pump.jpg" alt="Submersible Water Pump" loading="lazy">
+              <span class="card-status-badge badge-ok">HYDRAULIC ACTUATOR</span>
+            </div>
+            <div class="component-hw-body">
+              <h4>Submersible Water Pump</h4>
+              <div class="component-hw-meta">TU 18W · 1100 L/h · Hmax 1.8m · IPX8</div>
+              <p class="component-hw-desc">High-lift continuous-duty hydraulic pump providing pressurized nutrient solution circulation from the reservoir up through the vertical riser to Pipe 1.</p>
+            </div>
           </div>
+
+          <div class="component-hw-card">
+            <div class="component-hw-img" onclick="openLightbox('assets/images/electronics/06_hw_water_level_sensor_hw038.jpg', 'HW-038 Water Level and Depth Droplet Sensor Board')">
+              <img src="assets/images/electronics/06_hw_water_level_sensor_hw038.jpg" alt="HW-038 Water Level Sensor" loading="lazy">
+              <span class="card-status-badge badge-clay">RESERVOIR SAFETY</span>
+            </div>
+            <div class="component-hw-body">
+              <h4>Water Level Sensor (HW-038)</h4>
+              <div class="component-hw-meta">HW-038 · GPIO 35 (ADC) · Run-Dry Guard</div>
+              <p class="component-hw-desc">Measures reservoir fluid depth using parallel conducting traces. Automatically interlocks and halts pump actuation if reservoir water drops below safety levels to prevent pump burnout.</p>
+            </div>
+          </div>
+
         </div>
 
         <!-- ESP32 & Relay Coordination Architecture -->
@@ -2230,7 +2353,8 @@ body {
               <ul class="styled-list">
                 <li><strong>Capacitive Moisture Sensor (GPIO 34):</strong> Monitors moisture saturation around the plant root zone in the grow pipes.</li>
                 <li><strong>DS18B20 Temperature Probe (GPIO 04):</strong> Continuously tracks nutrient solution temperature in the reservoir bucket.</li>
-                <li><strong>Microcontroller Analysis:</strong> ESP32 algorithms process the raw ADC telemetry to detect moisture depletion around plant roots.</li>
+                <li><strong>Water Level Sensor HW-038 (GPIO 35):</strong> Continuously monitors buffer reservoir liquid level depth to implement dry-run pump safety interlocks.</li>
+                <li><strong>Microcontroller Analysis:</strong> ESP32 algorithms process raw ADC telemetry to detect moisture depletion and evaluate safety thresholds.</li>
               </ul>
             </div>
 
@@ -2238,9 +2362,10 @@ body {
               <h4 class="text-plant">2. Relay Module Switching &amp; Pump Action</h4>
               <p class="text-sm text-muted mb-md">The ESP32 coordinates directly with the submersible pump through the Relay Module:</p>
               <ul class="styled-list">
-                <li><strong>Pump Activation:</strong> When moisture falls below the calibrated threshold, ESP32 drives GPIO 26 HIGH, closing the relay contacts to start the pump and deliver solution to Pipe 1.</li>
+                <li><strong>Pump Activation:</strong> When moisture falls below the calibrated threshold and water level is safe, ESP32 drives GPIO 26 HIGH, closing the relay contacts to start the pump.</li>
                 <li><strong>Pump Cut-Off:</strong> When optimal root moisture is gained, ESP32 drives GPIO 26 LOW, opening the relay to cut pump power and allow root oxygenation.</li>
-                <li><strong>Galvanic Isolation:</strong> The relay module protects the ESP32 from inductive kickback voltages generated by the water pump motor.</li>
+                <li><strong>Run-Dry Safety Interlock:</strong> If HW-038 level sensor detects low reservoir volume, the ESP32 locks out pump actuation to prevent pump cavitation and dry burnout.</li>
+                <li><strong>Galvanic Isolation:</strong> The optocoupler relay module protects the ESP32 from inductive kickback voltages generated by the water pump motor.</li>
               </ul>
             </div>
           </div>
@@ -2777,11 +2902,12 @@ body {
 
         <!-- Filter Bar -->
         <div class="gallery-filter-bar">
-          <button class="filter-btn active" data-filter="all">All Media (44)</button>
+          <button class="filter-btn active" data-filter="all">All Media (50)</button>
           <button class="filter-btn" data-filter="workshop">Workshop Build (10)</button>
           <button class="filter-btn" data-filter="cad">SolidWorks CAD (18)</button>
           <button class="filter-btn" data-filter="3dwork">3D Printing Work (7)</button>
           <button class="filter-btn" data-filter="laser">Laser Cutting (9)</button>
+          <button class="filter-btn" data-filter="electronics">IoT Hardware &amp; Sensors (6)</button>
         </div>
 
         <!-- Unified Gallery Grid -->
@@ -3140,6 +3266,55 @@ body {
             <div class="gallery-overlay">
               <span class="gallery-tag">LASER WORK</span>
               <h4>DSP Controller, Ammeter &amp; E-Stop</h4>
+            </div>
+          </div>
+
+          <!-- IOT ELECTRONICS & SENSORS (REAL HARDWARE) -->
+          <div class="gallery-item" data-category="electronics" onclick="openLightbox('assets/images/electronics/01_hw_esp32_microcontroller_board.jpg', 'ESP32 NodeMCU 38-Pin Microcontroller Board with DuPont Wiring Harness')">
+            <img src="assets/images/electronics/01_hw_esp32_microcontroller_board.jpg" alt="ESP32 Microcontroller Board" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">ELECTRONICS</span>
+              <h4>ESP32 NodeMCU Controller</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="electronics" onclick="openLightbox('assets/images/electronics/02_hw_relay_module_5v.jpg', '1-Channel 5V Optocoupler Relay Module (JQC-3F-05VDC-C)')">
+            <img src="assets/images/electronics/02_hw_relay_module_5v.jpg" alt="5V Relay Module" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">ELECTRONICS</span>
+              <h4>5V Relay Module (JQC-3F)</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="electronics" onclick="openLightbox('assets/images/electronics/03_hw_moisture_sensor_module.jpg', 'Soil Moisture Sensor Probe and LM393 Voltage Comparator Board')">
+            <img src="assets/images/electronics/03_hw_moisture_sensor_module.jpg" alt="Soil Moisture Sensor" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">ELECTRONICS</span>
+              <h4>Moisture Probe &amp; LM393 Comparator</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="electronics" onclick="openLightbox('assets/images/electronics/04_hw_ds18b20_temperature_probe.jpg', 'DS18B20 Stainless Steel Waterproof Temperature Sensor Probe')">
+            <img src="assets/images/electronics/04_hw_ds18b20_temperature_probe.jpg" alt="DS18B20 Temp Probe" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">ELECTRONICS</span>
+              <h4>DS18B20 Temperature Probe</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="electronics" onclick="openLightbox('assets/images/electronics/05_hw_submersible_water_pump.jpg', 'TU Travel Universe 18W Submersible Water Pump (1100 L/h, Hmax 1.8m, IPX8)')">
+            <img src="assets/images/electronics/05_hw_submersible_water_pump.jpg" alt="Submersible Water Pump" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">ELECTRONICS</span>
+              <h4>Submersible Water Pump (18W)</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="electronics" onclick="openLightbox('assets/images/electronics/06_hw_water_level_sensor_hw038.jpg', 'HW-038 Water Level and Depth Droplet Sensor Board with Parallel Conductive Traces')">
+            <img src="assets/images/electronics/06_hw_water_level_sensor_hw038.jpg" alt="HW-038 Water Level Sensor" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">ELECTRONICS</span>
+              <h4>Water Level Sensor (HW-038)</h4>
             </div>
           </div>
 

@@ -87,19 +87,23 @@ flowchart TD
 | Component | Function / Role | ESP32 Pin / Interface | Operating Voltage |
 | :--- | :--- | :--- | :--- |
 | **ESP32 Development Board** | Main IoT Controller & Logic Processing | Core Microcontroller | 5V DC via Micro-USB |
+| **1-Channel 5V Relay Module** | Galvanically isolated motor switching | **GPIO 26** (Digital Output) | 5V DC VCC / 3.3V Logic |
 | **Capacitive Moisture Sensor v1.2** | Real-time root-zone moisture telemetry | **GPIO 34** (ADC1_CH6 Analog In) | 3.3V DC |
 | **DS18B20 Waterproof Probe** | Nutrient solution temperature tracking | **GPIO 04** (1-Wire Digital Bus) | 3.3V – 5V DC |
-| **1-Channel 5V Relay Module** | Galvanically isolated motor switching | **GPIO 26** (Digital Output) | 5V DC VCC / 3.3V Logic |
-| **Submersible Water Pump** | Pressurized hydraulic delivery to top pipe | Switched via Relay NO Contacts | 12V DC / 230V AC |
+| **Submersible Water Pump** | Pressurized hydraulic delivery to top pipe | Switched via Relay NO Contacts | 165–240V AC (18W, IPX8) |
+| **HW-038 Water Level Sensor** | Reservoir fluid depth & run-dry protection | **GPIO 35** (ADC1_CH7 Analog In) | 3.3V – 5V DC |
 | **Hydroponic Net Cups** | Inert clay pebble / root support mesh | Mechanical Mounting (5/pipe) | N/A |
 
+👉 **[📂 Explore the Complete IoT Hardware & Electronics Directory](Electronics/)**
+
 ### Closed-Loop Control Logic:
-1. **Continuous Acquisition**: ESP32 continuously samples root-zone moisture via GPIO 34 ADC readings.
-2. **Moisture Depletion Trigger**: When moisture drops below the calibrated lower threshold ($ADC > \text{Dry Threshold}$), the ESP32 sets **GPIO 26 HIGH**.
-3. **Relay Activation**: The relay closes contacts with optocoupler galvanic isolation, starting the submersible pump.
-4. **Hydraulic Circulation**: Nutrient water is pumped up through the vertical riser to Pipe 1 and cascades by gravity through Pipe 2, Pipe 3, and Pipe 4.
-5. **Optimal Moisture Cut-Off**: Once root sensors detect adequate moisture saturation, GPIO 26 is pulled **LOW**, de-energizing the relay to stop irrigation and promote root oxygenation.
-6. **Thermal Guard**: Continuous temperature tracking alerts if the solution exceeds recommended root threshold ($> 26^\circ\text{C}$).
+1. **Continuous Acquisition**: ESP32 continuously samples root-zone moisture via GPIO 34 and reservoir depth via GPIO 35.
+2. **Run-Dry Failsafe Interlock**: If the HW-038 level sensor detects insufficient water volume in the bucket reservoir, the ESP32 automatically locks out pump actuation to prevent cavitation and burnout.
+3. **Moisture Depletion Trigger**: When moisture drops below the calibrated lower threshold ($ADC > \text{Dry Threshold}$) AND water level is safe, the ESP32 sets **GPIO 26 HIGH**.
+4. **Relay Activation**: The relay closes contacts with optocoupler galvanic isolation, starting the submersible pump.
+5. **Hydraulic Circulation**: Nutrient water is pumped up through the vertical riser to Pipe 1 and cascades by gravity through Pipe 2, Pipe 3, and Pipe 4.
+6. **Optimal Moisture Cut-Off**: Once root sensors detect adequate moisture saturation, GPIO 26 is pulled **LOW**, de-energizing the relay to stop irrigation and promote root oxygenation.
+7. **Thermal Guard**: Continuous temperature tracking alerts if the solution exceeds recommended root threshold ($> 26^\circ\text{C}$).
 
 ---
 
@@ -202,8 +206,23 @@ SmartHydro/
 │   ├── 07_lasercad_workspace_bed_dimensions.png
 │   ├── 08_sil_laser_speed_power_materials_chart.jpg
 │   └── 09_sil_laser_dsp_controller_console.jpg
+├── Electronics/
+│   ├── README.md
+│   ├── 01_hw_esp32_microcontroller_board.jpg
+│   ├── 02_hw_relay_module_5v.jpg
+│   ├── 03_hw_moisture_sensor_module.jpg
+│   ├── 04_hw_ds18b20_temperature_probe.jpg
+│   ├── 05_hw_submersible_water_pump.jpg
+│   └── 06_hw_water_level_sensor_hw038.jpg
 ├── assets/
 │   └── images/
+│       ├── electronics/
+│       │   ├── 01_hw_esp32_microcontroller_board.jpg
+│       │   ├── 02_hw_relay_module_5v.jpg
+│       │   ├── 03_hw_moisture_sensor_module.jpg
+│       │   ├── 04_hw_ds18b20_temperature_probe.jpg
+│       │   ├── 05_hw_submersible_water_pump.jpg
+│       │   └── 06_hw_water_level_sensor_hw038.jpg
 │       ├── cad_12_elbow_fitting.jpg
 │       ├── cad_assem_final_elevation.jpg
 │       ├── cad_bucket.jpg
