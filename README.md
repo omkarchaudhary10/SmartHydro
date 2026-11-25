@@ -1,4 +1,4 @@
-# SmartHydro: IoT-Based Smart Hydroponic Farming System with Automatic Water Circulation
+﻿# SmartHydro: IoT-Based Smart Hydroponic Farming System with Automatic Water Circulation
 
 [![GitHub Pages](https://img.shields.io/badge/Live%20Website-GitHub%20Pages-success?style=for-the-badge&logo=github)](https://omkarchaudhary10.github.io/SmartHydro/)
 [![Institution](https://img.shields.io/badge/Institution-Sanjivani%20University-blue?style=for-the-badge)](https://sanjivani.edu.in)
@@ -117,10 +117,48 @@ The prototype was constructed by Group 18 at the **Sanjivani University Makerspa
 
 ---
 
+## 🖨️ 3D Printing & Additive Rapid Prototyping Laboratory (`3D work/`)
+
+In addition to structural metal fabrication, rapid prototyping was conducted at the Makerspace using high-speed desktop Fused Deposition Modeling (FDM) systems for customized fixtures, brackets, material handling studies, and precision anatomical modeling.
+
+👉 **[📂 Explore the Complete 3D Work Directory & Documentation](3D%20work/)**
+
+### Additive Manufacturing Equipment & CAM Slicing:
+| Parameter | Specification | Details |
+| :--- | :--- | :--- |
+| **3D Printers** | **Bambu Lab A1** & **Bambu Lab P1S** | High-speed direct-drive desktop 3D printers with active vibration compensation and automatic flow calibration. |
+| **CAM Slicing Engine** | **Bambu Studio** | High-precision slicing with 0.12mm Fine and 0.20mm Standard process profiles, custom seam placement, and multi-plate support. |
+| **Extruder / Nozzle** | $0.4\text{ mm}$ Nozzle | High-efficiency direct-drive extrusion with PTFE Bowden guide tube. |
+| **Build Surface** | **Textured PEI Plate** | Magnetic spring steel sheet offering robust first-layer thermal adhesion and self-releasing cool down. |
+| **Primary Polymer** | **Numakers PLA+ ($1.75\text{ mm}$)** | High-toughness modified PLA preserved in factory vacuum seals with silica gel desiccant packs. |
+| **Specialty Polymers** | **SUNLU Silk PLA+**, **Generic PLA** | Aesthetic silk finishes and structural functional pieces. |
+
+### Process & Artifact Documentation:
+| # | Step / Artifact | Image | Technical Description |
+| :-: | :--- | :---: | :--- |
+| **01** | **Filament Inventory & Moisture Control** | `01_numakers_pla_plus_filament_stock.jpg` | Vacuum-sealed Numakers PLA+ spools with desiccant packs to prevent hydrolysis, bubbling, and nozzle jams. |
+| **02** | **Spool Mount & PTFE Guide Setup** | `02_bambu_printer_filament_feed_setup.jpg` | Low-friction side spool bracket feeding 1.75mm filament through smooth PTFE tubing directly to the direct-drive toolhead. |
+| **03** | **Bambu Studio CAM Workspace** | `03_bambu_studio_workspace_setup.jpg` | Digital slicing workspace configured for the Bambu Lab A1 on the gold textured PEI plate at 0.20mm Standard height. |
+| **04** | **In-Situ High-Speed Printing** | `04_bambu_lab_active_print_bed.jpg` | Live deposition on heated PEI bed demonstrating sharp corners, uniform line width, and zero edge warping. |
+| **05** | **P1S Multi-Part Batch Slicing** | `05_bambu_studio_slicer_small_pieces_p1s.jpg` | Bambu Studio CAM layout on Bambu Lab P1S slicing 20+ mechanical pieces at ultra-fine 0.12mm layer height. |
+| **06** | **Complex Organic Slicing** | `06_bambu_studio_slicer_rose_heart.jpg` | Multi-material toolpath slicing for intricate organic geometry (Rose in Heart) using Silk PLA+ for high surface gloss. |
+| **07** | **Twin Indian Zebu Bull Sculptures** | `07_3d_printed_indian_bull_models.jpg` | Finished physical high-resolution 3D printed twin Indian Zebu cattle models in white PLA+ with sharp horns, muscular contouring, and halter relief. |
+
+---
+
 ## 📁 Repository Directory Structure
 
 ```text
 SmartHydro/
+├── 3D work/
+│   ├── README.md
+│   ├── 01_numakers_pla_plus_filament_stock.jpg
+│   ├── 02_bambu_printer_filament_feed_setup.jpg
+│   ├── 03_bambu_studio_workspace_setup.jpg
+│   ├── 04_bambu_lab_active_print_bed.jpg
+│   ├── 05_bambu_studio_slicer_small_pieces_p1s.jpg
+│   ├── 06_bambu_studio_slicer_rose_heart.jpg
+│   └── 07_3d_printed_indian_bull_models.jpg
 ├── assets/
 │   └── images/
 │       ├── cad_12_elbow_fitting.jpg
@@ -185,7 +223,7 @@ Open your browser and navigate to: `http://localhost:8080`
 ## 👥 Project Team & Academic Credits
 
 ### **Academic Institution**
-**Department of Mechanical Engineering**  
+**Department of Mechanical Engineering & Makerspace**  
 **Sanjivani University**, Kopargaon, Maharashtra, India
 
 ### **Project Guide**

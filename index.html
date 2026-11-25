@@ -442,6 +442,18 @@ body {
   border: 1px solid rgba(34, 197, 94, 0.3);
 }
 
+.badge-water, .badge-gov {
+  background: var(--water-glow);
+  color: var(--water);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.badge-clay {
+  background: rgba(224, 112, 58, 0.2);
+  color: var(--clay);
+  border: 1px solid rgba(224, 112, 58, 0.3);
+}
+
 /* Team Card (Numbered 1 2 3 4 without fake titles) */
 .team-card {
   padding: 1.25rem;
@@ -1602,7 +1614,7 @@ body {
         </a>
       </div>
       
-      <!-- Minimized 7-Item Navigation -->
+      <!-- Navigation -->
       <nav class="nav-links" id="navLinks">
         <a href="#overview" class="nav-link active">1. Overview</a>
         <a href="#principles" class="nav-link">2. Working Principle</a>
@@ -1610,7 +1622,8 @@ body {
         <a href="#cad-model" class="nav-link">4. 3D Video &amp; CAD</a>
         <a href="#electronics" class="nav-link">5. Electronics &amp; Control</a>
         <a href="#downloads" class="nav-link">6. CAD Downloads</a>
-        <a href="#gallery" class="nav-link">7. Unified Gallery</a>
+        <a href="#3d-work" class="nav-link">7. 3D Work</a>
+        <a href="#gallery" class="nav-link">8. Unified Gallery</a>
       </nav>
 
       <div class="header-actions">
@@ -2544,20 +2557,117 @@ body {
       </div>
     </section>
 
-    <!-- SEC 07: UNIFIED GALLERY (All Workshop Photos + All CAD Screenshots in One Place) -->
-    <section id="gallery" class="section">
+    <!-- SEC 07: 3D PRINTING & RAPID PROTOTYPING (3D Work) -->
+    <section id="3d-work" class="section section-alt">
       <div class="container">
         <div class="section-header">
           <span class="section-num">SECTION 07</span>
+          <h2 class="section-title">3D Printing &amp; Additive Rapid Prototyping</h2>
+          <p class="section-desc">Hands-on additive manufacturing, high-speed Bambu Lab 3D printers, Bambu Studio CAM toolpath slicing, filament moisture control, and precision physical prototypes fabricated at the Makerspace.</p>
+        </div>
+
+        <!-- 3D Printing Technical Pillars -->
+        <div class="grid-4col mb-lg">
+          <div class="card card-mini">
+            <div class="card-status-badge badge-ok">FDM HARDWARE</div>
+            <h4 class="mt-xs text-bright">Bambu Lab A1 &amp; P1S</h4>
+            <p class="text-sm text-muted mt-xs">High-speed direct-drive desktop 3D printers equipped with active vibration compensation and automatic flow calibration.</p>
+          </div>
+          <div class="card card-mini">
+            <div class="card-status-badge badge-gov">CAM SLICING</div>
+            <h4 class="mt-xs text-bright">Bambu Studio</h4>
+            <p class="text-sm text-muted mt-xs">Precision toolpath generation featuring 0.12mm Fine and 0.20mm Standard layer profiles, custom seams, and batch plate layouts.</p>
+          </div>
+          <div class="card card-mini">
+            <div class="card-status-badge badge-clay">MATERIAL QUALITY</div>
+            <h4 class="mt-xs text-bright">Numakers PLA+</h4>
+            <p class="text-sm text-muted mt-xs">1.75mm high-toughness PLA+ preserved in factory vacuum seals with desiccant to prevent moisture bubbling and hydrolysis.</p>
+          </div>
+          <div class="card card-mini">
+            <div class="card-status-badge badge-water">FABRICATED OUTPUTS</div>
+            <h4 class="mt-xs text-bright">Physical Models</h4>
+            <p class="text-sm text-muted mt-xs">Mechanical adapters, sensor brackets, and high-detail twin Indian Zebu cattle sculptures with intricate organic geometries.</p>
+          </div>
+        </div>
+
+        <!-- 3D Work Process & Artifact Cards -->
+        <div class="gallery-grid">
+          
+          <div class="gallery-item" data-category="3dwork" onclick="openLightbox('assets/images/3D_work/01_numakers_pla_plus_filament_stock.jpg', 'Vacuum-sealed Numakers PLA+ 1.75mm spools with desiccant packs for moisture-free extrusion')">
+            <img src="assets/images/3D_work/01_numakers_pla_plus_filament_stock.jpg" alt="Numakers PLA+ Filament Stock" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">01 · MATERIAL STOCK</span>
+              <h4>Numakers PLA+ Vacuum Packaging</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="3dwork" onclick="openLightbox('assets/images/3D_work/02_bambu_printer_filament_feed_setup.jpg', 'Bambu Lab side spool holder and low-friction PTFE Bowden feed tube')">
+            <img src="assets/images/3D_work/02_bambu_printer_filament_feed_setup.jpg" alt="Bambu Lab Extruder Filament Feed" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">02 · HARDWARE FEED</span>
+              <h4>Bambu Spool Mount &amp; PTFE Guide</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="3dwork" onclick="openLightbox('assets/images/3D_work/03_bambu_studio_workspace_setup.jpg', 'Bambu Studio slicing workspace initialized for Bambu Lab A1 on Textured PEI Plate')">
+            <img src="assets/images/3D_work/03_bambu_studio_workspace_setup.jpg" alt="Bambu Studio Setup" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">03 · CAM CALIBRATION</span>
+              <h4>Bambu Studio Workspace Setup</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="3dwork" onclick="openLightbox('assets/images/3D_work/04_bambu_lab_active_print_bed.jpg', 'High-speed extrusion on heated textured PEI plate showing uniform first-layer line width')">
+            <img src="assets/images/3D_work/04_bambu_lab_active_print_bed.jpg" alt="Bambu Lab Active Print Bed" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">04 · ACTIVE PRINTING</span>
+              <h4>PEI Bed First-Layer Deposition</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="3dwork" onclick="openLightbox('assets/images/3D_work/05_bambu_studio_slicer_small_pieces_p1s.jpg', 'Bambu Studio multi-component batch slicing for Bambu Lab P1S at 0.12mm fine resolution')">
+            <img src="assets/images/3D_work/05_bambu_studio_slicer_small_pieces_p1s.jpg" alt="P1S Multi-Part Batch Slicing" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">05 · BATCH SLICING</span>
+              <h4>P1S Multi-Piece Batch Layout (0.12mm)</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="3dwork" onclick="openLightbox('assets/images/3D_work/06_bambu_studio_slicer_rose_heart.jpg', 'Complex organic geometry toolpath slicing for Rose in Heart project with Silk PLA+')">
+            <img src="assets/images/3D_work/06_bambu_studio_slicer_rose_heart.jpg" alt="Bambu Studio Heart Rose Slicing" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">06 · ORGANIC SLICING</span>
+              <h4>Complex Geometry &amp; Silk PLA+</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="3dwork" onclick="openLightbox('assets/images/3D_work/07_3d_printed_indian_bull_models.jpg', 'High-resolution physical 3D printed twin Indian Zebu cattle models in white PLA+ with intricate horn and halter details')">
+            <img src="assets/images/3D_work/07_3d_printed_indian_bull_models.jpg" alt="3D Printed Indian Bull Models" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">07 · FABRICATED ARTIFACT</span>
+              <h4>Twin Indian Zebu Bull Sculptures</h4>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SEC 08: UNIFIED GALLERY (All Workshop Photos, SolidWorks CAD & 3D Work) -->
+    <section id="gallery" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-num">SECTION 08</span>
           <h2 class="section-title">Unified Project Gallery</h2>
-          <p class="section-desc">All workshop fabrication photos and SolidWorks CAD screenshots in one unified gallery. Click any image to view in full resolution.</p>
+          <p class="section-desc">All workshop fabrication photos, SolidWorks CAD screenshots, and 3D printing rapid prototyping in one unified gallery. Click any image to view in full resolution.</p>
         </div>
 
         <!-- Filter Bar -->
         <div class="gallery-filter-bar">
-          <button class="filter-btn active" data-filter="all">All Photos &amp; CAD (28)</button>
+          <button class="filter-btn active" data-filter="all">All Media (35)</button>
           <button class="filter-btn" data-filter="workshop">Workshop Build (10)</button>
           <button class="filter-btn" data-filter="cad">SolidWorks CAD (18)</button>
+          <button class="filter-btn" data-filter="3dwork">3D Printing Work (7)</button>
         </div>
 
         <!-- Unified Gallery Grid -->
@@ -2789,6 +2899,63 @@ body {
             </div>
           </div>
 
+          <!-- 3D WORK & RAPID PROTOTYPING -->
+          <div class="gallery-item" data-category="3dwork" onclick="openLightbox('assets/images/3D_work/01_numakers_pla_plus_filament_stock.jpg', 'Vacuum-sealed Numakers PLA+ 1.75mm spools with desiccant packs for moisture-free extrusion')">
+            <img src="assets/images/3D_work/01_numakers_pla_plus_filament_stock.jpg" alt="Numakers PLA+ Filament Stock" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">3D WORK</span>
+              <h4>Numakers PLA+ Vacuum Packaging</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="3dwork" onclick="openLightbox('assets/images/3D_work/02_bambu_printer_filament_feed_setup.jpg', 'Bambu Lab side spool holder and low-friction PTFE Bowden feed tube')">
+            <img src="assets/images/3D_work/02_bambu_printer_filament_feed_setup.jpg" alt="Bambu Lab Extruder Filament Feed" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">3D WORK</span>
+              <h4>Bambu Spool Mount &amp; PTFE Guide</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="3dwork" onclick="openLightbox('assets/images/3D_work/03_bambu_studio_workspace_setup.jpg', 'Bambu Studio slicing workspace initialized for Bambu Lab A1 on Textured PEI Plate')">
+            <img src="assets/images/3D_work/03_bambu_studio_workspace_setup.jpg" alt="Bambu Studio Setup" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">3D WORK</span>
+              <h4>Bambu Studio Workspace Setup</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="3dwork" onclick="openLightbox('assets/images/3D_work/04_bambu_lab_active_print_bed.jpg', 'High-speed extrusion on heated textured PEI plate showing uniform first-layer line width')">
+            <img src="assets/images/3D_work/04_bambu_lab_active_print_bed.jpg" alt="Bambu Lab Active Print Bed" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">3D WORK</span>
+              <h4>PEI Bed First-Layer Deposition</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="3dwork" onclick="openLightbox('assets/images/3D_work/05_bambu_studio_slicer_small_pieces_p1s.jpg', 'Bambu Studio multi-component batch slicing for Bambu Lab P1S at 0.12mm fine resolution')">
+            <img src="assets/images/3D_work/05_bambu_studio_slicer_small_pieces_p1s.jpg" alt="P1S Multi-Part Batch Slicing" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">3D WORK</span>
+              <h4>P1S Multi-Piece Batch Layout (0.12mm)</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="3dwork" onclick="openLightbox('assets/images/3D_work/06_bambu_studio_slicer_rose_heart.jpg', 'Complex organic geometry toolpath slicing for Rose in Heart project with Silk PLA+')">
+            <img src="assets/images/3D_work/06_bambu_studio_slicer_rose_heart.jpg" alt="Bambu Studio Heart Rose Slicing" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">3D WORK</span>
+              <h4>Complex Geometry &amp; Silk PLA+</h4>
+            </div>
+          </div>
+
+          <div class="gallery-item" data-category="3dwork" onclick="openLightbox('assets/images/3D_work/07_3d_printed_indian_bull_models.jpg', 'High-resolution physical 3D printed twin Indian Zebu cattle models in white PLA+ with intricate horn and halter details')">
+            <img src="assets/images/3D_work/07_3d_printed_indian_bull_models.jpg" alt="3D Printed Indian Bull Models" loading="lazy">
+            <div class="gallery-overlay">
+              <span class="gallery-tag">3D WORK</span>
+              <h4>Twin Indian Zebu Bull Sculptures</h4>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -2969,7 +3136,7 @@ function initLightbox() {
 }
 
 </script>
-  <script>
+<script>
 /**
  * SmartHydro - Interactive 3D Model Video & CAD Engine
  * Group 18 · Sanjivani University Makerspace
