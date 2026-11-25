@@ -185,7 +185,7 @@ Open your browser and navigate to: `http://localhost:8080`
 ## 👥 Project Team & Academic Credits
 
 ### **Academic Institution**
-**Department of Mechanical Engineering & Makerspace**  
+**Department of Mechanical Engineering**  
 **Sanjivani University**, Kopargaon, Maharashtra, India
 
 ### **Project Guide**
