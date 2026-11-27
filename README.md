@@ -27,6 +27,11 @@ By utilizing vertical space and continuous real-time monitoring of root-zone soi
 ## 💧 Problem Statement
 > **A significant amount of RO reject water generated in offices, colleges, and institutions is wasted every day. This creates an opportunity to reuse water resources through a smart hydroponic farming system that promotes water conservation and sustainable agriculture by utilizing suitable treated water for plant cultivation.**
 
+### 🌿 Proposed Solution
+1. **IoT-Based Smart Hydroponic Farming System**: To develop an IoT-based smart hydroponic farming system that utilizes suitable treated RO reject water for soil-less plant cultivation. The system uses an ESP32, sensors, and automated water circulation to monitor water conditions, control the pump, prevent overflow and reduce water wastage while promoting sustainable agriculture.
+2. **RO Reject Water Conservation**: To reduce water wastage by reusing suitable RO reject water generated in offices and colleges.
+3. **Four-Tier Pipe Hydroponic Structure**: To develop a soil-less hydroponic farming system using four horizontal PVC pipes.
+
 ---
 
 ## 🎯 Project Objectives
@@ -304,6 +309,11 @@ Open your browser and navigate to: `http://localhost:8080`
 
 ### **Problem Statement**
 > *A significant amount of RO reject water generated in offices, colleges, and institutions is wasted every day. This creates an opportunity to reuse water resources through a smart hydroponic farming system that promotes water conservation and sustainable agriculture by utilizing suitable treated water for plant cultivation.*
+
+### **Proposed Solution**
+1. To develop an IoT-based smart hydroponic farming system that utilizes suitable treated RO reject water for soil-less plant cultivation. The system uses an ESP32, sensors, and automated water circulation to monitor water conditions, control the pump, prevent overflow and reduce water wastage while promoting sustainable agriculture.
+2. To reduce water wastage by reusing suitable RO reject water generated in offices and colleges.
+3. To develop a soil-less hydroponic farming system using four horizontal PVC pipes.
 
 ---
 
