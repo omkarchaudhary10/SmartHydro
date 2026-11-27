@@ -15,7 +15,7 @@ The complete engineering portal, 3D interactive procedural rig animation, and wo
 ---
 
 ## 📌 Executive Summary & Abstract
-**SmartHydro** is an automated, soil-free hydroponic cultivation system engineered by **Group 18** at the **Department of Mechanical Engineering & Makerspace, Sanjivani University**. The system combines mechanical structural design, SolidWorks CAD modeling, physical workshop metal fabrication, and closed-loop IoT automation.
+**SmartHydro** is an automated, soil-free hydroponic cultivation system engineered by **Group 18** at the **Department of Mechanical Engineering, Sanjivani University**. The system combines mechanical structural design, SolidWorks CAD modeling, physical workshop metal fabrication, and closed-loop IoT automation.
 
 By utilizing vertical space and continuous real-time monitoring of root-zone soil moisture and nutrient solution temperature, SmartHydro eliminates manual irrigation, conserves up to 90% water compared to traditional soil farming, and prevents root rot through autonomous cycle coordination.
 
@@ -295,7 +295,7 @@ Open your browser and navigate to: `http://localhost:8080`
 ## 👥 Project Team & Academic Credits
 
 ### **Academic Institution**
-**Department of Mechanical Engineering & Makerspace**  
+**Department of Mechanical Engineering**  
 **Sanjivani University**, Kopargaon, Maharashtra, India
 
 ### **Project Guide**
