@@ -24,6 +24,11 @@ By utilizing vertical space and continuous real-time monitoring of root-zone soi
 
 ---
 
+## 💧 Problem Statement
+> **A significant amount of RO reject water generated in offices, colleges, and institutions is wasted every day. This creates an opportunity to reuse water resources through a smart hydroponic farming system that promotes water conservation and sustainable agriculture by utilizing suitable treated water for plant cultivation.**
+
+---
+
 ## 🎯 Project Objectives
 - **Automated Irrigation Control**: Automate nutrient water circulation based on real-time root-zone moisture saturation levels.
 - **Continuous Thermal Monitoring**: Track reservoir water temperature continuously using a waterproof submerged probe.
@@ -296,6 +301,9 @@ Open your browser and navigate to: `http://localhost:8080`
 2. **Sarthak Boste**
 3. **Darshan Mahajan**
 4. **Rushikesh Sonawane**
+
+### **Problem Statement**
+> *A significant amount of RO reject water generated in offices, colleges, and institutions is wasted every day. This creates an opportunity to reuse water resources through a smart hydroponic farming system that promotes water conservation and sustainable agriculture by utilizing suitable treated water for plant cultivation.*
 
 ---
 

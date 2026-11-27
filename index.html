@@ -489,6 +489,53 @@ body {
   color: var(--text-bright);
 }
 
+/* Team Problem Statement */
+.team-problem-statement {
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--line);
+}
+
+.problem-statement-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.problem-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--water);
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  padding: 0.22rem 0.65rem;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+.problem-badge .badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--water);
+  box-shadow: 0 0 8px var(--water);
+  display: inline-block;
+}
+
+.problem-statement-desc {
+  font-size: 0.885rem;
+  line-height: 1.6;
+  color: var(--text);
+  margin: 0;
+}
+
 /* Hero CAD Showcase Viewport */
 /* Hero CAD Compact Preview Card */
 .hero-cad-preview-card {
@@ -1758,6 +1805,17 @@ body {
                 <li>Darshan Mahajan</li>
                 <li>Rushikesh Sonawane</li>
               </ol>
+
+              <!-- Problem Statement -->
+              <div class="team-problem-statement">
+                <div class="problem-statement-header">
+                  <span class="problem-badge"><span class="badge-dot"></span> PROBLEM STATEMENT</span>
+                  <span class="meta-label">WATER CONSERVATION &amp; REUSE</span>
+                </div>
+                <p class="problem-statement-desc">
+                  A significant amount of RO reject water generated in offices, colleges, and institutions is wasted every day. This creates an opportunity to reuse water resources through a smart hydroponic farming system that promotes water conservation and sustainable agriculture by utilizing suitable treated water for plant cultivation.
+                </p>
+              </div>
             </div>
           </div>
 
