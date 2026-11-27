@@ -459,6 +459,7 @@ body {
   padding: 1.25rem;
   background: var(--surface);
   border: 1px solid var(--line);
+  margin-bottom: 1rem;
 }
 
 .team-header-row {
@@ -489,11 +490,12 @@ body {
   color: var(--text-bright);
 }
 
-/* Team Problem Statement */
-.team-problem-statement {
-  margin-top: 1rem;
-  padding-top: 0.85rem;
-  border-top: 1px solid var(--line);
+/* Problem & Solution Card (Separate Box) */
+.problem-solution-card {
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
 }
 
 .problem-statement-header {
@@ -1847,7 +1849,7 @@ body {
               <a href="#cad-model" class="btn btn-secondary">View SolidWorks CAD &darr;</a>
             </div>
 
-            <!-- Team Details Card (Numbered 1, 2, 3, 4 without job titles) -->
+            <!-- Separate Box 1: Team & Group Details Card -->
             <div class="card team-card">
               <div class="team-header-row">
                 <span class="meta-label">PROJECT TEAM (GROUP 18)</span>
@@ -1859,29 +1861,29 @@ body {
                 <li>Darshan Mahajan</li>
                 <li>Rushikesh Sonawane</li>
               </ol>
+            </div>
 
-              <!-- Problem Statement -->
-              <div class="team-problem-statement">
-                <div class="problem-statement-header">
-                  <span class="problem-badge"><span class="badge-dot"></span> PROBLEM STATEMENT</span>
-                  <span class="meta-label">WATER CONSERVATION &amp; REUSE</span>
-                </div>
-                <p class="problem-statement-desc">
-                  A significant amount of RO reject water generated in offices, colleges, and institutions is wasted every day. This creates an opportunity to reuse water resources through a smart hydroponic farming system that promotes water conservation and sustainable agriculture by utilizing suitable treated water for plant cultivation.
-                </p>
+            <!-- Separate Box 2: Problem Statement & Proposed Solution Card -->
+            <div class="card problem-solution-card">
+              <div class="problem-statement-header">
+                <span class="problem-badge"><span class="badge-dot"></span> PROBLEM STATEMENT</span>
+                <span class="meta-label">WATER CONSERVATION &amp; REUSE</span>
+              </div>
+              <p class="problem-statement-desc">
+                A significant amount of RO reject water generated in offices, colleges, and institutions is wasted every day. This creates an opportunity to reuse water resources through a smart hydroponic farming system that promotes water conservation and sustainable agriculture by utilizing suitable treated water for plant cultivation.
+              </p>
 
-                <!-- Proposed Solution Points -->
-                <div class="team-solution-statement">
-                  <div class="solution-statement-header">
-                    <span class="solution-badge"><span class="badge-dot-green"></span> PROPOSED SOLUTION</span>
-                    <span class="meta-label">OBJECTIVES &amp; APPROACH</span>
-                  </div>
-                  <ul class="solution-points-list">
-                    <li>To develop an IoT-based smart hydroponic farming system that utilizes suitable treated RO reject water for soil-less plant cultivation. The system uses an ESP32, sensors, and automated water circulation to monitor water conditions, control the pump, prevent overflow and reduce water wastage while promoting sustainable agriculture.</li>
-                    <li>To reduce water wastage by reusing suitable RO reject water generated in offices and colleges.</li>
-                    <li>To develop a soil-less hydroponic farming system using four horizontal PVC pipes.</li>
-                  </ul>
+              <!-- Proposed Solution Points -->
+              <div class="team-solution-statement">
+                <div class="solution-statement-header">
+                  <span class="solution-badge"><span class="badge-dot-green"></span> PROPOSED SOLUTION</span>
+                  <span class="meta-label">OBJECTIVES &amp; APPROACH</span>
                 </div>
+                <ul class="solution-points-list">
+                  <li>To develop an IoT-based smart hydroponic farming system that utilizes suitable treated RO reject water for soil-less plant cultivation. The system uses an ESP32, sensors, and automated water circulation to monitor water conditions, control the pump, prevent overflow and reduce water wastage while promoting sustainable agriculture.</li>
+                  <li>To reduce water wastage by reusing suitable RO reject water generated in offices and colleges.</li>
+                  <li>To develop a soil-less hydroponic farming system using four horizontal PVC pipes.</li>
+                </ul>
               </div>
             </div>
           </div>
