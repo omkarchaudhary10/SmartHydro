@@ -338,10 +338,8 @@ body {
 }
 
 .hero-container {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 2.5rem;
-  align-items: center;
+  display: block;
+  width: 100%;
 }
 
 .tag-row {
@@ -366,6 +364,7 @@ body {
   line-height: 1.6;
   color: var(--muted);
   margin-bottom: 1.75rem;
+  max-width: 920px;
 }
 
 .hero-actions {
@@ -484,10 +483,11 @@ body {
 
 /* Team Card (Numbered 1 2 3 4 without fake titles) */
 .team-card {
-  padding: 1.25rem;
+  padding: 1.25rem 1.5rem;
   background: var(--surface);
   border: 1px solid var(--line);
-  margin-bottom: 1rem;
+  border-radius: var(--radius-lg);
+  margin-bottom: 1.25rem;
 }
 
 .team-header-row {
@@ -508,8 +508,8 @@ body {
 .team-ordered-list {
   padding-left: 1.5rem;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.4rem 1.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem 1.5rem;
 }
 
 .team-ordered-list li {
@@ -520,10 +520,12 @@ body {
 
 /* Problem & Solution Card (Separate Box) */
 .problem-solution-card {
-  padding: 1.25rem;
+  padding: 1.5rem;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
+  margin-bottom: 1.5rem;
+}
 }
 
 .problem-statement-header {
@@ -1862,6 +1864,356 @@ body {
   color: var(--text-muted);
 }
 
+/* ==========================================================================
+   3D CYLINDRICAL COVERFLOW CAROUSEL FOR REPORT GALLERY
+   Inspired by Mitticool 3D rotating showcase with floor reflections
+   ========================================================================== */
+.gallery-toolbar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.gallery-view-switcher {
+  display: inline-flex;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.25rem;
+  gap: 0.25rem;
+}
+
+.view-mode-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.45rem 0.95rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: var(--transition);
+}
+
+.view-mode-btn:hover {
+  color: var(--text-bright);
+}
+
+.view-mode-btn.active {
+  background: var(--surface);
+  color: var(--water);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.pulse-dot-cyan {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--water);
+  box-shadow: 0 0 8px var(--water);
+  display: inline-block;
+  animation: pulse-dot 1.8s infinite;
+}
+
+/* 3D Carousel Stage */
+.gallery-carousel-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 2.5rem;
+}
+
+.carousel-3d-stage {
+  position: relative;
+  width: 100%;
+  height: 540px;
+  perspective: 1200px;
+  perspective-origin: 50% 45%;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 40%, rgba(15, 23, 42, 0.7) 0%, rgba(5, 5, 8, 0.98) 85%);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+[data-theme="light"] .carousel-3d-stage {
+  background: radial-gradient(circle at 50% 40%, #ffffff 0%, #e2e8f0 85%);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-3d-stage.is-dragging {
+  cursor: grabbing;
+}
+
+/* Floor Reflection Lighting */
+.carousel-floor-glow {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  height: 140px;
+  background: radial-gradient(ellipse at center bottom, rgba(56, 189, 248, 0.18) 0%, rgba(34, 197, 94, 0.08) 45%, transparent 75%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+[data-theme="light"] .carousel-floor-glow {
+  background: radial-gradient(ellipse at center bottom, rgba(2, 132, 199, 0.15) 0%, rgba(0, 0, 0, 0.06) 50%, transparent 75%);
+}
+
+/* 3D Rotating Ring */
+.carousel-3d-ring {
+  position: absolute;
+  width: 280px;
+  height: 360px;
+  transform-style: preserve-3d;
+  transition: transform 0.05s linear;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Individual 3D Card */
+.carousel-3d-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 360px;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: filter 0.3s ease, border-color 0.3s ease;
+  backface-visibility: hidden;
+}
+
+.carousel-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #000000;
+  border: 2px solid var(--line-strong);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.carousel-card-inner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  -webkit-box-reflect: below 6px linear-gradient(to bottom, transparent 60%, rgba(255, 255, 255, 0.25) 100%);
+}
+
+[data-theme="dark"] .carousel-card-inner img {
+  -webkit-box-reflect: below 6px linear-gradient(to bottom, transparent 60%, rgba(56, 189, 248, 0.25) 100%);
+}
+
+.carousel-card-badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 5;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(6px);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+
+.carousel-card-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  padding: 1.5rem 0.85rem 0.85rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.5) 70%, transparent 100%);
+}
+
+.carousel-card-caption h5 {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.35;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+/* Front Centered Card Highlight */
+.carousel-3d-card.is-center .carousel-card-inner {
+  border-color: var(--water);
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.4), 0 15px 40px rgba(0, 0, 0, 0.8);
+}
+
+.carousel-3d-card:hover .carousel-card-inner {
+  border-color: var(--plant);
+  transform: translateY(-4px);
+}
+
+/* Floating Navigation Arrows */
+.carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(8, 8, 12, 0.85);
+  border: 1px solid var(--line-strong);
+  color: var(--text-bright);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 25;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="light"] .carousel-nav-btn {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-nav-btn:hover {
+  background: var(--surface-hover);
+  border-color: var(--water);
+  color: var(--water);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.carousel-nav-btn.prev-btn { left: 1.25rem; }
+.carousel-nav-btn.next-btn { right: 1.25rem; }
+
+/* Bottom HUD Bar */
+.carousel-bottom-hud {
+  position: absolute;
+  bottom: 0.85rem;
+  left: 1.25rem;
+  right: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1.25rem;
+  background: rgba(8, 8, 12, 0.88);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(12px);
+  z-index: 25;
+  gap: 1rem;
+}
+
+[data-theme="light"] .carousel-bottom-hud {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: var(--line);
+}
+
+.hud-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+.btn-hud-ctrl {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.btn-hud-ctrl:hover {
+  border-color: var(--water);
+  color: var(--water);
+}
+
+.hud-active-info {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.hud-counter {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--water);
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+}
+
+.hud-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-bright);
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.hud-right .hud-hint {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .carousel-3d-stage {
+    height: 440px;
+  }
+  .carousel-3d-ring,
+  .carousel-3d-card {
+    width: 220px;
+    height: 290px;
+  }
+  .hud-right {
+    display: none;
+  }
+  .carousel-nav-btn {
+    width: 38px;
+    height: 38px;
+  }
+  .carousel-nav-btn.prev-btn { left: 0.5rem; }
+  .carousel-nav-btn.next-btn { right: 0.5rem; }
+}
+
+
 
 </style>
 
@@ -1975,21 +2327,6 @@ body {
                   <li>To reduce water wastage by reusing suitable RO reject water generated in offices and colleges.</li>
                   <li>To develop a soil-less hydroponic farming system using four horizontal PVC pipes.</li>
                 </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- Hero SolidWorks Master Assembly Card (Compact & Balanced) -->
-          <div class="hero-visual">
-            <div class="hero-cad-preview-card" onclick="openLightbox('assets/images/cad_assem_final_elevation.jpg', 'SolidWorks Master Assembly (Assem_final.SLDASM)')">
-              <div class="cad-badge-top">
-                <span class="pulse-dot"></span> SOLIDWORKS CAD · Assem_final.SLDASM
-              </div>
-              <img src="assets/images/cad_assem_final_elevation.jpg" alt="SolidWorks Master Assembly Front Elevation" class="hero-cad-preview-img">
-              <div class="hero-cad-overlay-action">
-                <a href="#cad-model" class="btn-watch-3d-video" onclick="event.stopPropagation();">
-                  🎥 Watch Interactive 3D Model Video &darr;
-                </a>
               </div>
             </div>
           </div>
@@ -2820,27 +3157,73 @@ body {
       </div>
     </section>
 
-    <!-- SEC 08: UNIFIED GALLERY (All Workshop Photos, SolidWorks CAD, 3D Work & Laser Cutting) -->
+    <!-- SEC 08: UNIFIED GALLERY & 3D INTERACTIVE CAROUSEL -->
     <section id="gallery" class="section section-alt">
       <div class="container">
         <div class="section-header">
           <span class="section-num">SECTION 08</span>
-          <h2 class="section-title">Unified Project Gallery</h2>
-          <p class="section-desc">All workshop fabrication photos, SolidWorks CAD screenshots, 3D printing rapid prototyping, and CNC laser cutting in one unified gallery. Click any image to view in full resolution.</p>
+          <h2 class="section-title">Unified Project &amp; Report Gallery</h2>
+          <p class="section-desc">Interactive 3D coverflow carousel and comprehensive photo archive of the SmartHydro system — documenting workshop fabrication, verified SolidWorks CAD, 3D printing, laser cutting, and IoT sensor hardware.</p>
         </div>
 
-        <!-- Filter Bar -->
-        <div class="gallery-filter-bar">
-          <button class="filter-btn active" data-filter="all">All Media (50)</button>
-          <button class="filter-btn" data-filter="workshop">Workshop Build (10)</button>
-          <button class="filter-btn" data-filter="cad">SolidWorks CAD (18)</button>
-          <button class="filter-btn" data-filter="3dwork">3D Printing Work (7)</button>
-          <button class="filter-btn" data-filter="laser">Laser Cutting (9)</button>
-          <button class="filter-btn" data-filter="electronics">IoT Hardware &amp; Sensors (6)</button>
+        <!-- Gallery Toolbar: 3D Carousel vs Grid Mode Switcher & Category Filters -->
+        <div class="gallery-toolbar-row">
+          <div class="gallery-view-switcher">
+            <button id="btnViewCarousel" class="view-mode-btn active" type="button" title="View 3D Coverflow Carousel">
+              <span class="pulse-dot-cyan"></span> 🎠 3D Coverflow Showcase
+            </button>
+            <button id="btnViewGrid" class="view-mode-btn" type="button" title="View Full Photo Grid">
+              ⊞ Grid Archive (50)
+            </button>
+          </div>
+
+          <div class="gallery-filter-bar">
+            <button class="filter-btn active" data-filter="all">All Highlights</button>
+            <button class="filter-btn" data-filter="workshop">Workshop Build</button>
+            <button class="filter-btn" data-filter="cad">SolidWorks CAD</button>
+            <button class="filter-btn" data-filter="3dwork">3D Printing</button>
+            <button class="filter-btn" data-filter="laser">Laser Cutting</button>
+            <button class="filter-btn" data-filter="electronics">IoT Hardware</button>
+          </div>
         </div>
 
-        <!-- Unified Gallery Grid -->
-        <div class="gallery-grid" id="galleryGrid">
+        <!-- 1. Interactive 3D Cylindrical Coverflow Showcase (Inspired by Mitticool 3D Gallery) -->
+        <div id="galleryCarouselWrapper" class="gallery-carousel-wrapper">
+          <div class="carousel-3d-stage" id="carousel3dStage" title="Drag horizontally to rotate 3D carousel">
+            <!-- Floor Reflection Lighting -->
+            <div class="carousel-floor-glow" aria-hidden="true"></div>
+
+            <!-- 3D Rotating Ring Container -->
+            <div class="carousel-3d-ring" id="carousel3dRing"></div>
+
+            <!-- Left / Right Navigation Arrow Buttons -->
+            <button class="carousel-nav-btn prev-btn" id="btnCarouselPrev" type="button" aria-label="Previous Slide">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button class="carousel-nav-btn next-btn" id="btnCarouselNext" type="button" aria-label="Next Slide">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+
+            <!-- Bottom Floating HUD Bar -->
+            <div class="carousel-bottom-hud">
+              <div class="hud-left">
+                <button id="btnToggleSpin" class="btn-hud-ctrl" type="button">
+                  <span id="spinIcon">⏸</span> <span id="spinText">Pause 3D Spin</span>
+                </button>
+                <div class="hud-active-info">
+                  <span class="hud-counter" id="carouselCounter">01 / 17</span>
+                  <span class="hud-title" id="carouselActiveTitle">Fully Assembled Rig on Campus</span>
+                </div>
+              </div>
+              <div class="hud-right">
+                <span class="hud-hint">🖱️ Drag horizontally to spin · Click to focus or enlarge</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Unified Gallery Grid (Shown when Grid View toggled or filtered) -->
+        <div class="gallery-grid" id="galleryGrid" style="display: none;">
           
           <!-- WORKSHOP REAL BUILD PHOTOS -->
           <div class="gallery-item" data-category="workshop" onclick="openLightbox('assets/images/workshop_full_rig_assembled.jpg', 'Completed rig assembled on stand with PVC pipes and orange hose at Sanjivani College Campus')">
@@ -4520,6 +4903,1325 @@ function initLightbox() {
   window.SmartHydro3D = {
     forceResize: forceResize
   };
+})();
+
+</script>
+<script>
+/**
+ * SmartHydro - Main UI Script
+ * Group 18 · Sanjivani University Makerspace
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  initThemeToggle();
+  initNavigation();
+  initGalleryFilter();
+  initLightbox();
+});
+
+/* 1. Theme Toggle */
+function initThemeToggle() {
+  const themeToggle = document.getElementById('themeToggle');
+  const html = document.documentElement;
+  
+  const savedTheme = localStorage.getItem('smarthydro-theme') || 'dark';
+  html.setAttribute('data-theme', savedTheme);
+  
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const target = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', target);
+      localStorage.setItem('smarthydro-theme', target);
+    });
+  }
+}
+
+/* 2. Navigation & ScrollSpy for 7 Clean Sections */
+function initNavigation() {
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  const links = document.querySelectorAll('.nav-link');
+  
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+  }
+  
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      if (navLinks && navLinks.classList.contains('open')) {
+        navLinks.classList.remove('open');
+      }
+    });
+  });
+  
+  // ScrollSpy
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let scrollY = window.pageYOffset;
+    
+    sections.forEach(current => {
+      const sectionHeight = current.offsetHeight;
+      const sectionTop = current.offsetTop - 120;
+      const sectionId = current.getAttribute('id');
+      
+      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+        links.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${sectionId}`) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  });
+}
+
+/* 3. Unified Gallery Filtering */
+function initGalleryFilter() {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      const filter = btn.getAttribute('data-filter');
+      
+      galleryItems.forEach(item => {
+        const itemCat = item.getAttribute('data-category');
+        if (filter === 'all' || itemCat === filter) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+}
+
+/* 4. Lightbox Modal */
+function initLightbox() {
+  window.openLightbox = function(imgSrc, caption) {
+    const modal = document.getElementById('imageLightbox');
+    const img = document.getElementById('lightboxImg');
+    const cap = document.getElementById('lightboxCaption');
+    
+    if (modal && img) {
+      img.src = imgSrc;
+      cap.textContent = caption || '';
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  };
+  
+  window.closeLightbox = function(e) {
+    if (e.target.id === 'imageLightbox' || e.target.classList.contains('lightbox-close')) {
+      const modal = document.getElementById('imageLightbox');
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+  };
+  
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const modal = document.getElementById('imageLightbox');
+      if (modal && modal.classList.contains('active')) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+  });
+}
+
+</script>
+<script>
+/**
+ * SmartHydro - Interactive 3D Model Video & CAD Engine
+ * Group 18 · Sanjivani University Makerspace
+ * 
+ * Recreates the exact SolidWorks Assem_final.SLDASM assembly:
+ * - 4x4x2 ft welded MS square-pipe frame (painted black)
+ * - 4 horizontal 3-inch PVC pipes in vertical zigzag arrangement
+ * - 20 net grow cups (5 per tier) with green plant sprouts
+ * - Floor reservoir bucket with handle & submersible pump
+ * - Wavy orange supply riser pipe (riser_pipe_L1_supply)
+ * - Inter-pipe transfer loops and drain return hose
+ * - ESP32 controller with DuPont wiring and live circulation particles
+ * - Cinematic video orbit, camera presets, scrubber bar, and CAD photo toggle
+ * - Fullscreen engine with automated multi-frame viewport resizing
+ */
+
+(function () {
+  'use strict';
+
+  let scene, camera, renderer, controls;
+  let modelGroup, waterParticles = [];
+  let isPlaying = true;
+  let isWaterFlowing = true;
+  let currentView = 'orbit';
+  let orbitTime = 0;
+  const ORBIT_CYCLE_SECONDS = 20;
+
+  // Camera preset positions
+  const PRESETS = {
+    orbit: { x: 4.8, y: 2.2, z: 6.2, tx: 0.3, ty: 0.1, tz: 0 },
+    front: { x: 0.2, y: 0.1, z: 7.2, tx: 0.2, ty: 0.1, tz: 0 },
+    iso: { x: 5.2, y: 3.2, z: 5.5, tx: 0.2, ty: 0.1, tz: 0 },
+    reservoir: { x: 4.2, y: -0.6, z: 2.8, tx: 2.8, ty: -1.2, tz: 0.3 },
+    top: { x: 0.2, y: 7.5, z: 0.8, tx: 0.2, ty: 0, tz: 0 }
+  };
+
+  let targetCamPos = { ...PRESETS.orbit };
+  let targetLookAt = { x: PRESETS.orbit.tx, y: PRESETS.orbit.ty, z: PRESETS.orbit.tz };
+
+  document.addEventListener('DOMContentLoaded', init);
+
+  function init() {
+    const container = document.getElementById('threeVideoContainer');
+    if (!container) return;
+
+    // Check if Three.js is loaded
+    if (typeof THREE === 'undefined') {
+      showFallback(container);
+      return;
+    }
+
+    try {
+      setupThree(container);
+      buildScene();
+      setupControls();
+      setupUI();
+      animate(0);
+    } catch (err) {
+      console.warn('Three.js initialization failed:', err);
+      showFallback(container);
+    }
+  }
+
+  function setupThree(container) {
+    const w = container.clientWidth || 560;
+    const h = container.clientHeight || 440;
+
+    // Scene
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x040406);
+    scene.fog = new THREE.FogExp2(0x040406, 0.045);
+
+    // Camera
+    camera = new THREE.PerspectiveCamera(42, w / h, 0.1, 100);
+    camera.position.set(PRESETS.orbit.x, PRESETS.orbit.y, PRESETS.orbit.z);
+
+    // Renderer
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+    renderer.setSize(w, h);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.1;
+
+    container.appendChild(renderer.domElement);
+
+    // OrbitControls
+    if (typeof THREE.OrbitControls !== 'undefined') {
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.06;
+      controls.maxDistance = 15;
+      controls.minDistance = 2.5;
+      controls.maxPolarAngle = Math.PI / 2 + 0.05;
+      controls.target.set(0.3, 0.1, 0);
+
+      controls.addEventListener('start', () => {
+        if (currentView === 'orbit') {
+          setActivePresetBtn('manual');
+        }
+      });
+    }
+
+    // Resize listener & ResizeObserver
+    window.addEventListener('resize', forceResize);
+
+    if (window.ResizeObserver) {
+      try {
+        const ro = new ResizeObserver(() => {
+          forceResize();
+        });
+        ro.observe(container);
+        const threeWrapper = document.getElementById('threeVideoWrapper');
+        if (threeWrapper) ro.observe(threeWrapper);
+      } catch (e) {}
+    }
+  }
+
+  function forceResize() {
+    const container = document.getElementById('threeVideoContainer');
+    const threeWrapper = document.getElementById('threeVideoWrapper');
+    if (!container || !camera || !renderer) return;
+
+    let nw = 0;
+    let nh = 0;
+
+    const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
+
+    if (isFs) {
+      // Fullscreen mode: fill the entire viewport below top header bar
+      const topbar = document.querySelector('.hero-cad-topbar');
+      const topbarH = topbar ? topbar.offsetHeight : 46;
+      nw = window.innerWidth;
+      nh = Math.max(window.innerHeight - topbarH, 300);
+    } else {
+      // Standard card mode
+      if (threeWrapper && threeWrapper.clientWidth > 0 && threeWrapper.clientHeight > 0) {
+        nw = threeWrapper.clientWidth;
+        nh = threeWrapper.clientHeight;
+      } else if (container.clientWidth > 0 && container.clientHeight > 0) {
+        nw = container.clientWidth;
+        nh = container.clientHeight;
+      } else {
+        const card = document.querySelector('.cad-video-showcase-card');
+        if (card) {
+          nw = card.clientWidth;
+          nh = card.clientHeight - 46;
+        }
+      }
+    }
+
+    if (nw > 0 && nh > 0) {
+      camera.aspect = nw / nh;
+      camera.updateProjectionMatrix();
+      renderer.setSize(nw, nh);
+      if (renderer.domElement) {
+        renderer.domElement.style.width = '100%';
+        renderer.domElement.style.height = '100%';
+      }
+    }
+  }
+
+  function buildScene() {
+    // 1. Lighting Setup
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.65);
+    scene.add(ambientLight);
+
+    const keyLight = new THREE.DirectionalLight(0xffffff, 1.1);
+    keyLight.position.set(6, 9, 7);
+    keyLight.castShadow = true;
+    keyLight.shadow.mapSize.width = 1024;
+    keyLight.shadow.mapSize.height = 1024;
+    keyLight.shadow.bias = -0.0005;
+    scene.add(keyLight);
+
+    const fillLight = new THREE.DirectionalLight(0x38bdf8, 0.45);
+    fillLight.position.set(-7, 4, -5);
+    scene.add(fillLight);
+
+    const plantLight = new THREE.PointLight(0x22c55e, 0.4, 6);
+    plantLight.position.set(0, 1.8, 1.2);
+    scene.add(plantLight);
+
+    const pumpGlow = new THREE.PointLight(0xea580c, 0.35, 4);
+    pumpGlow.position.set(2.8, -1.2, 0.3);
+    scene.add(pumpGlow);
+
+    // 2. Ground Grid & Reflection
+    const gridHelper = new THREE.GridHelper(14, 28, 0x22222a, 0x111116);
+    gridHelper.position.y = -2.02;
+    scene.add(gridHelper);
+
+    const floorGeo = new THREE.PlaneGeometry(24, 24);
+    const floorMat = new THREE.MeshStandardMaterial({
+      color: 0x040406,
+      roughness: 0.8,
+      metalness: 0.2
+    });
+    const floor = new THREE.Mesh(floorGeo, floorMat);
+    floor.rotation.x = -Math.PI / 2;
+    floor.position.y = -2.03;
+    floor.receiveShadow = true;
+    scene.add(floor);
+
+    // 3. Master Hydroponics Model Group
+    modelGroup = new THREE.Group();
+    scene.add(modelGroup);
+
+    buildStandFrame();
+    buildGrowthChannels();
+    buildReservoirBucket();
+    buildPlumbingAndRiser();
+    buildESP32Module();
+    buildWaterParticles();
+  }
+
+  /* 4x4x2 ft Rectangular Steel Stand Frame */
+  function buildStandFrame() {
+    const frameMat = new THREE.MeshStandardMaterial({
+      color: 0x1a1e24,
+      roughness: 0.35,
+      metalness: 0.75
+    });
+
+    const pipeRadius = 0.045; // 20 mm square-equivalent tube
+
+    function createColumn(x, z) {
+      const geo = new THREE.BoxGeometry(pipeRadius * 2, 4.0, pipeRadius * 2);
+      const col = new THREE.Mesh(geo, frameMat);
+      col.position.set(x, 0, z);
+      col.castShadow = true;
+      col.receiveShadow = true;
+      modelGroup.add(col);
+    }
+
+    function createBeam(x1, y1, z1, x2, y2, z2) {
+      const p1 = new THREE.Vector3(x1, y1, z1);
+      const p2 = new THREE.Vector3(x2, y2, z2);
+      const dist = p1.distanceTo(p2);
+      const geo = new THREE.BoxGeometry(pipeRadius * 2, pipeRadius * 2, dist);
+      const beam = new THREE.Mesh(geo, frameMat);
+      beam.position.copy(p1.clone().add(p2).multiplyScalar(0.5));
+      beam.lookAt(p2);
+      beam.castShadow = true;
+      modelGroup.add(beam);
+    }
+
+    // 4 Corner Posts (Width 4.0, Depth 2.0 -> x in [-2, 2], z in [-1, 1])
+    createColumn(-2.0, -1.0);
+    createColumn(-2.0, 1.0);
+    createColumn(2.0, -1.0);
+    createColumn(2.0, 1.0);
+
+    // Top Rectangle (y = 2.0)
+    createBeam(-2.0, 2.0, -1.0, 2.0, 2.0, -1.0);
+    createBeam(-2.0, 2.0, 1.0, 2.0, 2.0, 1.0);
+    createBeam(-2.0, 2.0, -1.0, -2.0, 2.0, 1.0);
+    createBeam(2.0, 2.0, -1.0, 2.0, 2.0, 1.0);
+
+    // Bottom Base Rectangle (y = -2.0)
+    createBeam(-2.0, -2.0, -1.0, 2.0, -2.0, -1.0);
+    createBeam(-2.0, -2.0, 1.0, 2.0, -2.0, 1.0);
+    createBeam(-2.0, -2.0, -1.0, -2.0, -2.0, 1.0);
+    createBeam(2.0, -2.0, -1.0, 2.0, -2.0, 1.0);
+
+    // 4 Tier Horizontal Pipe Support Cross-Bars (Left & Right sides)
+    const tierY = [1.35, 0.45, -0.45, -1.35];
+    tierY.forEach(y => {
+      createBeam(-2.0, y, -1.0, -2.0, y, 1.0);
+      createBeam(2.0, y, -1.0, 2.0, y, 1.0);
+
+      // Pipe Saddle Support Brackets
+      [-2.0, 2.0].forEach(x => {
+        const saddleGeo = new THREE.BoxGeometry(pipeRadius * 2.2, 0.12, pipeRadius * 2.2);
+        const saddle1 = new THREE.Mesh(saddleGeo, frameMat);
+        saddle1.position.set(x, y + 0.06, 0.85);
+        modelGroup.add(saddle1);
+
+        const saddle2 = new THREE.Mesh(saddleGeo, frameMat);
+        saddle2.position.set(x, y + 0.06, -0.85);
+        modelGroup.add(saddle2);
+      });
+    });
+  }
+
+  /* 4 Horizontal 3-Inch PVC Growth Pipes in Zigzag Layout */
+  function buildGrowthChannels() {
+    const pvcMat = new THREE.MeshStandardMaterial({
+      color: 0xdae0e8,
+      roughness: 0.28,
+      metalness: 0.08
+    });
+
+    const capMat = new THREE.MeshStandardMaterial({
+      color: 0xb5bcc7,
+      roughness: 0.35,
+      metalness: 0.15
+    });
+
+    const cupMat = new THREE.MeshStandardMaterial({
+      color: 0x1e293b,
+      roughness: 0.55
+    });
+
+    const leafMat = new THREE.MeshStandardMaterial({
+      color: 0x22c55e,
+      roughness: 0.35
+    });
+
+    const pipeLength = 3.92;
+    const pipeOuterR = 0.095; // 3-inch PVC scale
+
+    // 4 tiers in vertical zigzag:
+    // Tier 1: Front (z = 0.85)
+    // Tier 2: Back  (z = -0.85)
+    // Tier 3: Front (z = 0.85)
+    // Tier 4: Back  (z = -0.85)
+    const tiers = [
+      { y: 1.35, z: 0.85, rotZ: 0.008 },
+      { y: 0.45, z: -0.85, rotZ: -0.008 },
+      { y: -0.45, z: 0.85, rotZ: 0.008 },
+      { y: -1.35, z: -0.85, rotZ: -0.008 }
+    ];
+
+    tiers.forEach((tData) => {
+      // Pipe Cylinder
+      const pipeGeo = new THREE.CylinderGeometry(pipeOuterR, pipeOuterR, pipeLength, 32);
+      const pipeMesh = new THREE.Mesh(pipeGeo, pvcMat);
+      pipeMesh.rotation.z = Math.PI / 2 + tData.rotZ;
+      pipeMesh.position.set(0, tData.y, tData.z);
+      pipeMesh.castShadow = true;
+      pipeMesh.receiveShadow = true;
+      modelGroup.add(pipeMesh);
+
+      // End Caps
+      const capGeo = new THREE.CylinderGeometry(pipeOuterR * 1.04, pipeOuterR * 1.04, 0.08, 32);
+      const leftCap = new THREE.Mesh(capGeo, capMat);
+      leftCap.rotation.z = Math.PI / 2 + tData.rotZ;
+      leftCap.position.set(-pipeLength / 2, tData.y - tData.rotZ * (pipeLength / 2), tData.z);
+      modelGroup.add(leftCap);
+
+      const rightCap = new THREE.Mesh(capGeo, capMat);
+      rightCap.rotation.z = Math.PI / 2 + tData.rotZ;
+      rightCap.position.set(pipeLength / 2, tData.y + tData.rotZ * (pipeLength / 2), tData.z);
+      modelGroup.add(rightCap);
+
+      // 5 Net Grow Cups per Tier (20 Plants Total)
+      const cupPositions = [-1.4, -0.7, 0.0, 0.7, 1.4];
+      cupPositions.forEach(cx => {
+        const cy = tData.y + tData.rotZ * cx + pipeOuterR * 0.72;
+
+        // Net Cup Collar
+        const netGeo = new THREE.CylinderGeometry(0.045, 0.035, 0.075, 16);
+        const netMesh = new THREE.Mesh(netGeo, cupMat);
+        netMesh.position.set(cx, cy, tData.z);
+        modelGroup.add(netMesh);
+
+        // Plant Sprout
+        const stemGeo = new THREE.CylinderGeometry(0.005, 0.006, 0.07, 8);
+        const stem = new THREE.Mesh(stemGeo, leafMat);
+        stem.position.set(cx, cy + 0.045, tData.z);
+        modelGroup.add(stem);
+
+        const leafGeo = new THREE.SphereGeometry(0.026, 8, 8);
+        leafGeo.scale(1.8, 0.4, 0.9);
+
+        const leaf1 = new THREE.Mesh(leafGeo, leafMat);
+        leaf1.position.set(cx - 0.02, cy + 0.075, tData.z);
+        leaf1.rotation.z = 0.45;
+        modelGroup.add(leaf1);
+
+        const leaf2 = new THREE.Mesh(leafGeo, leafMat);
+        leaf2.position.set(cx + 0.02, cy + 0.075, tData.z);
+        leaf2.rotation.z = -0.45;
+        modelGroup.add(leaf2);
+      });
+    });
+  }
+
+  /* Reservoir Bucket & Submersible Pump (Right-Side Floor Position) */
+  function buildReservoirBucket() {
+    const bucketMat = new THREE.MeshStandardMaterial({
+      color: 0x475569,
+      roughness: 0.38,
+      metalness: 0.12
+    });
+
+    const waterMat = new THREE.MeshStandardMaterial({
+      color: 0x0284c7,
+      transparent: true,
+      opacity: 0.65,
+      roughness: 0.1
+    });
+
+    const pumpMat = new THREE.MeshStandardMaterial({
+      color: 0x0f172a,
+      roughness: 0.45,
+      metalness: 0.3
+    });
+
+    const bx = 2.8;
+    const by = -1.2;
+    const bz = 0.3;
+
+    // Bucket Body (Tapered Bucket: Top R=0.48, Bottom R=0.38, Height=0.92)
+    const bucketGeo = new THREE.CylinderGeometry(0.48, 0.38, 0.92, 32, 1, true);
+    const bucket = new THREE.Mesh(bucketGeo, bucketMat);
+    bucket.position.set(bx, by, bz);
+    bucket.castShadow = true;
+    modelGroup.add(bucket);
+
+    // Bucket Bottom
+    const botGeo = new THREE.CylinderGeometry(0.38, 0.38, 0.04, 32);
+    const bottom = new THREE.Mesh(botGeo, bucketMat);
+    bottom.position.set(bx, by - 0.45, bz);
+    modelGroup.add(bottom);
+
+    // Water Surface Disc inside bucket
+    const waterGeo = new THREE.CylinderGeometry(0.46, 0.46, 0.02, 32);
+    const waterDisc = new THREE.Mesh(waterGeo, waterMat);
+    waterDisc.position.set(bx, by + 0.28, bz);
+    modelGroup.add(waterDisc);
+
+    // Steel Handle
+    const handleGeo = new THREE.TorusGeometry(0.46, 0.012, 8, 32, Math.PI);
+    const handleMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.9, roughness: 0.2 });
+    const handle = new THREE.Mesh(handleGeo, handleMat);
+    handle.rotation.x = -Math.PI / 2;
+    handle.position.set(bx, by + 0.42, bz);
+    modelGroup.add(handle);
+
+    // Submersible Pump resting at bucket base
+    const pumpGeo = new THREE.BoxGeometry(0.22, 0.18, 0.22);
+    const pump = new THREE.Mesh(pumpGeo, pumpMat);
+    pump.position.set(bx, by - 0.32, bz);
+    modelGroup.add(pump);
+
+    // Temperature Probe wire submerged in bucket
+    const probeGeo = new THREE.CylinderGeometry(0.01, 0.01, 0.55, 8);
+    const probeMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b, roughness: 0.5 });
+    const probe = new THREE.Mesh(probeGeo, probeMat);
+    probe.position.set(bx - 0.18, by + 0.15, bz);
+    modelGroup.add(probe);
+  }
+
+  /* Wavy Orange Supply Riser Pipe & Inter-tier Plumbing */
+  function buildPlumbingAndRiser() {
+    const orangeMat = new THREE.MeshStandardMaterial({
+      color: 0xf97316,
+      roughness: 0.32,
+      metalness: 0.15
+    });
+
+    const hoseMat = new THREE.MeshStandardMaterial({
+      color: 0x38bdf8,
+      roughness: 0.3,
+      transparent: true,
+      opacity: 0.8
+    });
+
+    // 1. Wavy Orange Supply Riser (riser_pipe_L1_supply)
+    const curve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(2.8, -1.2, 0.3),
+      new THREE.Vector3(2.6, -0.6, 0.5),
+      new THREE.Vector3(2.35, 0.1, 0.65),
+      new THREE.Vector3(2.5, 0.8, 0.75),
+      new THREE.Vector3(2.0, 1.35, 0.85)
+    ]);
+    const riserGeo = new THREE.TubeGeometry(curve, 48, 0.024, 16, false);
+    const riserMesh = new THREE.Mesh(riserGeo, orangeMat);
+    modelGroup.add(riserMesh);
+
+    // 2. Inter-tier Transfer Loops (U-bends)
+    function createLoop(p1, p2, ctrl) {
+      const c = new THREE.QuadraticBezierCurve3(p1, ctrl, p2);
+      const g = new THREE.TubeGeometry(c, 24, 0.022, 12, false);
+      return new THREE.Mesh(g, hoseMat);
+    }
+
+    // Tier 1 (front right) to Tier 2 (back left) via left loop
+    const loop1 = createLoop(
+      new THREE.Vector3(-1.96, 1.35, 0.85),
+      new THREE.Vector3(-1.96, 0.45, -0.85),
+      new THREE.Vector3(-2.35, 0.9, 0.0)
+    );
+    modelGroup.add(loop1);
+
+    // Tier 2 (back right) to Tier 3 (front right) via right loop
+    const loop2 = createLoop(
+      new THREE.Vector3(1.96, 0.45, -0.85),
+      new THREE.Vector3(1.96, -0.45, 0.85),
+      new THREE.Vector3(2.35, 0.0, 0.0)
+    );
+    modelGroup.add(loop2);
+
+    // Tier 3 (front left) to Tier 4 (back left) via left loop
+    const loop3 = createLoop(
+      new THREE.Vector3(-1.96, -0.45, 0.85),
+      new THREE.Vector3(-1.96, -1.35, -0.85),
+      new THREE.Vector3(-2.35, -0.9, 0.0)
+    );
+    modelGroup.add(loop3);
+
+    // 3. Straight Horizontal Drain Hose from Tier 4 into Bucket
+    const drainCurve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(1.96, -1.35, -0.85),
+      new THREE.Vector3(2.3, -1.35, -0.3),
+      new THREE.Vector3(2.65, -1.15, 0.2)
+    ]);
+    const drainGeo = new THREE.TubeGeometry(drainCurve, 24, 0.025, 12, false);
+    const drainMesh = new THREE.Mesh(drainGeo, hoseMat);
+    modelGroup.add(drainMesh);
+  }
+
+  /* ESP32 Controller & DuPont Sensor Wiring */
+  function buildESP32Module() {
+    const pcbMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.6 });
+    const metalMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.8, roughness: 0.2 });
+
+    // ESP32 NodeMCU Board mounted to upper upright
+    const pcbGeo = new THREE.BoxGeometry(0.18, 0.015, 0.32);
+    const pcb = new THREE.Mesh(pcbGeo, pcbMat);
+    pcb.position.set(-1.8, 1.85, 0.85);
+    modelGroup.add(pcb);
+
+    const shieldGeo = new THREE.BoxGeometry(0.12, 0.02, 0.16);
+    const shield = new THREE.Mesh(shieldGeo, metalMat);
+    shield.position.set(-1.8, 1.87, 0.87);
+    modelGroup.add(shield);
+
+    // Capacitive Moisture Sensor in Tier 1 Cup 1
+    const probeGeo = new THREE.BoxGeometry(0.015, 0.14, 0.035);
+    const probeMat = new THREE.MeshStandardMaterial({ color: 0xef4444 });
+    const probe = new THREE.Mesh(probeGeo, probeMat);
+    probe.position.set(-1.4, 1.45, 0.85);
+    modelGroup.add(probe);
+
+    // Sensor Jumper Wire
+    const wireMat = new THREE.MeshBasicMaterial({ color: 0x22c55e });
+    const wireCurve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(-1.8, 1.85, 0.85),
+      new THREE.Vector3(-1.6, 1.65, 0.9),
+      new THREE.Vector3(-1.4, 1.52, 0.85)
+    ]);
+    const wireGeo = new THREE.TubeGeometry(wireCurve, 16, 0.008, 8, false);
+    const wire = new THREE.Mesh(wireGeo, wireMat);
+    modelGroup.add(wire);
+  }
+
+  /* Water Circulation Animated Particles */
+  function buildWaterParticles() {
+    const particleCount = 60;
+    const pGeo = new THREE.SphereGeometry(0.016, 8, 8);
+    const pMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
+
+    waterParticles = [];
+    for (let i = 0; i < particleCount; i++) {
+      const mesh = new THREE.Mesh(pGeo, pMat);
+      mesh.position.set(0, -10, 0);
+      modelGroup.add(mesh);
+      waterParticles.push({
+        mesh: mesh,
+        progress: (i / particleCount),
+        speed: 0.0035 + Math.random() * 0.0015
+      });
+    }
+  }
+
+  function animate(time) {
+    requestAnimationFrame(animate);
+
+    if (controls) controls.update();
+
+    // Cinematic Video Auto-Orbit
+    if (isPlaying && currentView === 'orbit') {
+      orbitTime += 0.007;
+      const angle = (orbitTime % (Math.PI * 2));
+      const radius = 7.2;
+      camera.position.x = Math.sin(angle) * radius;
+      camera.position.z = Math.cos(angle) * radius;
+      camera.position.y = 2.0 + Math.sin(angle * 2) * 0.6;
+      camera.lookAt(0.3, 0.1, 0);
+
+      const progress = (orbitTime % (Math.PI * 2)) / (Math.PI * 2);
+      updateVideoScrubber(progress);
+    } else if (currentView !== 'manual') {
+      camera.position.lerp(new THREE.Vector3(targetCamPos.x, targetCamPos.y, targetCamPos.z), 0.05);
+      if (controls) {
+        controls.target.lerp(new THREE.Vector3(targetLookAt.x, targetLookAt.y, targetLookAt.z), 0.05);
+      }
+    }
+
+    // Water Circulation Particle Animation
+    if (isWaterFlowing && waterParticles.length > 0) {
+      const tierLength = 3.92;
+      waterParticles.forEach(p => {
+        p.progress += p.speed;
+        if (p.progress > 1) p.progress = 0;
+
+        const globalProg = p.progress * 4;
+        const tier = Math.floor(globalProg);
+        const subProg = globalProg - tier;
+
+        const tY = [1.35, 0.45, -0.45, -1.35][tier];
+        const tZ = [0.85, -0.85, 0.85, -0.85][tier];
+        const isForward = (tier % 2 === 0);
+
+        const px = isForward ? (tierLength / 2 - subProg * tierLength) : (-tierLength / 2 + subProg * tierLength);
+        p.mesh.position.set(px, tY - 0.02, tZ);
+      });
+    }
+
+    if (renderer && scene && camera) {
+      renderer.render(scene, camera);
+    }
+  }
+
+  function setupUI() {
+    // 1. Play / Pause Toggle
+    const playBtn = document.getElementById('btnVideoPlay');
+    if (playBtn) {
+      playBtn.addEventListener('click', () => {
+        isPlaying = !isPlaying;
+        playBtn.innerHTML = isPlaying
+          ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg> Pause 3D Video'
+          : '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Play 3D Video';
+      });
+    }
+
+    // 2. Camera Preset Views
+    const presetPills = document.querySelectorAll('.cam-preset-btn');
+    presetPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        const view = pill.getAttribute('data-view');
+        currentView = view;
+        setActivePresetBtn(view);
+
+        if (view === 'orbit') {
+          isPlaying = true;
+          if (controls) controls.target.set(0.3, 0.1, 0);
+        } else if (PRESETS[view]) {
+          isPlaying = false;
+          targetCamPos = { ...PRESETS[view] };
+          targetLookAt = { x: PRESETS[view].tx, y: PRESETS[view].ty, z: PRESETS[view].tz };
+        }
+      });
+    });
+
+    // 3. Water Circulation Flow Toggle
+    const waterBtn = document.getElementById('btnToggleWaterFlow');
+    if (waterBtn) {
+      waterBtn.addEventListener('click', () => {
+        isWaterFlowing = !isWaterFlowing;
+        waterParticles.forEach(wp => { wp.mesh.visible = isWaterFlowing; });
+        waterBtn.classList.toggle('active', isWaterFlowing);
+      });
+    }
+
+    // 4. Mode Tabs: 3D Video vs SolidWorks CAD Screenshot
+    const btnTab3D = document.getElementById('btnTab3DVideo');
+    const btnTabCAD = document.getElementById('btnTabCadPhoto');
+    const threeWrapper = document.getElementById('threeVideoWrapper');
+    const photoWrapper = document.getElementById('staticCadPhotoWrapper');
+
+    function switchTo3DVideo() {
+      if (threeWrapper && photoWrapper) {
+        threeWrapper.style.display = 'block';
+        photoWrapper.style.display = 'none';
+        if (btnTab3D) btnTab3D.classList.add('active');
+        if (btnTabCAD) btnTabCAD.classList.remove('active');
+        isPlaying = true;
+        forceResize();
+        setTimeout(forceResize, 50);
+      }
+    }
+
+    function switchToCADScreenshot() {
+      if (threeWrapper && photoWrapper) {
+        threeWrapper.style.display = 'none';
+        photoWrapper.style.display = 'flex';
+        if (btnTabCAD) btnTabCAD.classList.add('active');
+        if (btnTab3D) btnTab3D.classList.remove('active');
+      }
+    }
+
+    if (btnTab3D) btnTab3D.addEventListener('click', switchTo3DVideo);
+    if (btnTabCAD) btnTabCAD.addEventListener('click', switchToCADScreenshot);
+
+    window.show3DVideoMode = switchTo3DVideo;
+    window.showCADScreenshotMode = switchToCADScreenshot;
+
+    // 5. Fullscreen Toggle with Complete Multi-Frame Resize & Vendor Prefixes
+    const fsBtn = document.getElementById('btnVideoFullscreen');
+    const videoCard = document.querySelector('.cad-video-showcase-card') || document.querySelector('.hero-cad-card');
+
+    function isFsActive() {
+      return !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
+    }
+
+    function toggleFullscreen() {
+      if (!videoCard) return;
+      if (!isFsActive()) {
+        const req = videoCard.requestFullscreen || videoCard.webkitRequestFullscreen || videoCard.mozRequestFullScreen || videoCard.msRequestFullscreen;
+        if (req) {
+          req.call(videoCard).catch(() => {});
+        }
+      } else {
+        const exit = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen;
+        if (exit) {
+          exit.call(document).catch(() => {});
+        }
+      }
+    }
+
+    if (fsBtn && videoCard) {
+      fsBtn.addEventListener('click', toggleFullscreen);
+    }
+
+    function onFullscreenChange() {
+      const isFs = isFsActive();
+      if (fsBtn) {
+        if (isFs) {
+          fsBtn.innerHTML = '✕ Exit Fullscreen';
+          fsBtn.classList.add('active');
+          fsBtn.setAttribute('title', 'Exit Fullscreen View');
+        } else {
+          fsBtn.innerHTML = '⛶ Fullscreen';
+          fsBtn.classList.remove('active');
+          fsBtn.setAttribute('title', 'Fullscreen View');
+        }
+      }
+
+      forceResize();
+      setTimeout(forceResize, 50);
+      setTimeout(forceResize, 150);
+      setTimeout(forceResize, 300);
+      setTimeout(forceResize, 600);
+    }
+
+    ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'].forEach(ev => {
+      document.addEventListener(ev, onFullscreenChange);
+    });
+  }
+
+  function setActivePresetBtn(view) {
+    const presetPills = document.querySelectorAll('.cam-preset-btn');
+    presetPills.forEach(p => {
+      p.classList.toggle('active', p.getAttribute('data-view') === view);
+    });
+  }
+
+  function updateVideoScrubber(progress) {
+    const bar = document.getElementById('videoScrubberProgress');
+    const timeLabel = document.getElementById('videoTimecode');
+    if (bar) {
+      bar.style.width = (progress * 100).toFixed(1) + '%';
+    }
+    if (timeLabel) {
+      const curSec = Math.floor(progress * ORBIT_CYCLE_SECONDS);
+      const totalSec = ORBIT_CYCLE_SECONDS;
+      const curStr = curSec < 10 ? '0' + curSec : '' + curSec;
+      const totStr = totalSec < 10 ? '0' + totalSec : '' + totalSec;
+      timeLabel.textContent = `00:${curStr} / 00:${totStr}`;
+    }
+  }
+
+  function showFallback(container) {
+    const photoWrapper = document.getElementById('staticCadPhotoWrapper');
+    const threeWrapper = document.getElementById('threeVideoWrapper');
+    const btnTab3D = document.getElementById('btnTab3DVideo');
+    const btnTabCAD = document.getElementById('btnTabCadPhoto');
+    if (photoWrapper && threeWrapper) {
+      threeWrapper.style.display = 'none';
+      photoWrapper.style.display = 'flex';
+      if (btnTabCAD) btnTabCAD.classList.add('active');
+      if (btnTab3D) btnTab3D.classList.remove('active');
+    }
+  }
+
+  function setupControls() {}
+
+  // Global export
+  window.SmartHydro3D = {
+    forceResize: forceResize
+  };
+})();
+
+</script>
+<script>
+/**
+ * SmartHydro - Interactive 3D Cylindrical Coverflow Carousel
+ * Group 18 · Sanjivani University
+ * Inspired by Mitticool 3D rotating showcase with floor reflections,
+ * momentum touch/mouse dragging, auto-rotation, and category filtering.
+ */
+
+(function () {
+  'use strict';
+
+  // Master gallery items dataset for the 3D Carousel
+  const CAROUSEL_ITEMS = [
+    // Workshop Build Highlights
+    { src: 'assets/images/workshop_full_rig_assembled.jpg', title: 'Fully Assembled Rig on Campus', category: 'workshop', tag: 'WORKSHOP' },
+    { src: 'assets/images/workshop_frame_pipes_structure.jpg', title: 'MS Frame & Pipes Stand Structure', category: 'workshop', tag: 'WORKSHOP' },
+    { src: 'assets/images/workshop_cutting_frame.jpg', title: 'Cutting MS Pipe on Chop Saw', category: 'workshop', tag: 'WORKSHOP' },
+    { src: 'assets/images/workshop_welding_frame.jpg', title: 'Arc Welding Frame Base', category: 'workshop', tag: 'WORKSHOP' },
+    { src: 'assets/images/workshop_painting_frame.jpg', title: 'Frame Finishing & Protective Colouring', category: 'workshop', tag: 'WORKSHOP' },
+    { src: 'assets/images/workshop_finished_pvc_pipes.jpg', title: 'Four Tier Finished PVC Growth Channels', category: 'workshop', tag: 'WORKSHOP' },
+
+    // SolidWorks CAD Models
+    { src: 'assets/images/cad_assem_final_elevation.jpg', title: 'SolidWorks Master Assembly (Assem_final.SLDASM)', category: 'cad', tag: 'SOLIDWORKS CAD' },
+    { src: 'assets/images/cad_hydroponic_stand_assembly.jpg', title: '3D Stand Structural Geometry & Brackets', category: 'cad', tag: 'SOLIDWORKS CAD' },
+    { src: 'assets/images/cad_bucket.jpg', title: '20L Reservoir Bucket & Submersible Pump', category: 'cad', tag: 'SOLIDWORKS CAD' },
+    { src: 'assets/images/cad_esp32_soil_moisture_assembly.jpg', title: 'ESP32 & Soil Moisture Sensor Assembly', category: 'cad', tag: 'SOLIDWORKS CAD' },
+
+    // 3D Printing Prototyping
+    { src: 'assets/images/3D_work/01_numakers_pla_plus_filament_stock.jpg', title: 'NuMakers PLA+ Engineering Filament Stock', category: '3dwork', tag: '3D PRINTING' },
+    { src: 'assets/images/3D_work/04_bambu_lab_active_print_bed.jpg', title: 'Bambu Lab Rapid Prototyping Print Bed', category: '3dwork', tag: '3D PRINTING' },
+    { src: 'assets/images/3D_work/07_3d_printed_indian_bull_models.jpg', title: 'High Detail 3D Printed Engineering Demonstrators', category: '3dwork', tag: '3D PRINTING' },
+
+    // CNC Laser Cutting
+    { src: 'assets/images/Laser_work/01_laser_cut_sanjivani_goddess_memento_trophy.jpg', title: 'Laser Cut Sanjivani University Memento Trophy', category: 'laser', tag: 'LASER CUTTING' },
+    { src: 'assets/images/Laser_work/03_laser_cut_sanjivani_university_crest_keychain.jpg', title: 'Laser Cut University Crest Emblem', category: 'laser', tag: 'LASER CUTTING' },
+    { src: 'assets/images/Laser_work/05_sil_laser_cutting_machine_open_honeycomb_bed.jpg', title: 'SIL Laser Cutting Machine Honeycomb Workbed', category: 'laser', tag: 'LASER CUTTING' },
+
+    // IoT Hardware & Electronics
+    { src: 'assets/images/electronics/01_hw_esp32_microcontroller_board.jpg', title: 'ESP32 NodeMCU Microcontroller Board', category: 'electronics', tag: 'IOT HARDWARE' },
+    { src: 'assets/images/electronics/03_hw_moisture_sensor_module.jpg', title: 'Capacitive Soil Moisture Sensor Module', category: 'electronics', tag: 'IOT HARDWARE' },
+    { src: 'assets/images/electronics/05_hw_submersible_water_pump.jpg', title: '18W Submersible Circulation Water Pump', category: 'electronics', tag: 'IOT HARDWARE' }
+  ];
+
+  let currentCategory = 'all';
+  let activeItems = [...CAROUSEL_ITEMS];
+
+  // Carousel State
+  let currentAngle = 0;
+  let targetAngle = 0;
+  let autoRotate = true;
+  let autoRotateSpeed = 0.14; // degrees per frame
+  let isDragging = false;
+  let startX = 0;
+  let startAngle = 0;
+  let lastX = 0;
+  let velocity = 0;
+  let animationId = null;
+  let resumeTimer = null;
+
+  // DOM Elements
+  let stageEl, ringEl, counterEl, titleEl, spinBtnEl, spinIconEl, spinTextEl;
+  let prevBtnEl, nextBtnEl;
+  let viewCarouselBtn, viewGridBtn, carouselWrapper, gridWrapper;
+
+  function init() {
+    stageEl = document.getElementById('carousel3dStage');
+    ringEl = document.getElementById('carousel3dRing');
+    counterEl = document.getElementById('carouselCounter');
+    titleEl = document.getElementById('carouselActiveTitle');
+    spinBtnEl = document.getElementById('btnToggleSpin');
+    spinIconEl = document.getElementById('spinIcon');
+    spinTextEl = document.getElementById('spinText');
+    prevBtnEl = document.getElementById('btnCarouselPrev');
+    nextBtnEl = document.getElementById('btnCarouselNext');
+
+    viewCarouselBtn = document.getElementById('btnViewCarousel');
+    viewGridBtn = document.getElementById('btnViewGrid');
+    carouselWrapper = document.getElementById('galleryCarouselWrapper');
+    gridWrapper = document.getElementById('galleryGrid');
+
+    if (!stageEl || !ringEl) return;
+
+    setupViewSwitcher();
+    setupCategoryFiltering();
+    renderCards();
+    setupEventListeners();
+    startAnimationLoop();
+  }
+
+  function setupViewSwitcher() {
+    if (!viewCarouselBtn || !viewGridBtn) return;
+
+    viewCarouselBtn.addEventListener('click', function () {
+      viewCarouselBtn.classList.add('active');
+      viewGridBtn.classList.remove('active');
+      if (carouselWrapper) carouselWrapper.style.display = 'block';
+      if (gridWrapper) gridWrapper.style.display = 'none';
+      autoRotate = true;
+      updateSpinButtonUI();
+    });
+
+    viewGridBtn.addEventListener('click', function () {
+      viewGridBtn.classList.add('active');
+      viewCarouselBtn.classList.remove('active');
+      if (carouselWrapper) carouselWrapper.style.display = 'none';
+      if (gridWrapper) gridWrapper.style.display = 'grid';
+      autoRotate = false;
+      updateSpinButtonUI();
+    });
+  }
+
+  function setupCategoryFiltering() {
+    const filterBtns = document.querySelectorAll('.gallery-filter-bar .filter-btn');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', function () {
+        const cat = btn.getAttribute('data-filter') || 'all';
+        currentCategory = cat;
+
+        // Filter 3D Carousel
+        if (cat === 'all') {
+          activeItems = [...CAROUSEL_ITEMS];
+        } else {
+          activeItems = CAROUSEL_ITEMS.filter(item => item.category === cat);
+          if (activeItems.length === 0) activeItems = [...CAROUSEL_ITEMS];
+        }
+
+        currentAngle = 0;
+        targetAngle = 0;
+        renderCards();
+
+        // Also filter the grid view if visible
+        const gridItems = document.querySelectorAll('.gallery-grid .gallery-item');
+        gridItems.forEach(item => {
+          const itemCat = item.getAttribute('data-category');
+          if (cat === 'all' || itemCat === cat) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  function getCardDimensions() {
+    const isMobile = window.innerWidth < 640;
+    const isTablet = window.innerWidth >= 640 && window.innerWidth < 1024;
+    const width = isMobile ? 220 : (isTablet ? 250 : 280);
+    const height = isMobile ? 290 : (isTablet ? 330 : 360);
+    return { width, height };
+  }
+
+  function renderCards() {
+    ringEl.innerHTML = '';
+    const total = activeItems.length;
+    const angleStep = 360 / total;
+    const { width } = getCardDimensions();
+    // Calculate radius to form a smooth cylinder without card overlap
+    const radius = Math.max(340, Math.round((width / 2) / Math.tan(Math.PI / total)) + 30);
+
+    activeItems.forEach((item, index) => {
+      const angle = index * angleStep;
+      const card = document.createElement('div');
+      card.className = 'carousel-3d-card';
+      card.dataset.index = index;
+      card.dataset.angle = angle;
+      card.dataset.src = item.src;
+      card.dataset.title = item.title;
+
+      card.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
+
+      card.innerHTML = `
+        <div class="carousel-card-inner">
+          <div class="carousel-card-badge">${item.tag}</div>
+          <img src="${item.src}" alt="${item.title}" loading="lazy">
+          <div class="carousel-card-caption">
+            <h5>${item.title}</h5>
+          </div>
+        </div>
+      `;
+
+      // Click behavior
+      card.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const activeIdx = getActiveIndex();
+        if (activeIdx === index) {
+          // Card is front and center -> Open Lightbox
+          if (typeof window.openLightbox === 'function') {
+            window.openLightbox(item.src, `${item.title} (${item.tag})`);
+          }
+        } else {
+          // Snap this card to center front
+          rotateToCard(index);
+        }
+      });
+
+      ringEl.appendChild(card);
+    });
+
+    updateHUD();
+  }
+
+  function getActiveIndex() {
+    const total = activeItems.length;
+    if (total === 0) return 0;
+    const angleStep = 360 / total;
+    const norm = ((-targetAngle % 360) + 360) % 360;
+    return Math.round(norm / angleStep) % total;
+  }
+
+  function rotateToCard(index) {
+    const total = activeItems.length;
+    const angleStep = 360 / total;
+    const targetCardAngle = index * angleStep;
+    
+    // Find shortest angular path
+    const currentNorm = ((-targetAngle % 360) + 360) % 360;
+    let diff = targetCardAngle - currentNorm;
+    if (diff > 180) diff -= 360;
+    if (diff < -180) diff += 360;
+
+    targetAngle -= diff;
+    pauseAutoRotateTemporarily();
+  }
+
+  function pauseAutoRotateTemporarily() {
+    autoRotate = false;
+    updateSpinButtonUI();
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => {
+      autoRotate = true;
+      updateSpinButtonUI();
+    }, 4000);
+  }
+
+  function updateSpinButtonUI() {
+    if (!spinIconEl || !spinTextEl) return;
+    if (autoRotate) {
+      spinIconEl.textContent = '⏸';
+      spinTextEl.textContent = 'Pause 3D Spin';
+    } else {
+      spinIconEl.textContent = '▶';
+      spinTextEl.textContent = 'Auto-Rotate';
+    }
+  }
+
+  function updateHUD() {
+    const activeIdx = getActiveIndex();
+    const item = activeItems[activeIdx];
+    if (counterEl && item) {
+      const padCurrent = String(activeIdx + 1).padStart(2, '0');
+      const padTotal = String(activeItems.length).padStart(2, '0');
+      counterEl.textContent = `${padCurrent} / ${padTotal}`;
+    }
+    if (titleEl && item) {
+      titleEl.textContent = item.title;
+    }
+
+    // Update active highlight classes on cards for depth lighting
+    const cards = ringEl.querySelectorAll('.carousel-3d-card');
+    cards.forEach((card, idx) => {
+      if (idx === activeIdx) {
+        card.classList.add('is-center');
+      } else {
+        card.classList.remove('is-center');
+      }
+    });
+  }
+
+  function setupEventListeners() {
+    // Prev / Next Buttons
+    if (prevBtnEl) {
+      prevBtnEl.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const angleStep = 360 / activeItems.length;
+        targetAngle += angleStep;
+        pauseAutoRotateTemporarily();
+      });
+    }
+
+    if (nextBtnEl) {
+      nextBtnEl.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const angleStep = 360 / activeItems.length;
+        targetAngle -= angleStep;
+        pauseAutoRotateTemporarily();
+      });
+    }
+
+    // Toggle Spin
+    if (spinBtnEl) {
+      spinBtnEl.addEventListener('click', function (e) {
+        e.stopPropagation();
+        autoRotate = !autoRotate;
+        updateSpinButtonUI();
+      });
+    }
+
+    // Pointer / Mouse / Touch Dragging
+    stageEl.addEventListener('pointerdown', function (e) {
+      isDragging = true;
+      startX = e.clientX;
+      lastX = e.clientX;
+      startAngle = targetAngle;
+      velocity = 0;
+      stageEl.classList.add('is-dragging');
+      stageEl.setPointerCapture(e.pointerId);
+      clearTimeout(resumeTimer);
+    });
+
+    stageEl.addEventListener('pointermove', function (e) {
+      if (!isDragging) return;
+      const deltaX = e.clientX - startX;
+      velocity = e.clientX - lastX;
+      lastX = e.clientX;
+      targetAngle = startAngle + deltaX * 0.28;
+    });
+
+    const endDrag = function (e) {
+      if (!isDragging) return;
+      isDragging = false;
+      stageEl.classList.remove('is-dragging');
+      try { stageEl.releasePointerCapture(e.pointerId); } catch (_) {}
+      
+      // Add release inertia
+      targetAngle += velocity * 4;
+
+      // Resume auto rotation after 3 seconds of idle
+      clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(() => {
+        autoRotate = true;
+        updateSpinButtonUI();
+      }, 3000);
+    };
+
+    stageEl.addEventListener('pointerup', endDrag);
+    stageEl.addEventListener('pointercancel', endDrag);
+
+    // Keyboard navigation
+    stageEl.setAttribute('tabindex', '0');
+    stageEl.addEventListener('keydown', function (e) {
+      const angleStep = 360 / activeItems.length;
+      if (e.key === 'ArrowLeft') {
+        targetAngle += angleStep;
+        pauseAutoRotateTemporarily();
+      } else if (e.key === 'ArrowRight') {
+        targetAngle -= angleStep;
+        pauseAutoRotateTemporarily();
+      }
+    });
+
+    // Handle Window Resize to dynamically adjust radius
+    let resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(renderCards, 150);
+    });
+  }
+
+  function startAnimationLoop() {
+    let lastActiveIdx = -1;
+
+    function loop() {
+      if (autoRotate && !isDragging) {
+        targetAngle -= autoRotateSpeed;
+      }
+
+      // Smooth damping interpolation
+      currentAngle += (targetAngle - currentAngle) * 0.085;
+
+      // Apply transform to 3D ring
+      ringEl.style.transform = `rotateY(${currentAngle}deg)`;
+
+      // Update HUD when active front card changes
+      const activeIdx = getActiveIndex();
+      if (activeIdx !== lastActiveIdx) {
+        lastActiveIdx = activeIdx;
+        updateHUD();
+      }
+
+      animationId = requestAnimationFrame(loop);
+    }
+
+    loop();
+  }
+
+  // Initialize once DOM is loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();
 
 </script>
